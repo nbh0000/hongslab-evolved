@@ -4,14 +4,14 @@ const KAKAO_URL='http://pf.kakao.com/_KxojrX';
 const PAGE=document.body.dataset.page||'index';
 const PAGE_ORDER=['portfolio','pricing','process','contact'];
 
-/* ===== 원본 기능 로직 (hongslab.kr) ===== */
+/* ===== 원본 기능 로직 (Studio Genilo) ===== */
 const OPTIONS=[['section','구역 추가',33000,'제공된 글·사진으로 기존 페이지에 구성'],['page','일반 소개 페이지 추가',77000,'기존 디자인 기준, 최대 4개 구역'],['custom','별도 디자인 페이지',150000,'범위 확인 후 확정'],['revision','수정 횟수 추가',33000,'기존 구성 내 30분 이내 작업'],['copy','소개 문구 작성',55000,'고객 자료·인터뷰 기준 최대 5개 구역'],['photo','사진 보정',33000,'최대 10장, 단순 보정·크기 정리'],['banner','배너 제작',33000,'고객 문구 제공, 시안 1개·수정 1회'],['booking','외부 예약·상담 서비스 연결',33000,'링크 또는 삽입'],['form','문의폼 추가',55000,'기본 항목 5개 이내'],['domain','도메인 최초 연결 대행',22000,'도메인 구매비 별도'],['card','명함 맞춤 디자인',20000,'앞뒤 1종·수정 1회'],['print','명함 인쇄 주문 대행',11000,'인쇄비·배송비 별도']];
 const money=n=>new Intl.NumberFormat('ko-KR').format(Math.round(n))+'원';
 if($('optionTable'))$('optionTable').innerHTML=OPTIONS.map(o=>`<tr><td>${o[1]}</td><td>${money(o[2])}${['custom','booking','form'].includes(o[0])?'부터':''}</td><td>${o[3]}</td></tr>`).join('');
 
 const PLAN_LABEL={budget:'실속형',basic:'기본형',premium:'프리미엄형'};
-function saveQuick(q){try{localStorage.setItem('hongslab_quick',JSON.stringify(q))}catch{}}
-function loadQuick(){try{return JSON.parse(localStorage.getItem('hongslab_quick')||'null')}catch{return null}}
+function saveQuick(q){try{localStorage.setItem('sg_quick',JSON.stringify(q))}catch{}}
+function loadQuick(){try{return JSON.parse(localStorage.getItem('sg_quick')||'null')}catch{return null}}
 function quickData(){
   const typeEl=document.querySelector('input[name="quickType"]:checked');if(!typeEl)return loadQuick();
   const type=typeEl.value;const features=[...document.querySelectorAll('.quickFeature:checked')].map(x=>x.value);
