@@ -2,7 +2,7 @@
 const $=id=>document.getElementById(id);
 const KAKAO_URL='http://pf.kakao.com/_KxojrX';
 const PAGE=document.body.dataset.page||'index';
-const PAGE_ORDER=['portfolio','pricing','estimate','process','faq','contact'];
+const PAGE_ORDER=['portfolio','pricing','process','contact'];
 
 /* ===== 원본 기능 로직 (hongslab.kr) ===== */
 const OPTIONS=[['section','구역 추가',33000,'제공된 글·사진으로 기존 페이지에 구성'],['page','일반 소개 페이지 추가',77000,'기존 디자인 기준, 최대 4개 구역'],['custom','별도 디자인 페이지',150000,'범위 확인 후 확정'],['revision','수정 횟수 추가',33000,'기존 구성 내 30분 이내 작업'],['copy','소개 문구 작성',55000,'고객 자료·인터뷰 기준 최대 5개 구역'],['photo','사진 보정',33000,'최대 10장, 단순 보정·크기 정리'],['banner','배너 제작',33000,'고객 문구 제공, 시안 1개·수정 1회'],['booking','외부 예약·상담 서비스 연결',33000,'링크 또는 삽입'],['form','문의폼 추가',55000,'기본 항목 5개 이내'],['domain','도메인 최초 연결 대행',22000,'도메인 구매비 별도'],['card','명함 맞춤 디자인',20000,'앞뒤 1종·수정 1회'],['print','명함 인쇄 주문 대행',11000,'인쇄비·배송비 별도']];
@@ -90,7 +90,7 @@ if(matchMedia('(hover:none)').matches)cursor.style.display='none';
   const pts=[];const STEP=2.4;
   for(let lat=-88;lat<=88;lat+=STEP){const cos=Math.cos(lat*Math.PI/180);const n=Math.max(1,Math.round(360/STEP*cos));for(let i=0;i<n;i++){const lon=-180+i*360/n+(lat/STEP%2?180/n:0);if(isLand(lat,lon)){const la=lat*Math.PI/180,lo=lon*Math.PI/180;pts.push([Math.cos(la)*Math.cos(lo),Math.sin(la),Math.cos(la)*Math.sin(lo)])}}}
   const toV=(lat,lon)=>{const la=lat*Math.PI/180,lo=lon*Math.PI/180;return [Math.cos(la)*Math.cos(lo),Math.sin(la),Math.cos(la)*Math.sin(lo)]};
-  const HOME=[36.48,127.29];const CITIES=[[35.68,139.69],[1.35,103.82],[-33.87,151.21],[25.2,55.27],[51.5,-.12],[40.71,-74.0],[34.05,-118.24],[-23.55,-46.63],[19.43,-99.13],[55.75,37.62]];
+  const HOME=[37.548,126.957];const CITIES=[[35.68,139.69],[1.35,103.82],[-33.87,151.21],[25.2,55.27],[51.5,-.12],[40.71,-74.0],[34.05,-118.24],[-23.55,-46.63],[19.43,-99.13],[55.75,37.62]];
   const arcs=CITIES.map((c,i)=>({a:toV(HOME[0],HOME[1]),b:toV(c[0],c[1]),phase:i*.37}));
   /* 뉴럴 노드/링크: 대륙 점 중 일부를 결정적으로 선택 */
   let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647};

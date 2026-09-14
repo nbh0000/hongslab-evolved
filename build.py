@@ -22,10 +22,9 @@ mbar = block('<div class="mobile-bar">', '</div>')
 modal = block('<div class="preview-modal"', 'alt="포트폴리오 확대 이미지"></div></div>')
 
 PAGES = [('index', '홈', 'index.html'), ('portfolio', '제작 사례', 'portfolio.html'), ('pricing', '제작 요금', 'pricing.html'),
-         ('estimate', '간단 견적', 'estimate.html'), ('process', '제작 과정', 'process.html'), ('faq', '자주 묻는 질문', 'faq.html'),
-         ('contact', '상담하기', 'contact.html')]
-hmap = {'#top': 'index.html', '#portfolio': 'portfolio.html', '#pricing': 'pricing.html', '#estimate': 'estimate.html',
-        '#process': 'process.html', '#faq': 'faq.html', '#contact': 'contact.html'}
+         ('process', '제작 과정', 'process.html'), ('contact', '상담하기', 'contact.html')]
+hmap = {'#top': 'index.html', '#portfolio': 'portfolio.html', '#pricing': 'pricing.html', '#estimate': 'contact.html',
+        '#process': 'process.html', '#faq': 'contact.html', '#contact': 'contact.html'}
 
 def links(s):
     for k, v in hmap.items():
@@ -35,9 +34,8 @@ def links(s):
 GHOST = {'portfolio': 'PORTFOLIO', 'effect': 'WHY', 'pricing': 'PRICING', 'maintenance': 'CARE', 'estimate': 'ESTIMATE', 'process': 'PROCESS', 'faq': 'FAQ', 'contact': 'CONTACT'}
 for k in secs:
     secs[k] = links(secs[k]).replace(f'<section class="section" id="{k}"', f'<section class="section" id="{k}" data-ghost="{GHOST[k]}"', 1)
-secs['pricing'] = re.sub(r'data-plan="(\w+)" href="estimate.html"', r'data-plan="\1" href="estimate.html?plan=\1"', secs['pricing'])
 hero, header, footer, mbar = links(hero), links(header), links(footer), links(mbar)
-hero = hero.replace('<div class="hero-scroll">SCROLL</div>', '<div class="hero-tags"><span>AI ASSISTED BUILD</span><span>PLAN · DESIGN · DEPLOY</span><span>SEJONG · KOREA</span></div><div class="hud-stats"><span><b>AI</b>CORE</span><span><b>WEB</b>APP</span><span><b>24</b>ONLINE</span></div><div class="hero-scroll">SCROLL DOWN</div>')
+hero = hero.replace('<div class="hero-scroll">SCROLL</div>', '<div class="hero-tags"><span>AI ASSISTED BUILD</span><span>PLAN · DESIGN · DEPLOY</span><span>SEOUL · KOREA</span></div><div class="hud-stats"><span><b>AI</b>CORE</span><span><b>WEB</b>APP</span><span><b>24</b>ONLINE</span></div><div class="hero-scroll">SCROLL DOWN</div>')
 for key, label, fn in PAGES[1:]:
     header = header.replace(f'<a href="{fn}">{label}</a>', f'<a href="{fn}" data-page="{key}">{label}</a>')
 
@@ -74,7 +72,7 @@ STUDIO_CSS = """
 
 STUDIO_HTML = """<section class="section studio" id="studio">
   <div class="wrap">
-    <div class="reveal"><div class="eyebrow scramble">AI STUDIO · SEJONG</div><h2 class="title">아이디어 하나도<br>제대로 동작하는 제품으로<em>.</em></h2><p class="lead">Studio Genilo는 AI를 활용해 기획부터 화면 설계, 개발까지 한 번에 진행합니다. 정리된 구조와 또렷한 첫인상, 그 기준을 그대로 담았습니다.</p></div>
+    <div class="reveal"><div class="eyebrow scramble">AI STUDIO · SEOUL</div><h2 class="title">아이디어 하나도<br>제대로 동작하는 제품으로<em>.</em></h2><p class="lead">Studio Genilo는 AI를 활용해 기획부터 화면 설계, 개발까지 한 번에 진행합니다. 정리된 구조와 또렷한 첫인상, 그 기준을 그대로 담았습니다.</p></div>
     <figure class="frame reveal">
       <span class="tag tl"><b></b>AI STUDIO GENILO · WEB APP</span>
       <img src="studio-1600.jpg" srcset="studio-1600.jpg 1600w, studio-2560.jpg 2560w" sizes="(max-width:1240px) 100vw, 1180px" width="2560" height="1429" alt="Studio Genilo 스튜디오 데스크. 모니터에 마젠타 파티클 지구본이 표시된 다크 모드 홈페이지 시안이 떠 있다." loading="lazy" decoding="async">
@@ -95,7 +93,7 @@ INDEX_HERO = """<section class="hero hero-x" id="hero">
       <div class="hero-actions"><a class="btn primary" href="portfolio.html">제작 사례 보기</a><a class="btn outline" href="http://pf.kakao.com/_KxojrX" target="_blank" rel="noopener noreferrer">카카오톡 무료 상담</a></div>
     </div>
   </div>
-  <div class="hero-tags"><span>AI ASSISTED BUILD</span><span>PLAN · DESIGN · DEPLOY</span><span>SEJONG · KOREA</span></div>
+  <div class="hero-tags"><span>AI ASSISTED BUILD</span><span>PLAN · DESIGN · DEPLOY</span><span>SEOUL · KOREA</span></div>
   <div class="hud-stats"><span><b>AI</b>CORE</span><span><b>WEB</b>APP</span><span><b>24</b>ONLINE</span></div>
   <div class="hero-scroll">SCROLL DOWN</div>
 </section>"""
@@ -134,7 +132,7 @@ CTA_HTML = """<section class="cta-x" id="cta">
   <img class="cta-bg" src="ai-letters-2560.jpg" srcset="ai-letters-1600.jpg 1600w, ai-letters-2560.jpg 2560w" sizes="100vw" alt="" loading="lazy" decoding="async">
   <div class="wrap cta-inner reveal">
     <div class="eyebrow scramble">READY TO BUILD</div>
-    <div class="hero-actions"><a class="btn primary" href="estimate.html">간단 견적</a><a class="btn light" href="contact.html">상담하기</a></div>
+    <div class="hero-actions"><a class="btn primary" href="contact.html">상담하기</a><a class="btn light" href="portfolio.html">제작 사례 보기</a></div>
   </div>
 </section>"""
 
@@ -191,9 +189,7 @@ out = {
     'index.html': page('index', T, 'dark', INDEX_HERO + '\n\n' + SKILLS_HTML + '\n\n' + NET_HTML + '\n\n' + marquee + '\n\n' + CTA_HTML),
     'portfolio.html': page('portfolio', '제작 사례 | Studio Genilo', 'dark', secs['portfolio']),
     'pricing.html': page('pricing', '제작 요금 | Studio Genilo', 'light', secs['pricing'] + '\n\n' + secs['maintenance']),
-    'estimate.html': page('estimate', '간단 견적 | Studio Genilo', 'dark', secs['estimate']),
     'process.html': page('process', '제작 과정 | Studio Genilo', 'dark', secs['process']),
-    'faq.html': page('faq', '자주 묻는 질문 | Studio Genilo', 'dark', secs['faq']),
     'contact.html': page('contact', '상담하기 | Studio Genilo', 'dark', secs['contact']),
 }
 for fn, html in out.items():
