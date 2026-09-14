@@ -327,11 +327,8 @@ body[data-theme="light"] .cursor{mix-blend-mode:multiply;background:radial-gradi
 }
 
 /* ===== 히어로 배경 이미지 (index) ===== */
-.hero:before{content:"";position:absolute;inset:0;z-index:0;background:url(studio-2560.jpg) 82% 45%/cover no-repeat;opacity:.42;transform:scale(1.04);animation:heroBg 2.4s var(--ease-out) forwards}
 .hero:after{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(70% 60% at 50% 45%,rgba(23,23,23,.25),rgba(23,23,23,.9) 80%),linear-gradient(180deg,rgba(23,23,23,.65),transparent 28%,transparent 62%,#171717)}
 .hero .wrap,.hero .hero-scroll{position:relative;z-index:1}
-@keyframes heroBg{to{transform:none}}
-@media(max-width:900px){.hero:before{background-image:url(studio-1600.jpg);background-position:62% 45%;opacity:.42}}
 /* ===== 포트폴리오 라벨 강조 ===== */
 #portfolio .eyebrow{font-size:1.05rem;letter-spacing:.42em;font-weight:700;color:#fff;padding:12px 22px 12px 26px;border:1px solid rgba(192,36,111,.55);border-radius:999px;background:linear-gradient(90deg,rgba(168,20,90,.32),rgba(168,20,90,.12));box-shadow:0 0 0 4px rgba(168,20,90,.10),0 12px 40px rgba(168,20,90,.35);animation:portfolioGlow 2.6s ease-in-out infinite}
 #portfolio .eyebrow:before,#portfolio .eyebrow:after{color:var(--accent-2)}

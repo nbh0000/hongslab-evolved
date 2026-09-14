@@ -32,10 +32,12 @@ def links(s):
         s = s.replace(f'href="{k}"', f'href="{v}"')
     return s
 
+GHOST = {'portfolio': 'PORTFOLIO', 'effect': 'WHY', 'pricing': 'PRICING', 'maintenance': 'CARE', 'estimate': 'ESTIMATE', 'process': 'PROCESS', 'faq': 'FAQ', 'contact': 'CONTACT'}
 for k in secs:
-    secs[k] = links(secs[k])
+    secs[k] = links(secs[k]).replace(f'<section class="section" id="{k}"', f'<section class="section" id="{k}" data-ghost="{GHOST[k]}"', 1)
 secs['pricing'] = re.sub(r'data-plan="(\w+)" href="estimate.html"', r'data-plan="\1" href="estimate.html?plan=\1"', secs['pricing'])
 hero, header, footer, mbar = links(hero), links(header), links(footer), links(mbar)
+hero = hero.replace('<div class="hero-scroll">SCROLL</div>', '<div class="hero-tags"><span>AI ASSISTED BUILD</span><span>PLAN · DESIGN · DEPLOY</span><span>SEJONG · KOREA</span></div><div class="hud-stats"><span><b>AI</b>CORE</span><span><b>WEB</b>APP</span><span><b>24</b>ONLINE</span></div><div class="hero-scroll">SCROLL DOWN</div>')
 for key, label, fn in PAGES[1:]:
     header = header.replace(f'<a href="{fn}">{label}</a>', f'<a href="{fn}" data-page="{key}">{label}</a>')
 
@@ -48,11 +50,8 @@ open("site.js", "w", encoding="utf-8", newline="\n").write(site_js)
 
 STUDIO_CSS = """
 /* ===== 히어로 배경 이미지 (index) ===== */
-.hero:before{content:"";position:absolute;inset:0;z-index:0;background:url(studio-2560.jpg) 82% 45%/cover no-repeat;opacity:.42;transform:scale(1.04);animation:heroBg 2.4s var(--ease-out) forwards}
 .hero:after{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(70% 60% at 50% 45%,rgba(23,23,23,.25),rgba(23,23,23,.9) 80%),linear-gradient(180deg,rgba(23,23,23,.65),transparent 28%,transparent 62%,#171717)}
 .hero .wrap,.hero .hero-scroll{position:relative;z-index:1}
-@keyframes heroBg{to{transform:none}}
-@media(max-width:900px){.hero:before{background-image:url(studio-1600.jpg);background-position:62% 45%;opacity:.42}}
 /* ===== 포트폴리오 라벨 강조 ===== */
 #portfolio .eyebrow{font-size:1.05rem;letter-spacing:.42em;font-weight:700;color:#fff;padding:12px 22px 12px 26px;border:1px solid rgba(192,36,111,.55);border-radius:999px;background:linear-gradient(90deg,rgba(168,20,90,.32),rgba(168,20,90,.12));box-shadow:0 0 0 4px rgba(168,20,90,.10),0 12px 40px rgba(168,20,90,.35);animation:portfolioGlow 2.6s ease-in-out infinite}
 #portfolio .eyebrow:before,#portfolio .eyebrow:after{color:var(--accent-2)}
@@ -86,6 +85,79 @@ STUDIO_HTML = """<section class="section studio" id="studio">
 </section>"""
 open("site.css", "w", encoding="utf-8", newline="\n").write((_css + STUDIO_CSS).strip() + "\n")
 
+INDEX_HERO = """<section class="hero hero-x" id="hero">
+  <div class="hero-art" aria-hidden="true"><img src="ai-head-2560.jpg" srcset="ai-head-1600.jpg 1600w, ai-head-2560.jpg 2560w" sizes="(max-width:900px) 100vw, 68vw" alt="" decoding="async" fetchpriority="high"></div>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow scramble">AI STUDIO GENILO · WEB APP STUDIO</div>
+      <h1 id="heroTitle">아이디어를 실제로 동작하는<br>웹 앱으로 만듭니다</h1>
+      <div class="hero-tagline">TRANSFORMING <em>IDEAS</em> INTO <em>WORKING PRODUCTS</em></div>
+      <div class="hero-actions"><a class="btn primary" href="portfolio.html">제작 사례 보기</a><a class="btn outline" href="http://pf.kakao.com/_KxojrX" target="_blank" rel="noopener noreferrer">카카오톡 무료 상담</a></div>
+    </div>
+  </div>
+  <div class="hero-tags"><span>AI ASSISTED BUILD</span><span>PLAN · DESIGN · DEPLOY</span><span>SEJONG · KOREA</span></div>
+  <div class="hud-stats"><span><b>AI</b>CORE</span><span><b>WEB</b>APP</span><span><b>24</b>ONLINE</span></div>
+  <div class="hero-scroll">SCROLL DOWN</div>
+</section>"""
+
+AICORE_HTML = """<section class="section ai-core" id="aicore" data-ghost="AI CORE">
+  <div class="wrap ai-grid">
+    <figure class="ai-figure reveal">
+      <img src="ai-android-1400.jpg" alt="Studio Genilo AI 안드로이드" loading="lazy" decoding="async">
+      <span class="hud-label tl"><b></b>MATERIALIZING_01<br><i>SYNTHETIC_VISUAL_INTERFACE</i></span>
+      <span class="hud-label br">SYNC · 100%</span>
+    </figure>
+    <div class="ai-copy">
+      <div class="reveal"><div class="eyebrow scramble">AI CORE · HOW WE BUILD</div><h2 class="title">AI가 설계하고,<br>사람이 완성합니다<em>.</em></h2></div>
+      <div class="ai-stats stagger">
+        <div class="stat"><b>AI</b><span>PLAN · CODE · QA</span></div>
+        <div class="stat"><b>01</b><span>IDEA TO PRODUCT</span></div>
+        <div class="stat"><b>PC·M</b><span>RESPONSIVE DEFAULT</span></div>
+        <div class="stat"><b>24H</b><span>ONLINE SUPPORT</span></div>
+      </div>
+      <ul class="ai-list reveal"><li>요구사항을 정리해 화면 구조와 데이터 흐름부터 설계합니다.</li><li>AI 코드 생성과 사람의 검수를 함께 거쳐 빠르고 정확하게 개발합니다.</li><li>배포, 도메인 연결, 운영까지 한 번에 진행합니다.</li></ul>
+    </div>
+  </div>
+</section>"""
+
+NET_HTML = """<section class="section net" id="network" data-ghost="NETWORK">
+  <div class="wrap net-grid">
+    <div class="net-copy">
+      <div class="reveal"><div class="eyebrow scramble">NETWORK · SEJONG TO WORLD</div><h2 class="title">어디서 열어도<br>같은 경험<em>.</em></h2></div>
+      <div class="net-tags reveal"><span>WEB APP</span><span>LANDING</span><span>ADMIN</span><span>BOOKING</span><span>PAYMENT</span><span>AUTH</span></div>
+    </div>
+    <div class="globe-wrap" id="globeWrap"><canvas id="globe"></canvas><div class="online" id="online"><b></b>ONLINE · SEJONG</div></div>
+  </div>
+</section>"""
+
+CTA_HTML = """<section class="cta-x" id="cta">
+  <img class="cta-bg" src="ai-letters-2560.jpg" srcset="ai-letters-1600.jpg 1600w, ai-letters-2560.jpg 2560w" sizes="100vw" alt="" loading="lazy" decoding="async">
+  <div class="wrap cta-inner reveal">
+    <div class="eyebrow scramble">READY TO BUILD</div>
+    <h2 class="title">지금 아이디어를<br>보내주세요<em>.</em></h2>
+    <div class="hero-actions"><a class="btn primary" href="estimate.html">간단 견적</a><a class="btn light" href="contact.html">상담하기</a></div>
+  </div>
+</section>"""
+
+SKILLS_HTML = """<section class="section skills" id="skills" data-ghost="SKILLS">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow scramble">AI SKILLS · NEURAL MAP</div><h2 class="title sk-title">Where <em>AI</em> lives in our workflow<em>.</em></h2></div>
+    <div class="sk-stage reveal">
+      <div class="sk-figure"><img src="ai-android-1400.jpg" alt="" loading="lazy" decoding="async"><i class="sk-node" style="--x:46%;--y:22%;--c:#ff2d8a"></i><i class="sk-node" style="--x:36%;--y:50%;--c:#c04dff"></i><i class="sk-node" style="--x:30%;--y:78%;--c:#ff6a3d"></i><i class="sk-node" style="--x:62%;--y:30%;--c:#24d3ff"></i><i class="sk-node" style="--x:58%;--y:56%;--c:#3dff9a"></i><i class="sk-node" style="--x:82%;--y:80%;--c:#ffd23d"></i></div>
+      <i class="sk-link l" style="--xn:46;--y:22%;--c:#ff2d8a"></i><i class="sk-link l" style="--xn:36;--y:50%;--c:#c04dff"></i><i class="sk-link l" style="--xn:30;--y:78%;--c:#ff6a3d"></i><i class="sk-link r" style="--xn:62;--y:30%;--c:#24d3ff"></i><i class="sk-link r" style="--xn:58;--y:56%;--c:#3dff9a"></i><i class="sk-link r" style="--xn:82;--y:80%;--c:#ffd23d"></i>
+      <div class="sk-cards">
+      <article class="sk-card l" style="--y:22%;--c:#ff2d8a"><h3>Prompt Engineering</h3><p>Specs that models execute exactly</p><span class="lvl">DAILY DRIVER</span><span class="bars"><b class="on"></b><b class="on"></b><b class="on"></b></span><small>CORE_01</small><span class="ret"><i></i><b></b></span></article>
+      <article class="sk-card l" style="--y:50%;--c:#c04dff"><h3>AI Pair Coding</h3><p>Claude Code, Cursor and Copilot in the loop</p><span class="lvl">DAILY DRIVER</span><span class="bars"><b class="on"></b><b class="on"></b><b class="on"></b></span><small>CORE_02</small><span class="ret"><i></i><b></b></span></article>
+      <article class="sk-card l" style="--y:78%;--c:#ff6a3d"><h3>Generative Visuals</h3><p>Gemini image models for art direction</p><span class="lvl">SHIP WITH IT</span><span class="bars"><b class="on"></b><b class="on"></b><b></b></span><small>CORE_03</small><span class="ret"><i></i><b></b></span></article>
+      <article class="sk-card r" style="--y:30%;--c:#24d3ff"><h3>Agent Workflows</h3><p>Tool-use, MCP and multi-step automation</p><span class="lvl">SHIP WITH IT</span><span class="bars"><b class="on"></b><b class="on"></b><b></b></span><small>CORE_04</small><span class="ret"><i></i><b></b></span></article>
+      <article class="sk-card r" style="--y:56%;--c:#3dff9a"><h3>LLM Integration</h3><p>Chat, RAG and search inside web apps</p><span class="lvl">DAILY DRIVER</span><span class="bars"><b class="on"></b><b class="on"></b><b class="on"></b></span><small>CORE_05</small><span class="ret"><i></i><b></b></span></article>
+      <article class="sk-card r" style="--y:80%;--c:#ffd23d"><h3>AI QA & Review</h3><p>Automated tests, code review and audits</p><span class="lvl">SHIP WITH IT</span><span class="bars"><b class="on"></b><b class="on"></b><b></b></span><small>CORE_06</small><span class="ret"><i></i><b></b></span></article>
+      </div>
+    </div>
+    <div class="sk-legend reveal"><span>DAILY DRIVER · 3/3</span><span>SHIP WITH IT · 2/3</span><span>SYNC · LIVE</span></div>
+  </div>
+</section>"""
+
 HEAD = '''<!doctype html>
 <html lang="ko">
 <head>
@@ -95,10 +167,20 @@ HEAD = '''<!doctype html>
 <title>{title}</title>
 <link href="fonts.css" rel="stylesheet">
 <link href="site.css" rel="stylesheet">
+<link href="cyber.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
 </head>
 <body data-theme="{theme}" data-page="{key}">
 <div class="grid-bg"></div>
 <div class="cursor" id="cursor"></div>
+<div class="scan"></div>
+<div class="hud"><i></i><i></i><i></i><i></i></div>
+<div class="boot" id="boot"><div class="boot-grid"></div><div class="boot-corners"><i></i><i></i><i></i><i></i></div>
+<div class="boot-inner"><div class="boot-mark"><i></i></div><div class="boot-logo">Studio <em>Genilo</em></div><div class="boot-status" id="bootStatus">INITIALIZING AI CORE</div><div class="boot-tag">아이디어가 <b>동작하는 제품</b>이 되는 곳.</div><div class="boot-bar"><i id="bootFill"></i><b id="bootDot"></b></div><div class="boot-pct" id="bootPct">000%</div><button class="boot-enter" id="bootEnter" type="button">ENTER STUDIO<small>READY</small></button></div>
+<div class="boot-log" id="bootLog"></div><div class="boot-ver">SG · BUILD 2026.09</div></div>
+<script src="cyber.js"></script>
 '''
 
 def page(key, title, theme, content):
@@ -107,7 +189,7 @@ def page(key, title, theme, content):
 
 T = 'Studio Genilo | AI 웹 앱 제작 스튜디오'
 out = {
-    'index.html': page('index', T, 'dark', hero + '\n\n' + marquee),
+    'index.html': page('index', T, 'dark', INDEX_HERO + '\n\n' + AICORE_HTML + '\n\n' + SKILLS_HTML + '\n\n' + NET_HTML + '\n\n' + marquee + '\n\n' + CTA_HTML),
     'portfolio.html': page('portfolio', '제작 사례 | Studio Genilo', 'dark', secs['portfolio']),
     'pricing.html': page('pricing', '제작 요금 | Studio Genilo', 'light', secs['pricing'] + '\n\n' + secs['maintenance']),
     'estimate.html': page('estimate', '간단 견적 | Studio Genilo', 'dark', secs['estimate']),
