@@ -189,7 +189,7 @@ def page(key, title, theme, content):
 
 T = 'Studio Genilo | AI 웹 앱 제작 스튜디오'
 out = {
-    'index.html': page('index', T, 'dark', INDEX_HERO + '\n\n' + AICORE_HTML + '\n\n' + SKILLS_HTML + '\n\n' + NET_HTML + '\n\n' + marquee + '\n\n' + CTA_HTML),
+    'index.html': page('index', T, 'dark', INDEX_HERO + '\n\n' + SKILLS_HTML + '\n\n' + NET_HTML + '\n\n' + marquee + '\n\n' + CTA_HTML),
     'portfolio.html': page('portfolio', '제작 사례 | Studio Genilo', 'dark', secs['portfolio']),
     'pricing.html': page('pricing', '제작 요금 | Studio Genilo', 'light', secs['pricing'] + '\n\n' + secs['maintenance']),
     'estimate.html': page('estimate', '간단 견적 | Studio Genilo', 'dark', secs['estimate']),
