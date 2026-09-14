@@ -30,7 +30,7 @@ async function copyText(text){try{await navigator.clipboard.writeText(text);retu
 function inquiryText(){
   const q=quickData()||{};const interest=$('interest');const company=($('company')||{}).value||'',phone=($('phone')||{}).value||'',message=($('message')||{}).value||'';
   const interestText=interest?interest.value:(PLAN_LABEL[q.plan]||'상담 전 선택');
-  return `[홍스랩 홈페이지 제작 상담]\n업체명/이름: ${company.trim()||'미입력'}\n연락처: ${phone.trim()||'미입력'}\n관심 상품: ${interestText}\n업종: ${q.industry||'미선택'}\n홈페이지 형태: ${q.type==='one'?'한 페이지 소개형':q.type==='multi'?'여러 페이지형':q.type==='unknown'?'아직 미정':'미선택'}\n필요 기능: ${q.features&&q.features.length?q.features.join(', '):'미선택'}\n\n문의 내용:\n${message.trim()||'미입력'}`}
+  return `[Studio Genilo 홈페이지 제작 상담]\n업체명/이름: ${company.trim()||'미입력'}\n연락처: ${phone.trim()||'미입력'}\n관심 상품: ${interestText}\n업종: ${q.industry||'미선택'}\n홈페이지 형태: ${q.type==='one'?'한 페이지 소개형':q.type==='multi'?'여러 페이지형':q.type==='unknown'?'아직 미정':'미선택'}\n필요 기능: ${q.features&&q.features.length?q.features.join(', '):'미선택'}\n\n문의 내용:\n${message.trim()||'미입력'}`}
 if($('quickConsult'))$('quickConsult').onclick=async()=>{await copyText(inquiryText());window.open(KAKAO_URL,'_blank','noopener');};
 if($('interest')){const q=loadQuick();if(q&&PLAN_LABEL[q.plan])$('interest').value=PLAN_LABEL[q.plan]}
 if($('kakaoInquiry'))$('kakaoInquiry').onclick=async()=>{const phone=$('phone'),message=$('message'),privacy=$('privacy'),formResult=$('formResult'),success=$('formSuccess');if(!phone.value.trim()||!message.value.trim()||!privacy.checked){success.classList.remove('show');formResult.style.color='var(--red)';formResult.textContent='연락처, 문의 내용, 개인정보 동의는 필수입니다.';return}const copied=await copyText(inquiryText());formResult.textContent='';success.classList.add('show');if(!copied)success.textContent='카카오톡 채널을 엽니다. 위 문의 내용을 직접 복사해 채팅창에 붙여넣어 보내 주세요.';window.open(KAKAO_URL,'_blank','noopener');};
@@ -64,7 +64,7 @@ function onScroll(){
 addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);
 
 /* ===== 마퀴 ===== */
-(function(){const t=$('marqueeTrack');if(!t)return;const words=['홍스랩','HONGS LAB','소상공인 홈페이지 제작','159,000원부터','WEBSITE STUDIO','제작 사례','간단 견적','카카오톡 상담'];let html='';for(let r=0;r<4;r++)words.forEach(w=>html+=`<span>${w}</span>`);t.innerHTML=html})();
+(function(){const t=$('marqueeTrack');if(!t)return;const words=['Studio Genilo','AI STUDIO GENILO','웹 앱 제작','AI × WEB APP','기획 · 디자인 · 개발','제작 사례','간단 견적','카카오톡 상담'];let html='';for(let r=0;r<4;r++)words.forEach(w=>html+=`<span>${w}</span>`);t.innerHTML=html})();
 
 /* ===== 리빌 / 스크램블 ===== */
 const GLYPHS='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>/|[]{}#%&*+=~가나다라마바사아자차카타파하ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ';

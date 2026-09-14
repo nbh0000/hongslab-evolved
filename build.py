@@ -47,6 +47,12 @@ site_js = open("site.src.js", encoding="utf-8").read().replace('__LAND__', land)
 open("site.js", "w", encoding="utf-8", newline="\n").write(site_js)
 
 STUDIO_CSS = """
+/* ===== 히어로 배경 이미지 (index) ===== */
+.hero:before{content:"";position:absolute;inset:0;z-index:0;background:url(studio-2560.jpg) 82% 45%/cover no-repeat;opacity:.42;transform:scale(1.04);animation:heroBg 2.4s var(--ease-out) forwards}
+.hero:after{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(70% 60% at 50% 45%,rgba(23,23,23,.25),rgba(23,23,23,.9) 80%),linear-gradient(180deg,rgba(23,23,23,.65),transparent 28%,transparent 62%,#171717)}
+.hero .wrap,.hero .hero-scroll{position:relative;z-index:1}
+@keyframes heroBg{to{transform:none}}
+@media(max-width:900px){.hero:before{background-image:url(studio-1600.jpg);background-position:62% 45%;opacity:.42}}
 /* ===== 스튜디오 비주얼 (index) ===== */
 .studio{padding-top:0}
 .studio .frame{position:relative;margin-top:44px;border-radius:22px;overflow:hidden;border:1px solid var(--line-strong);background:#0f0f11;box-shadow:0 40px 120px rgba(168,20,90,.18),0 20px 60px rgba(0,0,0,.5)}
@@ -63,13 +69,13 @@ STUDIO_CSS = """
 
 STUDIO_HTML = """<section class="section studio" id="studio">
   <div class="wrap">
-    <div class="reveal"><div class="eyebrow scramble">STUDIO · SEJONG</div><h2 class="title">작은 사업에도<br>제대로 만든 화면 하나<em>.</em></h2><p class="lead">홍스랩은 화려한 기능보다 정리된 구조와 또렷한 첫인상에 집중합니다. 다크 톤과 포인트 컬러 하나로 완성되는 화면, 그 기준을 그대로 담았습니다.</p></div>
+    <div class="reveal"><div class="eyebrow scramble">AI STUDIO · SEJONG</div><h2 class="title">아이디어 하나도<br>제대로 동작하는 제품으로<em>.</em></h2><p class="lead">Studio Genilo는 AI를 활용해 기획부터 화면 설계, 개발까지 한 번에 진행합니다. 정리된 구조와 또렷한 첫인상, 그 기준을 그대로 담았습니다.</p></div>
     <figure class="frame reveal">
-      <span class="tag tl"><b></b>HONGS LAB · WEBSITE STUDIO</span>
-      <img src="studio-1600.jpg" srcset="studio-1600.jpg 1600w, studio-2560.jpg 2560w" sizes="(max-width:1240px) 100vw, 1180px" width="2560" height="1429" alt="홍스랩 스튜디오 데스크. 모니터에 마젠타 파티클 지구본이 표시된 다크 모드 홈페이지 시안이 떠 있다." loading="lazy" decoding="async">
+      <span class="tag tl"><b></b>AI STUDIO GENILO · WEB APP</span>
+      <img src="studio-1600.jpg" srcset="studio-1600.jpg 1600w, studio-2560.jpg 2560w" sizes="(max-width:1240px) 100vw, 1180px" width="2560" height="1429" alt="Studio Genilo 스튜디오 데스크. 모니터에 마젠타 파티클 지구본이 표시된 다크 모드 홈페이지 시안이 떠 있다." loading="lazy" decoding="async">
       <span class="tag br"><b></b>4K · 5504 × 3072</span>
     </figure>
-    <div class="caption reveal"><span>DARK MODE · ONE ACCENT COLOR</span><span>PC · MOBILE RESPONSIVE</span></div>
+    <div class="caption reveal"><span>AI-ASSISTED · PLAN TO DEPLOY</span><span>PC · MOBILE RESPONSIVE</span></div>
   </div>
 </section>"""
 open("site.css", "w", encoding="utf-8", newline="\n").write((_css + STUDIO_CSS).strip() + "\n")
@@ -79,7 +85,7 @@ HEAD = '''<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="홍스랩 | 소상공인 홈페이지 제작 159,000원부터. 제작 사례, 간단 견적, 카카오톡 상담.">
+<meta name="description" content="Studio Genilo | AI로 만드는 웹 앱 제작 스튜디오. 랜딩 페이지부터 로그인·결제·관리자 기능이 있는 웹 앱까지 기획·디자인·개발을 한 번에.">
 <title>{title}</title>
 <link href="fonts.css" rel="stylesheet">
 <link href="site.css" rel="stylesheet">
@@ -93,15 +99,15 @@ def page(key, title, theme, content):
     return (HEAD.format(title=title, theme=theme, key=key) + header + '\n\n<main id="top">\n' + content +
             '\n</main>\n\n' + footer + '\n\n' + mbar + '\n' + modal + '\n<script src="site.js"></script>\n</body>\n</html>\n')
 
-T = '홍스랩 | 소상공인 홈페이지 제작 159,000원부터'
+T = 'Studio Genilo | AI 웹 앱 제작 스튜디오'
 out = {
-    'index.html': page('index', T, 'dark', hero + '\n\n' + STUDIO_HTML + '\n\n' + secs['effect'] + '\n\n' + marquee),
-    'portfolio.html': page('portfolio', '제작 사례 | 홍스랩', 'dark', secs['portfolio']),
-    'pricing.html': page('pricing', '제작 요금 | 홍스랩', 'light', secs['pricing'] + '\n\n' + secs['maintenance']),
-    'estimate.html': page('estimate', '간단 견적 | 홍스랩', 'dark', secs['estimate']),
-    'process.html': page('process', '제작 과정 | 홍스랩', 'dark', secs['process']),
-    'faq.html': page('faq', '자주 묻는 질문 | 홍스랩', 'dark', secs['faq']),
-    'contact.html': page('contact', '상담하기 | 홍스랩', 'dark', secs['contact']),
+    'index.html': page('index', T, 'dark', hero + '\n\n' + marquee),
+    'portfolio.html': page('portfolio', '제작 사례 | Studio Genilo', 'dark', secs['portfolio']),
+    'pricing.html': page('pricing', '제작 요금 | Studio Genilo', 'light', secs['pricing'] + '\n\n' + secs['maintenance']),
+    'estimate.html': page('estimate', '간단 견적 | Studio Genilo', 'dark', secs['estimate']),
+    'process.html': page('process', '제작 과정 | Studio Genilo', 'dark', secs['process']),
+    'faq.html': page('faq', '자주 묻는 질문 | Studio Genilo', 'dark', secs['faq']),
+    'contact.html': page('contact', '상담하기 | Studio Genilo', 'dark', secs['contact']),
 }
 for fn, html in out.items():
     open(fn, "w", encoding="utf-8", newline="\n").write(html)
