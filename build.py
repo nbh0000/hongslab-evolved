@@ -41,10 +41,38 @@ for key, label, fn in PAGES[1:]:
 
 css = css.replace('.section+.section{padding-top:40px}',
                   '.section+.section{padding-top:40px}\nmain>.section:first-child{padding-top:170px}')
-open("site.css", "w", encoding="utf-8", newline="\n").write(css.strip() + "\n")
+_css = css.strip() + "\n"
 
 site_js = open("site.src.js", encoding="utf-8").read().replace('__LAND__', land)
 open("site.js", "w", encoding="utf-8", newline="\n").write(site_js)
+
+STUDIO_CSS = """
+/* ===== 스튜디오 비주얼 (index) ===== */
+.studio{padding-top:0}
+.studio .frame{position:relative;margin-top:44px;border-radius:22px;overflow:hidden;border:1px solid var(--line-strong);background:#0f0f11;box-shadow:0 40px 120px rgba(168,20,90,.18),0 20px 60px rgba(0,0,0,.5)}
+.studio .frame img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;transform:scale(1.02);transition:transform 1.6s var(--ease-out)}
+.studio .frame.in img{transform:none}
+.studio .frame:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(23,23,23,.28),transparent 40%,transparent 75%,rgba(23,23,23,.55));pointer-events:none}
+.studio .tag{position:absolute;z-index:2;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(240,240,248,.82);display:inline-flex;align-items:center;gap:.7em;padding:8px 12px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(20,20,22,.55);backdrop-filter:blur(8px)}
+.studio .tag b{width:6px;height:6px;border-radius:50%;background:var(--accent-2);box-shadow:0 0 12px var(--accent-2)}
+.studio .tag.tl{top:22px;left:22px}
+.studio .tag.br{right:22px;bottom:22px}
+.studio .caption{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:14px;font-family:var(--font-mono);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+@media(max-width:720px){.studio .frame{border-radius:14px}.studio .frame img{aspect-ratio:4/3}.studio .tag.br{display:none}.studio .caption{display:none}}
+"""
+
+STUDIO_HTML = """<section class="section studio" id="studio">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow scramble">STUDIO · SEJONG</div><h2 class="title">작은 사업에도<br>제대로 만든 화면 하나<em>.</em></h2><p class="lead">홍스랩은 화려한 기능보다 정리된 구조와 또렷한 첫인상에 집중합니다. 다크 톤과 포인트 컬러 하나로 완성되는 화면, 그 기준을 그대로 담았습니다.</p></div>
+    <figure class="frame reveal">
+      <span class="tag tl"><b></b>HONGS LAB · WEBSITE STUDIO</span>
+      <img src="studio-1600.jpg" srcset="studio-1600.jpg 1600w, studio-2560.jpg 2560w" sizes="(max-width:1240px) 100vw, 1180px" width="2560" height="1429" alt="홍스랩 스튜디오 데스크. 모니터에 마젠타 파티클 지구본이 표시된 다크 모드 홈페이지 시안이 떠 있다." loading="lazy" decoding="async">
+      <span class="tag br"><b></b>4K · 5504 × 3072</span>
+    </figure>
+    <div class="caption reveal"><span>DARK MODE · ONE ACCENT COLOR</span><span>PC · MOBILE RESPONSIVE</span></div>
+  </div>
+</section>"""
+open("site.css", "w", encoding="utf-8", newline="\n").write((_css + STUDIO_CSS).strip() + "\n")
 
 HEAD = '''<!doctype html>
 <html lang="ko">
@@ -67,7 +95,7 @@ def page(key, title, theme, content):
 
 T = '홍스랩 | 소상공인 홈페이지 제작 159,000원부터'
 out = {
-    'index.html': page('index', T, 'dark', hero + '\n\n' + secs['effect'] + '\n\n' + marquee),
+    'index.html': page('index', T, 'dark', hero + '\n\n' + STUDIO_HTML + '\n\n' + secs['effect'] + '\n\n' + marquee),
     'portfolio.html': page('portfolio', '제작 사례 | 홍스랩', 'dark', secs['portfolio']),
     'pricing.html': page('pricing', '제작 요금 | 홍스랩', 'light', secs['pricing'] + '\n\n' + secs['maintenance']),
     'estimate.html': page('estimate', '간단 견적 | 홍스랩', 'dark', secs['estimate']),
