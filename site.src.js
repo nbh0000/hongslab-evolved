@@ -1,0 +1,124 @@
+/* ===== 공통 ===== */
+const $=id=>document.getElementById(id);
+const KAKAO_URL='http://pf.kakao.com/_KxojrX';
+const PAGE=document.body.dataset.page||'index';
+const PAGE_ORDER=['portfolio','pricing','estimate','process','faq','contact'];
+
+/* ===== 원본 기능 로직 (hongslab.kr) ===== */
+const OPTIONS=[['section','구역 추가',33000,'제공된 글·사진으로 기존 페이지에 구성'],['page','일반 소개 페이지 추가',77000,'기존 디자인 기준, 최대 4개 구역'],['custom','별도 디자인 페이지',150000,'범위 확인 후 확정'],['revision','수정 횟수 추가',33000,'기존 구성 내 30분 이내 작업'],['copy','소개 문구 작성',55000,'고객 자료·인터뷰 기준 최대 5개 구역'],['photo','사진 보정',33000,'최대 10장, 단순 보정·크기 정리'],['banner','배너 제작',33000,'고객 문구 제공, 시안 1개·수정 1회'],['booking','외부 예약·상담 서비스 연결',33000,'링크 또는 삽입'],['form','문의폼 추가',55000,'기본 항목 5개 이내'],['domain','도메인 최초 연결 대행',22000,'도메인 구매비 별도'],['card','명함 맞춤 디자인',20000,'앞뒤 1종·수정 1회'],['print','명함 인쇄 주문 대행',11000,'인쇄비·배송비 별도']];
+const money=n=>new Intl.NumberFormat('ko-KR').format(Math.round(n))+'원';
+if($('optionTable'))$('optionTable').innerHTML=OPTIONS.map(o=>`<tr><td>${o[1]}</td><td>${money(o[2])}${['custom','booking','form'].includes(o[0])?'부터':''}</td><td>${o[3]}</td></tr>`).join('');
+
+const PLAN_LABEL={budget:'실속형',basic:'기본형',premium:'프리미엄형'};
+function saveQuick(q){try{localStorage.setItem('hongslab_quick',JSON.stringify(q))}catch{}}
+function loadQuick(){try{return JSON.parse(localStorage.getItem('hongslab_quick')||'null')}catch{return null}}
+function quickData(){
+  const typeEl=document.querySelector('input[name="quickType"]:checked');if(!typeEl)return loadQuick();
+  const type=typeEl.value;const features=[...document.querySelectorAll('.quickFeature:checked')].map(x=>x.value);
+  let plan='budget',name='실속형 홈페이지',price='159,000원부터',desc='한 페이지로 사업 소개와 연락 방법을 빠르게 안내하는 구성입니다.';
+  if(type==='multi'||features.includes('문의폼')||features.includes('예약 문의')||features.includes('게시판')){plan='basic';name='기본형 홈페이지';price='299,000원부터';desc='서비스 소개와 고객 문의 연결을 함께 정리하는 기본 구성입니다.'}
+  if(features.includes('예약 문의')&&features.includes('게시판')){plan='premium';name='프리미엄형 홈페이지';price='599,000원부터';desc='여러 페이지와 추가 기능을 사업에 맞게 구성하는 상담형 제작입니다.'}
+  $('quickPlanName').textContent=name;const qp=$('quickPrice');if(qp.textContent!==price){qp.classList.add('bump');setTimeout(()=>qp.classList.remove('bump'),400)}qp.textContent=price;$('quickDescription').textContent=desc;
+  const q={plan,name,price,desc,type,features,industry:$('quickIndustry').value};saveQuick(q);return q}
+function choosePlan(plan){const radio=document.querySelector(`input[name="quickType"][value="${plan==='budget'?'one':'multi'}"]`);if(radio)radio.checked=true;if(plan==='premium')document.querySelectorAll('.quickFeature').forEach(x=>{if(x.value==='예약 문의'||x.value==='게시판')x.checked=true});quickData()}
+if($('quickIndustry')){
+  document.querySelectorAll('#estimate input,#estimate select').forEach(el=>el.addEventListener('change',quickData));
+  const p=new URLSearchParams(location.search).get('plan');if(p&&PLAN_LABEL[p])choosePlan(p);else quickData();
+}
+document.querySelectorAll('.select-quick').forEach(a=>a.addEventListener('click',()=>{if($('quickIndustry'))choosePlan(a.dataset.plan)}));
+async function copyText(text){try{await navigator.clipboard.writeText(text);return true}catch{return false}}
+function inquiryText(){
+  const q=quickData()||{};const interest=$('interest');const company=($('company')||{}).value||'',phone=($('phone')||{}).value||'',message=($('message')||{}).value||'';
+  const interestText=interest?interest.value:(PLAN_LABEL[q.plan]||'상담 전 선택');
+  return `[홍스랩 홈페이지 제작 상담]\n업체명/이름: ${company.trim()||'미입력'}\n연락처: ${phone.trim()||'미입력'}\n관심 상품: ${interestText}\n업종: ${q.industry||'미선택'}\n홈페이지 형태: ${q.type==='one'?'한 페이지 소개형':q.type==='multi'?'여러 페이지형':q.type==='unknown'?'아직 미정':'미선택'}\n필요 기능: ${q.features&&q.features.length?q.features.join(', '):'미선택'}\n\n문의 내용:\n${message.trim()||'미입력'}`}
+if($('quickConsult'))$('quickConsult').onclick=async()=>{await copyText(inquiryText());window.open(KAKAO_URL,'_blank','noopener');};
+if($('interest')){const q=loadQuick();if(q&&PLAN_LABEL[q.plan])$('interest').value=PLAN_LABEL[q.plan]}
+if($('kakaoInquiry'))$('kakaoInquiry').onclick=async()=>{const phone=$('phone'),message=$('message'),privacy=$('privacy'),formResult=$('formResult'),success=$('formSuccess');if(!phone.value.trim()||!message.value.trim()||!privacy.checked){success.classList.remove('show');formResult.style.color='var(--red)';formResult.textContent='연락처, 문의 내용, 개인정보 동의는 필수입니다.';return}const copied=await copyText(inquiryText());formResult.textContent='';success.classList.add('show');if(!copied)success.textContent='카카오톡 채널을 엽니다. 위 문의 내용을 직접 복사해 채팅창에 붙여넣어 보내 주세요.';window.open(KAKAO_URL,'_blank','noopener');};
+const FAQ=[['159,000원에 어디까지 포함되나요?','실속형은 한 페이지·최대 5개 구역, 준비된 디자인 선택, PC·모바일 대응, 전화·카카오톡·지도 및 외부 문의 링크 연결, 검색 기본 설정, 제작 중 수정 1회, 기존 명함 틀을 활용한 인쇄용 파일 1종을 포함합니다. 고객 제공 글·사진·로고 기준으로 제작합니다.'],['도메인과 호스팅은 별도인가요?','네. 도메인, 호스팅, 홈페이지 빌더, 문자·이메일·예약 서비스 등 외부 서비스 비용은 제작비와 별도입니다. 고객 명의 계정에서 직접 결제하는 방식을 권장합니다.'],['유지보수 가입은 필수인가요?','아닙니다. 유지보수는 선택 사항이며, 미가입 상태에서도 홈페이지는 유지됩니다. 수정이 필요하면 건별로 요청할 수 있습니다.'],['모바일에서도 사용할 수 있나요?','네. 모든 제작 상품은 PC와 모바일 화면에 맞춰 사용할 수 있도록 제작합니다.'],['수정은 몇 번 가능한가요?','실속형 1회, 기본형 2회, 프리미엄형 3회입니다. 기존에 합의한 구성 안에서의 변경을 뜻하며 전체 디자인 변경과 기능 추가는 별도 견적입니다.'],['제작 기간은 얼마나 걸리나요?','실속형은 3~5영업일, 기본형은 5~10영업일, 프리미엄형은 10~15영업일이 예상됩니다. 자료와 착수금이 모두 접수된 이후부터 계산합니다.'],['검색 상위 노출을 보장하나요?','아니요. 제목·설명·공유 이미지 같은 검색 기본 설정과 등록 지원은 제공하지만, 검색 결과의 상위 노출 순위는 보장하지 않습니다.'],['결제·예약·회원가입 기능도 가능한가요?','가능 여부와 비용은 기능 범위를 확인한 뒤 별도 상담으로 안내합니다. 회원가입, 결제, 자체 예약 시스템, 관리자 페이지, 데이터베이스 구축은 고정 가격 항목이 아닙니다.']];
+if($('faqList')){$('faqList').innerHTML=FAQ.map(x=>`<div class="faq-item"><button class="faq-q" type="button"><span>${x[0]}</span><span>+</span></button><div class="faq-a"><div>${x[1]}</div></div></div>`).join('');document.querySelectorAll('.faq-q').forEach(q=>q.onclick=()=>q.parentElement.classList.toggle('open'))}
+const modal=$('previewModal'),previewImage=$('previewImage'),previewTitle=$('previewTitle');
+function closePreview(){if(!modal)return;modal.classList.remove('open');document.body.style.overflow=''}
+if(modal){document.querySelectorAll('.preview-btn').forEach(b=>b.onclick=()=>{previewImage.src=b.dataset.image;previewImage.alt=b.dataset.title+' 확대 이미지';previewTitle.textContent=b.dataset.title+' 미리보기';modal.classList.add('open');document.body.style.overflow='hidden'});$('previewClose').onclick=closePreview;modal.onclick=e=>{if(e.target===modal)closePreview()}}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closePreview();closeMenu()}});
+
+/* ===== 헤더 / 모바일 메뉴 / 활성 메뉴 ===== */
+const header=$('header'),menuBtn=$('menuBtn'),mobileMenu=$('mobileMenu');
+function closeMenu(){mobileMenu.classList.remove('open');menuBtn.textContent='☰';document.body.style.overflow=''}
+menuBtn.onclick=()=>{const open=!mobileMenu.classList.contains('open');mobileMenu.classList.toggle('open',open);menuBtn.textContent=open?'×':'☰';document.body.style.overflow=open?'hidden':''};
+mobileMenu.querySelectorAll('a').forEach(a=>a.onclick=closeMenu);
+document.querySelectorAll('#navLinks a').forEach(a=>a.classList.toggle('active',a.dataset.page===PAGE));
+const pageIdx=PAGE_ORDER.indexOf(PAGE);document.querySelectorAll('#dots i').forEach((d,i)=>d.classList.toggle('on',i===pageIdx));
+let lastY=0;
+const themed=[...document.querySelectorAll('section[data-theme]')];const baseTheme=document.body.dataset.theme||'dark';
+
+/* ===== 스크롤: 미터, 헤더 숨김, 테마 전환, 프로세스 진행선, 마퀴 ===== */
+const tick=$('tick'),pct=$('scrollPct');
+function onScroll(){
+  const y=scrollY,max=document.documentElement.scrollHeight-innerHeight,p=max>0?Math.min(1,y/max):0;
+  tick.style.top=(p*58)+'px';pct.textContent=String(Math.round(p*100)).padStart(3,'0')+'%';
+  header.classList.toggle('hide',y>lastY&&y>300&&!mobileMenu.classList.contains('open'));lastY=y;
+  if(themed.length){const probe=y+innerHeight*.45;let theme=baseTheme;for(const s of themed){if(s.offsetTop<=probe)theme=s.dataset.theme}if(document.body.dataset.theme!==theme)document.body.dataset.theme=theme}
+  const rail=$('processRail');if(rail){const r=rail.getBoundingClientRect();const prog=Math.min(1,Math.max(0,(innerHeight*.8-r.top)/(r.height+innerHeight*.3)));$('processFill').style.width=(prog*100)+'%';const steps=rail.querySelectorAll('.step');steps.forEach((s,i)=>s.classList.toggle('done',(i+1)/steps.length<=prog+.02))}
+  const track=$('marqueeTrack');if(track){track.style.transform=`translateX(${-(y*.35)%(track.scrollWidth/2||1)}px)`}
+}
+addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);
+
+/* ===== 마퀴 ===== */
+(function(){const t=$('marqueeTrack');if(!t)return;const words=['홍스랩','HONGS LAB','소상공인 홈페이지 제작','159,000원부터','WEBSITE STUDIO','제작 사례','간단 견적','카카오톡 상담'];let html='';for(let r=0;r<4;r++)words.forEach(w=>html+=`<span>${w}</span>`);t.innerHTML=html})();
+
+/* ===== 리빌 / 스크램블 ===== */
+const GLYPHS='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>/|[]{}#%&*+=~가나다라마바사아자차카타파하ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ';
+function scramble(el){if(el.dataset.done)return;el.dataset.done=1;const final=el.textContent;const len=final.length;const start=performance.now(),dur=900+len*25;el.style.minWidth=el.offsetWidth+'px';(function frame(now){const t=Math.min(1,(now-start)/dur);let out='';for(let i=0;i<len;i++){const c=final[i];if(c===' '||c==='·'){out+=c;continue}out+=(i/len<t)?c:GLYPHS[Math.floor(Math.random()*GLYPHS.length)]}el.textContent=out;if(t<1)requestAnimationFrame(frame);else{el.textContent=final;el.style.minWidth=''}})(start)}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('.scramble').forEach(scramble);if(e.target.classList.contains('scramble'))scramble(e.target);io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal,.stagger,.hero .scramble').forEach(el=>io.observe(el));
+
+/* ===== 히어로 단어 등장 ===== */
+(function(){const h=$('heroTitle');if(!h)return;const parts=h.innerHTML.split('<br>');let i=0;h.innerHTML=parts.map(line=>line.trim().split(' ').map(w=>`<span class="word" style="animation-delay:${.15+i++*.09}s">${w}</span>`).join(' ')).join('<br>')})();
+
+/* ===== 카드 스포트라이트 & 커서 글로우 ===== */
+const cursor=$('cursor');
+document.addEventListener('pointermove',e=>{cursor.style.transform=`translate(${e.clientX-180}px,${e.clientY-180}px)`;const el=e.target.closest('.card');if(el){const r=el.getBoundingClientRect();el.style.setProperty('--mx',(e.clientX-r.left)+'px');el.style.setProperty('--my',(e.clientY-r.top)+'px')}},{passive:true});
+document.addEventListener('pointerleave',()=>cursor.style.opacity=0);document.addEventListener('pointerenter',()=>cursor.style.opacity=1);
+if(matchMedia('(hover:none)').matches)cursor.style.display='none';
+
+/* ===== 지구본 (홈) ===== */
+(function(){
+  const cv=$('globe');if(!cv)return;
+  const LAND_B64='__LAND__';
+  const W=360,H=180;const raw=atob(LAND_B64);const land=new Uint8Array(W*H);for(let i=0;i<raw.length;i++){const b=raw.charCodeAt(i);for(let k=0;k<8;k++)land[i*8+k]=(b>>(7-k))&1}
+  const isLand=(lat,lon)=>{const px=Math.floor((lon+180)/360*W)%W,py=Math.min(H-1,Math.floor((90-lat)/180*H));return land[py*W+px]};
+  const pts=[];const STEP=2.4;
+  for(let lat=-88;lat<=88;lat+=STEP){const cos=Math.cos(lat*Math.PI/180);const n=Math.max(1,Math.round(360/STEP*cos));for(let i=0;i<n;i++){const lon=-180+i*360/n+(lat/STEP%2?180/n:0);if(isLand(lat,lon)){const la=lat*Math.PI/180,lo=lon*Math.PI/180;pts.push([Math.cos(la)*Math.cos(lo),Math.sin(la),Math.cos(la)*Math.sin(lo)])}}}
+  const toV=(lat,lon)=>{const la=lat*Math.PI/180,lo=lon*Math.PI/180;return [Math.cos(la)*Math.cos(lo),Math.sin(la),Math.cos(la)*Math.sin(lo)]};
+  const HOME=[36.48,127.29];const CITIES=[[35.68,139.69],[1.35,103.82],[-33.87,151.21],[25.2,55.27],[51.5,-.12],[40.71,-74.0],[34.05,-118.24],[-23.55,-46.63],[19.43,-99.13],[55.75,37.62]];
+  const arcs=CITIES.map((c,i)=>({a:toV(HOME[0],HOME[1]),b:toV(c[0],c[1]),phase:i*.37}));
+  const wrap=$('globeWrap'),online=$('online');const ctx=cv.getContext('2d');
+  let size=0,dpr=1;function resize(){const r=wrap.getBoundingClientRect();size=r.width;dpr=Math.min(2,devicePixelRatio||1);cv.width=size*dpr;cv.height=size*dpr}resize();addEventListener('resize',resize);
+  let rot=-2.2,vel=.0022,tilt=.32,drag=null,hover=false;
+  wrap.addEventListener('pointerdown',e=>{drag={x:e.clientX,r:rot};wrap.setPointerCapture(e.pointerId)});
+  wrap.addEventListener('pointermove',e=>{if(drag){const d=(e.clientX-drag.x)/size*3;rot=drag.r+d;vel=0}});
+  wrap.addEventListener('pointerup',()=>{drag=null;vel=.0022});wrap.addEventListener('pointercancel',()=>{drag=null;vel=.0022});
+  wrap.addEventListener('pointerenter',()=>hover=true);wrap.addEventListener('pointerleave',()=>hover=false);
+  const light=()=>document.body.dataset.theme==='light';
+  function project(v){const [x,y,z]=v;const cr=Math.cos(rot),sr=Math.sin(rot);let x1=x*cr-z*sr,z1=x*sr+z*cr;const ct=Math.cos(tilt),st=Math.sin(tilt);let y2=y*ct-z1*st,z2=y*st+z1*ct;return [x1,y2,z2]}
+  function slerp(a,b,t){let d=a[0]*b[0]+a[1]*b[1]+a[2]*b[2];d=Math.max(-1,Math.min(1,d));const o=Math.acos(d),so=Math.sin(o)||1e-6;const k1=Math.sin((1-t)*o)/so,k2=Math.sin(t*o)/so;return [a[0]*k1+b[0]*k2,a[1]*k1+b[1]*k2,a[2]*k1+b[2]*k2]}
+  let last=performance.now();
+  function frame(now){const dt=now-last;last=now;if(!drag)rot+=vel*(hover?.35:1)*dt/16;
+    const R=size*.42,cx=size/2,cy=size/2;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,size,size);
+    const fg=light()?'23,23,23':'240,240,248';
+    ctx.fillStyle=`rgba(${fg},.07)`;for(const p of pts){const [x,y,z]=project(p);if(z<0)ctx.fillRect(cx+x*R-.6,cy-y*R-.6,1.2,1.2)}
+    ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.strokeStyle=`rgba(${fg},.12)`;ctx.lineWidth=1;ctx.stroke();
+    const g=ctx.createRadialGradient(cx-R*.3,cy-R*.3,R*.2,cx,cy,R);g.addColorStop(0,'rgba(168,20,90,.04)');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fill();
+    for(const p of pts){const [x,y,z]=project(p);if(z>=0){const a=.18+.82*z;ctx.fillStyle=`rgba(${fg},${a})`;const s=1.3+z*1.2;ctx.fillRect(cx+x*R-s/2,cy-y*R-s/2,s,s)}}
+    const t0=now/1000;
+    for(const arc of arcs){const prog=((t0*.18+arc.phase)%1);const head=prog*1.35;const N=48;ctx.beginPath();let started=false;
+      for(let i=0;i<=N;i++){const t=i/N;if(t>head)break;const v=slerp(arc.a,arc.b,t);const lift=1+Math.sin(t*Math.PI)*.28;const [x,y,z]=project([v[0]*lift,v[1]*lift,v[2]*lift]);if(z<-.15){started=false;continue}const px=cx+x*R,py=cy-y*R;if(!started){ctx.moveTo(px,py);started=true}else ctx.lineTo(px,py)}
+      const fade=head>1?Math.max(0,1-(head-1)/.35):1;ctx.strokeStyle=`rgba(168,20,90,${.55*fade})`;ctx.lineWidth=1;ctx.stroke();
+      if(head<1){const v=slerp(arc.a,arc.b,head);const lift=1+Math.sin(head*Math.PI)*.28;const [x,y,z]=project([v[0]*lift,v[1]*lift,v[2]*lift]);if(z>-.15){ctx.beginPath();ctx.arc(cx+x*R,cy-y*R,2,0,Math.PI*2);ctx.fillStyle='#c0246f';ctx.fill()}}}
+    const [hx,hy,hz]=project(arcs[0].a);const px=cx+hx*R,py=cy-hy*R;
+    if(hz>0){ctx.beginPath();ctx.arc(px,py,3.5,0,Math.PI*2);ctx.fillStyle='#a8145a';ctx.fill();ctx.beginPath();ctx.arc(px,py,9+Math.sin(t0*3)*3,0,Math.PI*2);ctx.strokeStyle='rgba(168,20,90,.45)';ctx.stroke()}
+    online.style.opacity=hz>.15?1:0;online.style.left=px+'px';online.style.top=py+'px';
+    requestAnimationFrame(frame)}
+  requestAnimationFrame(frame);
+})();
+onScroll();

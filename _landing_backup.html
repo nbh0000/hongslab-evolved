@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="홍스랩 | 소상공인 홈페이지 제작 159,000원부터. 제작 사례, 간단 견적, 카카오톡 상담.">
+<title>홍스랩 | 소상공인 홈페이지 제작 159,000원부터</title>
+<link href="fonts.css" rel="stylesheet">
+<style>
+:root{
+  --accent:#a8145a;--accent-2:#c0246f;--kakao:#fee500;--kakao-ink:#191600;--red:#ff5c6a;
+  --bg:#171717;--fg:#f0f0f8;--fg2:rgba(240,240,248,.62);--muted:rgba(240,240,248,.46);
+  --line:rgba(255,255,255,.10);--line-strong:rgba(255,255,255,.18);--card:rgba(255,255,255,.028);--card-hover:rgba(255,255,255,.055);
+  --pill:rgba(20,20,22,.78);--dot:rgba(255,255,255,.08);--ghost:rgba(240,240,248,.05);
+  --font-mono:"JetBrains Mono","Pretendard Variable",ui-monospace,SFMono-Regular,Menlo,monospace;--font-sans:"Pretendard Variable","Noto Sans KR",system-ui,-apple-system,sans-serif;
+  --ease-out:cubic-bezier(.16,1,.3,1);--ease-in-out:cubic-bezier(.77,0,.175,1);
+  --max:1180px;
+}
+body[data-theme="light"]{
+  --bg:#f0f0f8;--fg:#171717;--fg2:rgba(23,23,23,.68);--muted:rgba(23,23,23,.5);
+  --line:rgba(0,0,0,.09);--line-strong:rgba(0,0,0,.18);--card:rgba(255,255,255,.55);--card-hover:rgba(255,255,255,.9);
+  --pill:rgba(30,30,34,.86);--dot:rgba(0,0,0,.09);--ghost:rgba(23,23,23,.05);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip;scrollbar-width:thin;scrollbar-color:#7f7f8759 transparent}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-sans);font-size:15px;line-height:1.7;word-break:keep-all;overflow-wrap:break-word;transition:background-color .7s var(--ease-in-out),color .7s var(--ease-in-out);position:relative;overflow-x:clip}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+img{max-width:100%;display:block}
+::selection{background:var(--accent);color:#fff}
+
+/* dotted grid background */
+.grid-bg{position:fixed;inset:0;pointer-events:none;z-index:0;background-image:radial-gradient(var(--dot) 1px,transparent 1.2px);background-size:26px 26px;transition:opacity .7s;opacity:1}
+.grid-bg:after{content:"";position:absolute;inset:0;background:radial-gradient(60% 50% at 50% 0%,rgba(168,20,90,.05),transparent 70%)}
+
+.wrap{width:min(var(--max),calc(100% - 40px));margin:auto;position:relative}
+.section{padding:120px 0;position:relative;z-index:1}
+.section+.section{padding-top:40px}
+.eyebrow{font-family:var(--font-mono);display:inline-flex;align-items:center;gap:.6em;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.eyebrow:before{content:"[";color:var(--muted)}
+.eyebrow:after{content:"]";color:var(--muted)}
+.title{font-size:clamp(1.6rem,3.2vw,2.7rem);line-height:1.25;letter-spacing:-.03em;font-weight:700;margin:16px 0 18px}
+.title em{font-style:normal;color:var(--accent)}
+.lead{max-width:720px;color:var(--fg2);margin:0;font-size:1.02rem}
+.center{text-align:center}.center .lead{margin:auto}
+.notice{font-size:.82rem;color:var(--muted)}
+
+/* buttons */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:999px;padding:14px 24px;font-weight:700;font-size:.9rem;letter-spacing:.01em;transition:transform .35s var(--ease-out),box-shadow .35s var(--ease-out),background .3s,border-color .3s,color .3s;overflow:hidden;white-space:nowrap}
+.btn:after{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent 30%,rgba(255,255,255,.22) 50%,transparent 70%);transform:translateX(-120%);transition:transform .7s var(--ease-out)}
+.btn:hover:after{transform:translateX(120%)}
+.btn:hover{transform:translateY(-3px)}
+.btn.primary{background:var(--accent);color:#fff}
+.btn.primary:hover{background:var(--accent-2);box-shadow:0 12px 32px rgba(168,20,90,.35)}
+.btn.light{background:var(--fg);color:var(--bg)}
+.btn.light:hover{box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.btn.outline{border-color:var(--line-strong);background:transparent;color:var(--fg)}
+.btn.outline:hover{border-color:var(--fg);background:var(--ghost)}
+.btn.kakao-btn{background:var(--kakao);color:var(--kakao-ink)}
+.btn.kakao-btn:hover{box-shadow:0 12px 32px rgba(254,229,0,.28)}
+.btn.kakao-btn:before,.chat-pill:before{content:"";width:16px;height:16px;border-radius:50%;background:var(--kakao);flex:none;box-shadow:inset 0 0 0 4px var(--kakao-ink)}
+.chat-pill:before{width:12px;height:12px;box-shadow:inset 0 0 0 3px #191600}
+
+/* header pill */
+header{position:fixed;top:14px;left:0;right:0;z-index:40;display:flex;justify-content:center;padding:0 14px;pointer-events:none}
+.pill{pointer-events:auto;width:min(1180px,100%);height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 12px 0 22px;border-radius:999px;background:var(--pill);border:1px solid rgba(255,255,255,.08);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 10px 40px rgba(0,0,0,.35);color:#f0f0f8;transition:transform .6s var(--ease-out),opacity .4s}
+header.hide .pill{transform:translateY(-120%);opacity:0}
+.logo{display:flex;flex-direction:column;gap:3px;line-height:1;font-weight:700;font-size:1.05rem;letter-spacing:-.03em}
+.logo em{font-style:normal;color:var(--accent)}
+.dots{display:flex;gap:7px;padding-left:1px}
+.dots i{width:4px;height:4px;border-radius:50%;background:rgba(255,255,255,.55);transition:background .3s,transform .3s}
+.dots i.on{background:var(--accent);transform:scale(1.4)}
+.links{display:flex;gap:6px}
+.links a{font-family:var(--font-mono);position:relative;padding:8px 13px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(240,240,248,.72);transition:color .3s}
+.links a:after{content:"";position:absolute;left:13px;right:13px;bottom:4px;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease-out)}
+.links a:hover{color:#fff}
+.links a:hover:after{transform:scaleX(1)}
+.links a.active{color:#fff}
+.links a.active:after{transform:scaleX(1);background:rgba(255,255,255,.5)}
+.hright{display:flex;align-items:center;gap:8px}
+.chat-pill{display:inline-flex;align-items:center;gap:9px;height:40px;padding:0 18px 0 14px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.04);font-size:.78rem;font-weight:700;color:#fff;transition:background .3s,border-color .3s,transform .35s var(--ease-out)}
+.chat-pill:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.4);transform:translateY(-2px)}
+.menu-btn{display:none;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.16);background:transparent;color:#fff;font-size:1.1rem;line-height:1}
+.mobile-menu{position:fixed;inset:0;z-index:35;background:rgba(23,23,23,.96);backdrop-filter:blur(16px);display:flex;flex-direction:column;justify-content:center;padding:40px 28px;gap:6px;opacity:0;pointer-events:none;transition:opacity .4s}
+.mobile-menu.open{opacity:1;pointer-events:auto}
+.mobile-menu a{font-size:clamp(1.8rem,8vw,2.6rem);font-weight:800;letter-spacing:-.04em;color:#f0f0f8;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.08);transform:translateY(20px);opacity:0;transition:transform .6s var(--ease-out),opacity .6s}
+.mobile-menu.open a{transform:none;opacity:1}
+.mobile-menu a span{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.3em;color:var(--accent);display:block;margin-bottom:2px}
+
+/* scroll meter */
+.scroll-meter{font-family:var(--font-mono);position:fixed;right:22px;top:50%;transform:translateY(-50%);z-index:30;display:flex;align-items:center;gap:10px;font-size:.62rem;letter-spacing:.1em;color:var(--muted);pointer-events:none}
+.scroll-meter .rail{position:relative;width:1px;height:60px;background:var(--line-strong)}
+.scroll-meter .tick{position:absolute;left:-3px;width:7px;height:1.5px;background:var(--fg);top:0;transition:top .1s linear}
+
+/* hero */
+.hero{position:relative;z-index:1;min-height:100svh;padding:110px 0 80px;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.globe-wrap{position:relative;width:min(560px,80vw);aspect-ratio:1;margin:0 auto 10px;cursor:grab}
+.globe-wrap:active{cursor:grabbing}
+.globe-wrap canvas{width:100%;height:100%;display:block}
+.globe-wrap:before{content:"";position:absolute;inset:-12%;border-radius:50%;background:radial-gradient(circle,rgba(168,20,90,.08),transparent 60%);pointer-events:none}
+.online{font-family:var(--font-mono);position:absolute;display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:6px;border:1px solid rgba(255,255,255,.14);background:rgba(23,23,23,.8);backdrop-filter:blur(8px);font-size:.62rem;letter-spacing:.22em;color:#f0f0f8;white-space:nowrap;transform:translate(-50%,-140%);transition:opacity .4s;pointer-events:none}
+.online b{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgba(168,20,90,.6);animation:ping 1.8s ease-out infinite}
+@keyframes ping{80%{box-shadow:0 0 0 8px rgba(168,20,90,0)}100%{box-shadow:0 0 0 8px rgba(168,20,90,0)}}
+.hero .eyebrow{display:flex;justify-content:center}
+.hero h1{font-size:clamp(1.7rem,3.8vw,3.3rem);line-height:1.25;letter-spacing:-.035em;font-weight:700;margin:16px auto 20px;text-align:center;max-width:860px}
+.hero h1 .word{display:inline-block;opacity:0;transform:translateY(40px) rotate(2deg);animation:wordIn 1s var(--ease-out) forwards}
+@keyframes wordIn{to{opacity:1;transform:none}}
+.hero p{max-width:600px;margin:0 auto;text-align:center;color:var(--fg2);font-size:clamp(.92rem,1.2vw,1.02rem)}
+.hero-actions{display:flex;justify-content:center;gap:12px;margin-top:36px;flex-wrap:wrap}
+.hero-scroll{font-family:var(--font-mono);position:absolute;left:50%;bottom:28px;transform:translateX(-50%);font-size:.6rem;letter-spacing:.3em;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:8px}
+.hero-scroll:after{content:"";width:1px;height:38px;background:linear-gradient(var(--fg),transparent);animation:drop 1.8s var(--ease-in-out) infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* reveal & scramble */
+.reveal{opacity:0;transform:translateY(34px);transition:opacity 1s var(--ease-out),transform 1s var(--ease-out)}
+.reveal.in{opacity:1;transform:none}
+.stagger>*{opacity:0;transform:translateY(28px);transition:opacity .9s var(--ease-out),transform .9s var(--ease-out)}
+.stagger.in>*{opacity:1;transform:none}
+.stagger.in>*:nth-child(1){transition-delay:.05s}.stagger.in>*:nth-child(2){transition-delay:.15s}.stagger.in>*:nth-child(3){transition-delay:.25s}.stagger.in>*:nth-child(4){transition-delay:.35s}.stagger.in>*:nth-child(5){transition-delay:.45s}.stagger.in>*:nth-child(6){transition-delay:.55s}.stagger.in>*:nth-child(7){transition-delay:.65s}
+
+/* cards */
+.card{position:relative;padding:30px;border:1px solid var(--line);border-radius:16px;background:var(--card);overflow:hidden;transition:transform .5s var(--ease-out),border-color .4s,background .4s,box-shadow .5s}
+.card:before{content:"";position:absolute;inset:0;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(168,20,90,.10),transparent 45%);opacity:0;transition:opacity .4s;pointer-events:none}
+.card:hover{transform:translateY(-6px);border-color:var(--line-strong);background:var(--card-hover);box-shadow:0 24px 50px rgba(0,0,0,.25)}
+.card:hover:before{opacity:1}
+.card>*{position:relative}
+.card h3{margin:14px 0 8px;font-size:1.08rem;letter-spacing:-.02em}
+.card p{margin:0;color:var(--fg2);font-size:.92rem}
+.icon{width:46px;height:46px;border-radius:12px;border:1px solid var(--line-strong);display:grid;place-items:center;font-size:1.05rem;font-weight:700;color:var(--accent);background:var(--ghost);transition:transform .5s var(--ease-out),background .3s,color .3s}
+.card:hover .icon{transform:rotate(-8deg) scale(1.08);background:var(--accent);color:#fff;border-color:var(--accent)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+
+/* portfolio */
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.portfolio{padding:0;display:flex;flex-direction:column}
+.portfolio-image{position:relative;aspect-ratio:16/10;overflow:hidden;border-bottom:1px solid var(--line)}
+.portfolio-image img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform 1.2s var(--ease-out),filter .6s}
+.portfolio:hover .portfolio-image img{transform:scale(1.06);filter:saturate(1.1)}
+.portfolio-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.35));opacity:0;transition:opacity .4s}
+.portfolio:hover .portfolio-image:after{opacity:1}
+.portfolio-empty{aspect-ratio:16/10;display:grid;place-items:center;border-bottom:1px solid var(--line);color:var(--muted);font-size:.8rem;letter-spacing:.2em;background:repeating-linear-gradient(-45deg,transparent 0 12px,var(--ghost) 12px 13px)}
+.portfolio-body{padding:24px 24px 26px;display:flex;flex-direction:column;gap:8px;flex:1}
+.portfolio-body strong{font-size:1.05rem;letter-spacing:-.02em}
+.portfolio-body p{margin:0;color:var(--fg2);font-size:.86rem}
+.portfolio-links{display:flex;gap:10px;margin-top:auto;padding-top:14px}
+.preview-btn,.visit-btn{flex:1;border-radius:999px;padding:11px 14px;font-size:.8rem;font-weight:700;text-align:center;transition:transform .35s var(--ease-out),background .3s,border-color .3s,color .3s}
+.preview-btn{border:1px solid var(--line-strong);background:transparent}
+.preview-btn:hover{border-color:var(--fg);transform:translateY(-2px)}
+.visit-btn{border:1px solid var(--accent);background:var(--accent);color:#fff}
+.visit-btn:hover{background:var(--accent-2);transform:translateY(-2px)}
+.visit-btn .arrow{display:inline-block;transition:transform .35s var(--ease-out)}
+.visit-btn:hover .arrow{transform:translateX(5px)}
+
+/* pricing */
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;align-items:stretch}
+.plan{display:flex;flex-direction:column}
+.plan h3{font-family:var(--font-mono);margin:0;font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.plan .for{margin:12px 0 0;font-size:.86rem;color:var(--fg2);min-height:2.6em}
+.plan .price{font-family:var(--font-mono);margin:16px 0 0;font-size:clamp(2rem,3vw,2.6rem);font-weight:800;letter-spacing:-.05em;line-height:1}
+.plan .period{margin:8px 0 0;font-size:.78rem;color:var(--muted)}
+.plan .plan-intro{margin:18px 0 0;padding-top:18px;border-top:1px solid var(--line);font-size:.88rem;color:var(--fg2)}
+.plan ul{margin:16px 0 26px;padding:0;list-style:none;display:grid;gap:9px;font-size:.86rem}
+.plan ul li{display:flex;gap:10px}
+.plan ul li:before{content:"+";color:var(--accent);font-weight:700;flex:none}
+.plan .btn{margin-top:auto;width:100%}
+.plan.recommended{border-color:rgba(168,20,90,.55);background:linear-gradient(180deg,rgba(168,20,90,.08),transparent 40%),var(--card)}
+.plan.recommended:before{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(168,20,90,.22),transparent 45%)}
+.badge{font-family:var(--font-mono);position:absolute;top:18px;right:18px;padding:5px 11px;border-radius:999px;background:var(--accent);color:#fff;font-size:.62rem;letter-spacing:.2em;font-weight:700}
+.common{margin-top:26px;padding:24px 28px;border:1px dashed var(--line-strong);border-radius:14px;font-size:.86rem;color:var(--fg2)}
+.common strong{display:block;color:var(--fg);margin-bottom:8px;letter-spacing:.1em;font-size:.76rem}
+.common ul{margin:0;padding-left:1.2em}
+.maintenance-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+.maint h3{font-family:var(--font-mono);margin:0;font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted)}
+.maint .monthly{font-family:var(--font-mono);font-size:2rem;font-weight:800;letter-spacing:-.05em;margin:14px 0 6px}
+.maint ul{margin:14px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:.86rem;color:var(--fg2)}
+.maint ul li{display:flex;gap:10px}.maint ul li:before{content:"—";color:var(--accent);flex:none}
+
+/* estimate */
+.simple-estimate{display:grid;grid-template-columns:1.25fr .9fr;gap:18px;margin-top:44px}
+.quick-panel{display:grid;gap:22px}
+.field label{display:block;font-size:.84rem;font-weight:700;margin-bottom:10px}
+.field select,.field input[type=text],.field textarea{width:100%;padding:13px 16px;border-radius:12px;border:1px solid var(--line-strong);background:var(--ghost);color:var(--fg);outline:none;transition:border-color .3s,box-shadow .3s}
+.field select:focus,.field input:focus,.field textarea:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(168,20,90,.15)}
+.field select option{color:#171717}
+.choice-row{display:flex;flex-wrap:wrap;gap:8px}
+.choice-row label{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--line-strong);border-radius:999px;font-size:.84rem;cursor:pointer;margin:0;font-weight:500;transition:border-color .3s,background .3s,transform .3s var(--ease-out)}
+.choice-row label:hover{border-color:var(--fg);transform:translateY(-2px)}
+.choice-row label:has(input:checked){border-color:var(--accent);background:rgba(168,20,90,.12)}
+.choice-row input{accent-color:var(--accent);margin:0}
+.quick-result{padding:30px;border-radius:16px;background:#171717;color:#f0f0f8;border:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;position:relative;overflow:hidden}
+.quick-result:before{content:"";position:absolute;inset:-40% -40% auto auto;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(168,20,90,.22),transparent 65%);pointer-events:none}
+.quick-result>*{position:relative}
+.quick-result h3{font-family:var(--font-mono);margin:0;font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(240,240,248,.5)}
+.result-plan{margin-top:16px;font-size:1.2rem;font-weight:700}
+.result-price{font-family:var(--font-mono);font-size:2.4rem;font-weight:800;letter-spacing:-.05em;color:#fff;line-height:1.1;margin:6px 0 12px;transition:transform .4s var(--ease-out)}
+.result-price.bump{transform:scale(1.06)}
+.quick-result p{margin:0 0 20px;color:rgba(240,240,248,.65);font-size:.88rem}
+.quick-result .btn{margin-top:auto;background:#fff;color:#171717}
+.calc-note{font-size:.74rem!important;color:rgba(240,240,248,.45)!important;margin:14px 0 0!important}
+.detail-options{margin-top:18px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.detail-options summary{list-style:none;cursor:pointer;padding:18px 24px;font-weight:700;font-size:.9rem;display:flex;justify-content:space-between;align-items:center}
+.detail-options summary::-webkit-details-marker{display:none}
+.detail-options summary:after{content:"+";font-size:1.3rem;color:var(--accent);transition:transform .4s var(--ease-out)}
+.detail-options[open] summary:after{transform:rotate(45deg)}
+.detail-inner{padding:0 24px 24px}
+.table-wrap{overflow-x:auto;margin-top:10px}
+table{width:100%;border-collapse:collapse;font-size:.84rem;min-width:560px}
+th,td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.2em;color:var(--muted);font-weight:500}
+tbody tr{transition:background .3s}tbody tr:hover{background:var(--ghost)}
+td:nth-child(2){white-space:nowrap;font-weight:700}
+.kakao-inline{margin-top:18px;padding:26px 28px;border-radius:16px;border:1px solid var(--line);background:var(--card);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.kakao-inline p{margin:0;font-size:.9rem;color:var(--fg2)}.kakao-inline strong{color:var(--fg)}
+
+/* process */
+.process{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;margin-top:44px;position:relative}
+.process:before{content:"";position:absolute;left:0;right:0;top:34px;height:1px;background:var(--line)}
+.process .fill{position:absolute;left:0;top:34px;height:1px;background:var(--accent);width:0;transition:width 1.2s var(--ease-out)}
+.step{position:relative;padding:60px 6px 0;text-align:center;font-size:.86rem;font-weight:700;transition:transform .5s var(--ease-out)}
+.step:hover{transform:translateY(-6px)}
+.step b{font-family:var(--font-mono);position:absolute;left:50%;top:0;transform:translate(-50%,-50%);width:auto;font-size:4.2rem;font-weight:800;letter-spacing:-.06em;line-height:1;color:transparent;-webkit-text-stroke:1px var(--line-strong);transition:color .4s,-webkit-text-stroke .4s,transform .5s var(--ease-out);pointer-events:none}
+.step:before{content:"";position:absolute;left:50%;top:34px;transform:translate(-50%,-50%);width:9px;height:9px;border-radius:50%;background:var(--bg);border:1px solid var(--line-strong);transition:background .3s,border-color .3s,transform .3s}
+.step.done:before{background:var(--accent);border-color:var(--accent);transform:translate(-50%,-50%) scale(1.3)}
+.step:hover b{color:var(--fg);-webkit-text-stroke:0;transform:translate(-50%,-56%)}
+.step p{margin:0}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:54px}
+.info ul{margin:8px 0 0;padding:0;list-style:none;display:grid;gap:8px;font-size:.88rem;color:var(--fg2)}
+.info ul li{display:flex;gap:10px}.info ul li:before{content:"—";color:var(--accent);flex:none}
+.info h3{margin:0 0 8px}
+
+/* marquee */
+.marquee{position:relative;z-index:1;padding:20px 0;overflow:hidden;transform:rotate(-3deg) scale(1.08);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:40px 0 20px}
+.marquee .track{font-family:var(--font-mono);display:flex;gap:60px;white-space:nowrap;will-change:transform;font-size:clamp(2rem,5vw,4rem);font-weight:800;letter-spacing:-.03em;text-transform:uppercase;color:var(--fg)}
+.marquee .track span{opacity:.9}.marquee .track span:nth-child(even){color:transparent;-webkit-text-stroke:1px var(--line-strong)}
+
+/* faq */
+.faq-list{margin-top:44px;border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line);transition:background .3s}
+.faq-item:hover{background:var(--ghost)}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 8px;border:0;background:none;text-align:left;font-weight:700;font-size:1rem;color:var(--fg)}
+.faq-q span:last-child{width:32px;height:32px;border-radius:50%;border:1px solid var(--line-strong);display:grid;place-items:center;flex:none;font-weight:400;transition:transform .45s var(--ease-out),background .3s,color .3s}
+.faq-item.open .faq-q span:last-child{transform:rotate(45deg);background:var(--accent);border-color:var(--accent);color:#fff}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease-out)}
+.faq-a>div{overflow:hidden;color:var(--fg2);font-size:.92rem;padding:0 8px}
+.faq-item.open .faq-a{grid-template-rows:1fr}
+.faq-item.open .faq-a>div{padding-bottom:22px}
+
+/* contact */
+.contact-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.ccard{display:flex;align-items:center;gap:16px;padding:22px 24px}
+.ccard .cic{width:42px;height:42px;border-radius:50%;border:1px solid var(--line-strong);display:grid;place-items:center;flex:none;font-size:.9rem;transition:background .3s,color .3s,border-color .3s}
+.ccard:hover .cic{background:var(--accent);border-color:var(--accent);color:#fff}
+.ccard strong{display:block;font-size:1rem}.ccard small{color:var(--muted);font-size:.78rem}
+.ccard .go{margin-left:auto;font-size:1.3rem;transition:transform .4s var(--ease-out)}
+.ccard:hover .go{transform:translateX(6px)}
+.contact-grid{display:grid;grid-template-columns:.85fr 1.25fr;gap:18px;margin-top:18px;align-items:start}
+.contact-side h3{margin:0 0 10px;font-size:1.15rem}
+.contact-side>p{color:var(--fg2);font-size:.92rem}
+.contact-side .btn{width:100%;margin-top:14px}
+.contact-buttons{display:flex;gap:10px;margin-top:10px}.contact-buttons .btn{flex:1;margin-top:0}
+.form h3{font-size:1.15rem;margin-bottom:6px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+.field.full{grid-column:1/-1}
+.privacy{display:flex!important;align-items:flex-start;gap:10px;font-weight:500!important;font-size:.84rem!important;cursor:pointer}
+.privacy input{accent-color:var(--accent);margin-top:4px}
+.form-actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.result{margin-top:12px;font-size:.86rem;min-height:1.4em}
+.form-success{display:none;margin-top:12px;padding:14px 16px;border-radius:12px;background:rgba(168,20,90,.12);border:1px solid rgba(168,20,90,.4);font-size:.86rem}
+.form-success.show{display:block}
+
+/* footer */
+footer{position:relative;z-index:1;padding:80px 0 120px;border-top:1px solid var(--line)}
+.foot-top{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+.foot-logo{font-size:1.8rem;font-weight:700;letter-spacing:-.05em}
+.foot-logo em{font-style:normal;color:var(--accent)}
+.foot-nav{font-family:var(--font-mono);display:flex;gap:18px;flex-wrap:wrap;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.foot-nav a{transition:color .3s}.foot-nav a:hover{color:var(--fg)}
+.biz{display:flex;flex-wrap:wrap;gap:8px;margin-top:40px}
+.biz span{font-family:var(--font-mono);display:inline-flex;gap:10px;align-items:center;padding:8px 14px;border:1px solid var(--line);border-radius:999px;font-size:.72rem;letter-spacing:.06em;color:var(--fg2);transition:border-color .3s,color .3s,transform .3s var(--ease-out)}
+.biz span:hover{border-color:var(--fg);color:var(--fg);transform:translateY(-2px)}
+.biz span i{font-style:normal;color:var(--muted);font-size:.64rem;letter-spacing:.18em}
+.biz span:first-child:before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.copy{font-family:var(--font-mono);margin-top:34px;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+/* mobile bar */
+.mobile-bar{display:none;position:fixed;left:12px;right:12px;bottom:12px;z-index:38;gap:8px;padding:8px;border-radius:999px;background:rgba(20,20,22,.9);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.1)}
+.mobile-bar .btn{flex:1;padding:12px}
+.mobile-bar .btn.outline{color:#fff;border-color:rgba(255,255,255,.2)}
+
+/* modal */
+.preview-modal{position:fixed;inset:0;z-index:60;background:rgba(10,10,12,.86);backdrop-filter:blur(10px);display:grid;place-items:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .35s}
+.preview-modal.open{opacity:1;pointer-events:auto}
+.preview-dialog{width:min(1100px,100%);max-height:100%;background:#1c1c1f;border:1px solid rgba(255,255,255,.12);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transform:translateY(24px) scale(.98);transition:transform .5s var(--ease-out)}
+.preview-modal.open .preview-dialog{transform:none}
+.preview-top{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.1);color:#f0f0f8}
+.preview-title{font-size:.8rem;letter-spacing:.14em;font-weight:700}
+.preview-close{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.16);background:transparent;color:#fff;font-size:1.2rem;transition:background .3s,transform .4s var(--ease-out)}
+.preview-close:hover{background:var(--accent);border-color:var(--accent);transform:rotate(90deg)}
+.preview-image{width:100%;overflow:auto;max-height:calc(100vh - 110px);object-fit:contain;background:#111}
+
+/* cursor glow */
+.cursor{position:fixed;left:0;top:0;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,rgba(168,20,90,.05),transparent 60%);pointer-events:none;z-index:2;transform:translate(-50%,-50%);transition:opacity .4s;mix-blend-mode:screen}
+body[data-theme="light"] .cursor{mix-blend-mode:multiply;background:radial-gradient(circle,rgba(168,20,90,.06),transparent 60%)}
+
+/* responsive */
+@media (max-width:1100px){
+  .links{display:none}.menu-btn{display:grid;place-items:center}
+  .process{grid-template-columns:repeat(4,1fr);row-gap:40px}.process:before,.process .fill{display:none}
+}
+@media (max-width:900px){
+  .section{padding:90px 0}.section+.section{padding-top:24px}
+  .grid3,.portfolio-grid,.plan-grid,.maintenance-grid,.contact-cards{grid-template-columns:1fr 1fr}
+  .simple-estimate,.contact-grid,.info-grid{grid-template-columns:1fr}
+  .scroll-meter{display:none}
+}
+@media (max-width:640px){
+  .wrap{width:calc(100% - 32px)}
+  header{top:10px;padding:0 10px}.pill{height:56px;padding:0 8px 0 18px}
+  .chat-pill span{display:none}.chat-pill{padding:0 12px;gap:0}
+  .grid3,.portfolio-grid,.plan-grid,.maintenance-grid,.contact-cards,.form-grid{grid-template-columns:1fr}
+  .process{grid-template-columns:repeat(3,1fr)}
+  .hero{padding-top:90px}.hero-actions .btn{width:100%}
+  .globe-wrap{width:min(340px,86vw)}
+  .mobile-bar{display:flex}footer{padding-bottom:110px}
+  .hero-scroll{display:none}
+  .kakao-inline .btn{width:100%}
+  .contact-buttons{flex-direction:column}
+  .marquee{transform:rotate(-4deg) scale(1.12)}
+}
+@media (prefers-reduced-motion:reduce){
+  .reveal,.stagger>*{opacity:1;transform:none;transition:none}
+  .hero h1 .word{animation:none;opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body data-theme="dark">
+<div class="grid-bg"></div>
+<div class="cursor" id="cursor"></div>
+
+<header id="header"><div class="pill">
+  <a class="logo" href="#top"><span>홍스<em>랩</em></span><span class="dots" id="dots"><i></i><i></i><i></i><i></i><i></i><i></i></span></a>
+  <nav class="links" id="navLinks">
+    <a href="#portfolio">제작 사례</a><a href="#pricing">제작 요금</a><a href="#estimate">간단 견적</a><a href="#process">제작 과정</a><a href="#faq">자주 묻는 질문</a><a href="#contact">상담하기</a>
+  </nav>
+  <div class="hright">
+    <a class="chat-pill" href="http://pf.kakao.com/_KxojrX" target="_blank" rel="noopener noreferrer"><span>카카오톡 무료 상담</span></a>
+    <button class="menu-btn" aria-label="메뉴 열기" id="menuBtn">☰</button>
+  </div>
+</div></header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#portfolio"><span>01</span>제작 사례</a><a href="#pricing"><span>02</span>제작 요금</a><a href="#estimate"><span>03</span>간단 견적</a><a href="#process"><span>04</span>제작 과정</a><a href="#faq"><span>05</span>자주 묻는 질문</a><a href="#contact"><span>06</span>상담하기</a>
+</div>
+<aside class="scroll-meter"><span class="rail"><span class="tick" id="tick"></span></span><span id="scrollPct">000%</span></aside>
+
+<main id="top">
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="globe-wrap" id="globeWrap"><canvas id="globe"></canvas><div class="online" id="online"><b></b>ONLINE · SEJONG</div></div>
+    <div class="eyebrow scramble">HONGS LAB · WEBSITE STUDIO</div>
+    <h1 id="heroTitle">소상공인을 위한 홈페이지 제작,<br>159,000원부터</h1>
+    <p>PC·모바일 홈페이지부터 명함 디자인까지. 사업에 필요한 내용만 정리해 제작합니다.</p>
+    <div class="hero-actions"><a class="btn primary" href="#portfolio">제작 사례 보기</a><a class="btn light" href="http://pf.kakao.com/_KxojrX" target="_blank" rel="noopener noreferrer">카카오톡 무료 상담</a></div>
+  </div>
+  <div class="hero-scroll">SCROLL</div>
+</section>
+
+<section class="section" id="portfolio" data-theme="dark">
+  <div class="wrap">
+    <div class="reveal center"><div class="eyebrow scramble">PORTFOLIO</div><h2 class="title">실제 제작 사례<em>.</em></h2><p class="lead">업종과 목적에 맞춰 서비스 안내부터 고객 문의까지 자연스럽게 연결하는 홈페이지를 제작합니다.</p></div>
+    <div class="portfolio-grid stagger">
+      <article class="card portfolio"><div class="portfolio-image"><img src="image-2.jpg" alt="보험·재무 상담형 홈페이지 미리보기" loading="lazy"></div><div class="portfolio-body"><strong>보험·재무 상담형 홈페이지</strong><p>상담 분야 안내 · 보험 점검 · 상담 과정 · 전화·카카오톡 상담 연결</p><div class="portfolio-links"><button class="preview-btn" type="button" data-image="image-2.jpg" data-title="보험·재무 상담형 홈페이지">크게 보기</button><a class="visit-btn" href="https://siniseop-azfinance.pplx.app/" target="_blank" rel="noopener noreferrer">사이트 방문 <span class="arrow">→</span></a></div></div></article>
+      <article class="card portfolio"><div class="portfolio-image"><img src="image.jpg" alt="구남종합인력 홈페이지 미리보기" loading="lazy"></div><div class="portfolio-body"><strong>구남종합인력 홈페이지</strong><p>업종별 인력 안내 · 현장 인력 요청 · 담당자 상담 · 배치 절차</p><div class="portfolio-links"><button class="preview-btn" type="button" data-image="image.jpg" data-title="구남종합인력 홈페이지">크게 보기</button><a class="visit-btn" href="https://gunaminc.kr" target="_blank" rel="noopener noreferrer">사이트 방문 <span class="arrow">→</span></a></div></div></article>
+      <article class="card portfolio"><div class="portfolio-empty">다음 제작 사례 준비 중</div><div class="portfolio-body"><strong>업종별 맞춤 홈페이지</strong><p>사업 소개, 서비스 안내, 문의 연결 등 필요한 구성에 맞춰 제작합니다.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="effect" data-theme="light">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow scramble">WHY WEBSITE</div><h2 class="title">홈페이지는 고객과 만나는<br>가장 기본적인 사업 공간입니다<em>.</em></h2><p class="lead">필요한 정보가 쉽고 명확하게 정리되어 있으면 고객이 더 편하게 문의합니다.</p></div>
+    <div class="grid3 stagger">
+      <article class="card effect"><div class="icon">⌕</div><h3>검색을 통한 문의 연결</h3><p>사업과 서비스 정보를 정리해 두면 고객이 필요한 순간에 더 쉽게 찾아볼 수 있습니다.</p></article>
+      <article class="card effect"><div class="icon">24</div><h3>24시간 열려 있는 영업 채널</h3><p>영업시간이 아니어도 고객이 서비스와 연락 방법을 확인할 수 있는 공간을 만듭니다.</p></article>
+      <article class="card effect"><div class="icon">✓</div><h3>신뢰를 매출로 연결</h3><p>정돈된 소개와 안내는 처음 방문한 고객에게 사업의 신뢰감을 전달하는 데 도움이 됩니다.</p></article>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="pricing" data-theme="light">
+  <div class="wrap">
+    <div class="reveal center"><div class="eyebrow scramble">PRICING</div><h2 class="title">제작 요금 안내<em>.</em></h2><p class="lead">모든 금액은 부가세가 포함된 판매가입니다. 도메인·호스팅 등 외부 서비스 비용은 별도이며, 작업 범위는 상담 후 최종 확인합니다.</p></div>
+    <div class="plan-grid stagger">
+      <article class="card plan"><h3>실속형</h3><p class="for">한 페이지 소개가 필요한 개인 영업자</p><p class="price">159,000원</p><p class="period">예상 제작 기간 3~5영업일</p><p class="plan-intro">준비된 디자인에 업체 정보와 내용을 맞춰 빠르게 제작합니다.</p><ul><li>한 페이지 · 최대 5개 구역</li><li>PC·모바일 대응</li><li>전화·카카오톡·지도 링크</li><li>제작 중 수정 1회</li></ul><a class="btn outline select-quick" data-plan="budget" href="#estimate">이 상품으로 간단 견적</a></article>
+      <article class="card plan recommended"><span class="badge">가장 많이 선택</span><h3>기본형</h3><p class="for">서비스 소개와 상담 연결이 필요한 소상공인</p><p class="price">299,000원</p><p class="period">예상 제작 기간 5~10영업일</p><p class="plan-intro">내용과 동선을 정리해 고객 문의로 연결하는 기본 구성입니다.</p><ul><li>최대 3페이지 · 전체 최대 12개 구역</li><li>PC·모바일 대응</li><li>문의폼·전화·카카오톡·지도</li><li>제작 중 수정 2회</li></ul><a class="btn primary select-quick" data-plan="basic" href="#estimate">이 상품으로 간단 견적</a></article>
+      <article class="card plan"><h3>프리미엄형</h3><p class="for">소개할 서비스와 콘텐츠가 많은 사업자</p><p class="price">599,000원부터</p><p class="period">예상 제작 기간 10~15영업일</p><p class="plan-intro">여러 서비스와 페이지를 사업에 맞게 맞춤 구성합니다.</p><ul><li>최대 5페이지 · 전체 최대 20개 구역</li><li>PC·모바일 대응</li><li>기본 문의폼·페이지별 검색 설정</li><li>제작 중 수정 3회</li></ul><a class="btn outline select-quick" data-plan="premium" href="#estimate">이 상품으로 간단 견적</a></article>
+    </div>
+    <div class="common reveal"><strong>공통 안내</strong><ul><li>제작 기간은 자료와 착수금이 모두 접수된 뒤부터 계산합니다.</li><li>수정은 사전에 합의한 구성 안에서의 문구·이미지·배치 변경을 뜻합니다.</li><li>페이지 추가, 결제·회원가입·예약·관리자 기능, 전체 디자인 변경은 별도 상담으로 안내합니다.</li></ul></div>
+  </div>
+</section>
+
+<section class="section" id="maintenance" data-theme="light">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow scramble">MAINTENANCE</div><h2 class="title">공개 후 관리도<br>사업 상황에 맞게<em>.</em></h2><p class="lead">유지보수 가입은 선택 사항입니다. 가입하지 않아도 홈페이지는 유지되며, 호스팅 등 외부 서비스 이용·결제는 별도로 필요합니다.</p></div>
+    <div class="maintenance-grid stagger">
+      <article class="card maint"><h3>미가입</h3><div class="monthly">월 0원</div><ul><li>수정 필요 시 건별 결제</li><li>정기 점검 없음</li><li>단순 수정 최소 22,000원</li><li>요청 접수 확인 3영업일 이내</li></ul></article>
+      <article class="card maint"><h3>기본 관리</h3><div class="monthly">월 22,000원</div><ul><li>월 수정 1회, 총 20분 이내</li><li>연락처·문구·사진 교체</li><li>월 1회 접속·링크·문의폼 점검</li><li>접수 확인 2영업일 이내</li></ul></article>
+      <article class="card maint"><h3>운영 관리</h3><div class="monthly">월 55,000원</div><ul><li>월 수정 3회, 총 60분 이내</li><li>기본 수정 + 기존 구성 내 콘텐츠 등록</li><li>월 1회 점검 · 변경 시 백업</li><li>접수 확인 1영업일 이내</li></ul></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="estimate" data-theme="dark">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow scramble">QUICK ESTIMATE</div><h2 class="title">간단 견적<em>.</em></h2><p class="lead">업종·홈페이지 형태·필요 기능 세 가지를 선택하면 추천 구성이 표시됩니다. 세부 옵션은 상담 후 정리합니다.</p></div>
+    <div class="simple-estimate reveal">
+      <div class="quick-panel card">
+        <div class="field"><label>1. 어떤 업종의 홈페이지가 필요하신가요?</label><select id="quickIndustry"><option value="기타">업종을 선택해 주세요</option><option>음식점·카페</option><option>학원·교육</option><option>인력·건설</option><option>보험·상담</option><option>쇼핑·제품</option><option>기타</option></select></div>
+        <div class="field"><label>2. 원하는 홈페이지 형태는 무엇인가요?</label><div class="choice-row"><label><input type="radio" name="quickType" value="one" checked> 한 페이지 소개형</label><label><input type="radio" name="quickType" value="multi"> 여러 페이지형</label><label><input type="radio" name="quickType" value="unknown"> 아직 잘 모르겠어요</label></div></div>
+        <div class="field"><label>3. 필요한 기능을 골라 주세요. <span class="notice">(복수 선택)</span></label><div class="choice-row"><label><input class="quickFeature" type="checkbox" value="전화 바로 걸기"> 전화</label><label><input class="quickFeature" type="checkbox" value="카카오톡 상담"> 카카오톡</label><label><input class="quickFeature" type="checkbox" value="네이버 지도"> 지도</label><label><input class="quickFeature" type="checkbox" value="문의폼"> 문의폼</label><label><input class="quickFeature" type="checkbox" value="예약 문의"> 예약</label><label><input class="quickFeature" type="checkbox" value="게시판"> 게시판</label></div></div>
+      </div>
+      <aside class="quick-result"><h3>추천 구성</h3><div class="result-plan" id="quickPlanName">실속형 홈페이지</div><div class="result-price" id="quickPrice">159,000원부터</div><p id="quickDescription">한 페이지로 사업 소개와 연락 방법을 빠르게 안내하는 구성입니다.</p><button class="btn light" id="quickConsult" type="button">이 내용으로 카카오톡 상담하기</button><p class="calc-note">선택한 기능과 자료 준비 상태에 따라 최종 금액은 상담 후 확정됩니다.</p></aside>
+    </div>
+    <details class="detail-options reveal"><summary>상세 옵션과 추가 비용 직접 확인하기</summary><div class="detail-inner"><p class="notice">페이지 추가, 사진 보정, 배너, 외부 예약 연동 등은 아래 기준으로 안내합니다.</p><div class="table-wrap"><table><thead><tr><th>항목</th><th>금액</th><th>설명</th></tr></thead><tbody id="optionTable"></tbody></table></div></div></details>
+    <div class="kakao-inline reveal"><p><strong>바로 상담이 필요하신가요?</strong><br>카카오톡 채널에서 업종과 필요한 기능을 알려 주시면 확인 후 안내드립니다.</p><a class="btn kakao-btn" href="http://pf.kakao.com/_KxojrX" target="_blank" rel="noopener noreferrer">카카오톡 상담하기</a></div>
+  </div>
+</section>
+
+<section class="section" id="process" data-theme="dark">
+  <div class="wrap">
+    <div class="reveal center"><div class="eyebrow scramble">PROCESS</div><h2 class="title">상담부터 공개까지의 과정<em>.</em></h2></div>
+    <div class="process stagger" id="processRail"><span class="fill" id="processFill"></span>
+      <div class="step"><b>01</b><p>상담</p></div><div class="step"><b>02</b><p>범위·견적 확정</p></div><div class="step"><b>03</b><p>자료 전달·착수금 결제</p></div><div class="step"><b>04</b><p>제작</p></div><div class="step"><b>05</b><p>미리보기·수정</p></div><div class="step"><b>06</b><p>잔금 결제</p></div><div class="step"><b>07</b><p>정식 공개·인계</p></div>
+    </div>
+    <div class="info-grid stagger">
+      <article class="card info"><h3>결제 안내</h3><p>실속형은 전액 선결제입니다. 기본형·프리미엄형은 착수금 50%, 잔금 50%로 진행합니다. 추가 작업은 승인 후 선결제, 유지보수는 월 선결제입니다. 외부 비용·인쇄비는 실비로 처리하며 취소 시 완료 작업과 지출 비용을 기준으로 정산합니다.</p></article>
+      <article class="card info"><h3>미리 준비하면 좋은 자료</h3><ul><li>상호·연락처·주소</li><li>사업 및 서비스 소개</li><li>로고·사진</li><li>참고할 디자인·색상</li><li>최종 승인 담당자 정보</li></ul></article>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="track" id="marqueeTrack"></div></div>
+
+<section class="section" id="faq" data-theme="dark">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow scramble">FAQ</div><h2 class="title">자주 묻는 질문<em>.</em></h2></div>
+    <div class="faq-list reveal" id="faqList"></div>
+  </div>
+</section>
+
+<section class="section" id="contact" data-theme="dark">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow scramble">CONTACT</div><h2 class="title">상담 안내<em>.</em></h2><p class="lead">문의는 홍스랩 카카오톡 채널에서 가장 빠르게 확인합니다. 업종, 필요한 기능, 원하는 공개 시점을 함께 보내 주시면 됩니다.</p></div>
+    <div class="contact-cards stagger">
+      <a class="card ccard" href="http://pf.kakao.com/_KxojrX" target="_blank" rel="noopener noreferrer"><span class="cic">K</span><span><strong>카카오톡 채널 상담하기</strong><small>홍스랩 카카오톡 채널</small></span><span class="go">→</span></a>
+      <a class="card ccard" href="tel:01086039867"><span class="cic">☎</span><span><strong>전화 상담</strong><small>010-8603-9867</small></span><span class="go">→</span></a>
+      <a class="card ccard" href="mailto:hongslab1@naver.com"><span class="cic">@</span><span><strong>이메일 상담</strong><small>hongslab1@naver.com</small></span><span class="go">→</span></a>
+    </div>
+    <div class="contact-grid reveal">
+      <aside class="contact-side card"><h3>홍스랩 상담 채널</h3><p>작업 범위를 확인한 뒤 진행 가능 일정과 최종 견적을 안내합니다. 상담은 카카오톡 채널에서 기록으로 남아 편리하게 이어갈 수 있습니다.</p><a class="btn kakao-btn" href="http://pf.kakao.com/_KxojrX" target="_blank" rel="noopener noreferrer">카카오톡 채널 상담하기</a><div class="contact-buttons"><a class="btn primary" href="tel:01086039867">전화 상담</a><a class="btn outline" href="mailto:hongslab1@naver.com">이메일 상담</a></div><p class="notice" style="margin-top:16px">전화 010-8603-9867<br>이메일 hongslab1@naver.com</p></aside>
+      <form class="form card" id="contactForm"><h3 style="margin-top:0">상담 내용 정리</h3><p class="notice">작성 후 카카오톡 상담 버튼을 누르면 내용이 복사되고 채널이 열립니다. 채팅창에 붙여넣어 전송하면 됩니다.</p><div class="form-grid"><div class="field"><label for="company">업체명 / 이름 <span class="notice">(선택)</span></label><input id="company" type="text" placeholder="예: 홍스상회 / 홍길동"></div><div class="field"><label for="phone">연락처 <span style="color:var(--red)">*</span></label><input id="phone" type="text" placeholder="연락 가능한 번호를 입력하세요"></div><div class="field"><label for="interest">관심 상품</label><select id="interest"><option>상담 전 선택</option><option>실속형</option><option>기본형</option><option>프리미엄형</option></select></div><div class="field full"><label for="message">문의 내용 <span style="color:var(--red)">*</span></label><textarea id="message" rows="5" placeholder="업종, 필요한 페이지 또는 기능, 원하는 공개 시점 등을 적어 주세요."></textarea></div><div class="field full"><label class="privacy"><input type="checkbox" id="privacy"> 개인정보 수집 및 상담 목적의 이용에 동의합니다. <span style="color:var(--red)">*</span></label></div></div><div class="form-actions"><button class="btn kakao-btn" type="button" id="kakaoInquiry">카카오톡으로 상담하기</button><button class="btn outline" type="reset">내용 지우기</button></div><div class="result" id="formResult" aria-live="polite"></div><div class="form-success" id="formSuccess">상담 내용을 복사하고 카카오톡 채널을 열었습니다. 채팅창에 붙여넣어 보내 주세요.</div></form>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap">
+  <div class="foot-top reveal"><div class="foot-logo">홍스<em>랩</em></div><nav class="foot-nav"><a href="#portfolio">제작 사례</a><a href="#pricing">제작 요금</a><a href="#estimate">간단 견적</a><a href="#process">제작 과정</a><a href="#faq">자주 묻는 질문</a><a href="#contact">상담하기</a></nav></div>
+  <div class="biz reveal"><span><i>대표자</i>홍순경</span><span><i>사업자등록번호</i>176-43-01356</span><span><i>전화</i>010-8603-9867</span><span><i>이메일</i>hongslab1@naver.com</span><span><i>주소</i>세종특별자치시 조치원읍 도원1로 16</span></div>
+  <div class="copy reveal"><span>© Hongs Lab. All rights reserved.</span><span>HONGS LAB · WEBSITE STUDIO</span></div>
+</div></footer>
+
+<div class="mobile-bar"><a class="btn outline" href="#estimate">간단 견적</a><a class="btn primary" href="http://pf.kakao.com/_KxojrX" target="_blank" rel="noopener noreferrer">카카오톡 상담</a></div>
+<div class="preview-modal" id="previewModal" role="dialog" aria-modal="true" aria-labelledby="previewTitle"><div class="preview-dialog"><div class="preview-top"><div class="preview-title" id="previewTitle">포트폴리오 미리보기</div><button class="preview-close" id="previewClose" type="button" aria-label="미리보기 닫기">×</button></div><img class="preview-image" id="previewImage" alt="포트폴리오 확대 이미지"></div></div>
+
+<script>
+/* ===== 원본 기능 로직 (hongslab.kr) ===== */
+const KAKAO_URL='http://pf.kakao.com/_KxojrX';
+const OPTIONS=[['section','구역 추가',33000,'제공된 글·사진으로 기존 페이지에 구성'],['page','일반 소개 페이지 추가',77000,'기존 디자인 기준, 최대 4개 구역'],['custom','별도 디자인 페이지',150000,'범위 확인 후 확정'],['revision','수정 횟수 추가',33000,'기존 구성 내 30분 이내 작업'],['copy','소개 문구 작성',55000,'고객 자료·인터뷰 기준 최대 5개 구역'],['photo','사진 보정',33000,'최대 10장, 단순 보정·크기 정리'],['banner','배너 제작',33000,'고객 문구 제공, 시안 1개·수정 1회'],['booking','외부 예약·상담 서비스 연결',33000,'링크 또는 삽입'],['form','문의폼 추가',55000,'기본 항목 5개 이내'],['domain','도메인 최초 연결 대행',22000,'도메인 구매비 별도'],['card','명함 맞춤 디자인',20000,'앞뒤 1종·수정 1회'],['print','명함 인쇄 주문 대행',11000,'인쇄비·배송비 별도']];
+const money=n=>new Intl.NumberFormat('ko-KR').format(Math.round(n))+'원';
+const optionTable=document.getElementById('optionTable');optionTable.innerHTML=OPTIONS.map(o=>`<tr><td>${o[1]}</td><td>${money(o[2])}${['custom','booking','form'].includes(o[0])?'부터':''}</td><td>${o[3]}</td></tr>`).join('');
+const quickIndustry=document.getElementById('quickIndustry'),quickPlanName=document.getElementById('quickPlanName'),quickPrice=document.getElementById('quickPrice'),quickDescription=document.getElementById('quickDescription'),interest=document.getElementById('interest');
+function quickData(){const type=document.querySelector('input[name="quickType"]:checked').value;const features=[...document.querySelectorAll('.quickFeature:checked')].map(x=>x.value);let plan='budget',name='실속형 홈페이지',price='159,000원부터',desc='한 페이지로 사업 소개와 연락 방법을 빠르게 안내하는 구성입니다.';if(type==='multi'||features.includes('문의폼')||features.includes('예약 문의')||features.includes('게시판')){plan='basic';name='기본형 홈페이지';price='299,000원부터';desc='서비스 소개와 고객 문의 연결을 함께 정리하는 기본 구성입니다.'}if(features.includes('예약 문의')&&features.includes('게시판')){plan='premium';name='프리미엄형 홈페이지';price='599,000원부터';desc='여러 페이지와 추가 기능을 사업에 맞게 구성하는 상담형 제작입니다.'}quickPlanName.textContent=name;if(quickPrice.textContent!==price){quickPrice.classList.add('bump');setTimeout(()=>quickPrice.classList.remove('bump'),400)}quickPrice.textContent=price;quickDescription.textContent=desc;interest.value={budget:'실속형',basic:'기본형',premium:'프리미엄형'}[plan];return {plan,name,price,desc,type,features,industry:quickIndustry.value}}
+function choosePlan(plan){const radio=document.querySelector(`input[name="quickType"][value="${plan==='budget'?'one':'multi'}"]`);if(radio)radio.checked=true;if(plan==='premium')document.querySelectorAll('.quickFeature').forEach(x=>{if(x.value==='예약 문의'||x.value==='게시판')x.checked=true});quickData()}
+document.querySelectorAll('#estimate input,#estimate select').forEach(el=>el.addEventListener('change',quickData));document.querySelectorAll('.select-quick').forEach(a=>a.addEventListener('click',()=>choosePlan(a.dataset.plan)));quickData();
+async function copyText(text){try{await navigator.clipboard.writeText(text);return true}catch{return false}}
+function inquiryText(){const q=quickData(),company=document.getElementById('company').value.trim(),phone=document.getElementById('phone').value.trim(),message=document.getElementById('message').value.trim();return `[홍스랩 홈페이지 제작 상담]\n업체명/이름: ${company||'미입력'}\n연락처: ${phone||'미입력'}\n관심 상품: ${interest.value}\n업종: ${q.industry}\n홈페이지 형태: ${q.type==='one'?'한 페이지 소개형':q.type==='multi'?'여러 페이지형':'아직 미정'}\n필요 기능: ${q.features.length?q.features.join(', '):'미선택'}\n\n문의 내용:\n${message||'미입력'}`}
+document.getElementById('quickConsult').onclick=async()=>{await copyText(inquiryText());window.open(KAKAO_URL,'_blank','noopener');};
+document.getElementById('kakaoInquiry').onclick=async()=>{const phone=document.getElementById('phone'),message=document.getElementById('message'),privacy=document.getElementById('privacy'),formResult=document.getElementById('formResult'),success=document.getElementById('formSuccess');if(!phone.value.trim()||!message.value.trim()||!privacy.checked){success.classList.remove('show');formResult.style.color='var(--red)';formResult.textContent='연락처, 문의 내용, 개인정보 동의는 필수입니다.';return}const copied=await copyText(inquiryText());formResult.textContent='';success.classList.add('show');if(!copied)success.textContent='카카오톡 채널을 엽니다. 위 문의 내용을 직접 복사해 채팅창에 붙여넣어 보내 주세요.';window.open(KAKAO_URL,'_blank','noopener');};
+const FAQ=[['159,000원에 어디까지 포함되나요?','실속형은 한 페이지·최대 5개 구역, 준비된 디자인 선택, PC·모바일 대응, 전화·카카오톡·지도 및 외부 문의 링크 연결, 검색 기본 설정, 제작 중 수정 1회, 기존 명함 틀을 활용한 인쇄용 파일 1종을 포함합니다. 고객 제공 글·사진·로고 기준으로 제작합니다.'],['도메인과 호스팅은 별도인가요?','네. 도메인, 호스팅, 홈페이지 빌더, 문자·이메일·예약 서비스 등 외부 서비스 비용은 제작비와 별도입니다. 고객 명의 계정에서 직접 결제하는 방식을 권장합니다.'],['유지보수 가입은 필수인가요?','아닙니다. 유지보수는 선택 사항이며, 미가입 상태에서도 홈페이지는 유지됩니다. 수정이 필요하면 건별로 요청할 수 있습니다.'],['모바일에서도 사용할 수 있나요?','네. 모든 제작 상품은 PC와 모바일 화면에 맞춰 사용할 수 있도록 제작합니다.'],['수정은 몇 번 가능한가요?','실속형 1회, 기본형 2회, 프리미엄형 3회입니다. 기존에 합의한 구성 안에서의 변경을 뜻하며 전체 디자인 변경과 기능 추가는 별도 견적입니다.'],['제작 기간은 얼마나 걸리나요?','실속형은 3~5영업일, 기본형은 5~10영업일, 프리미엄형은 10~15영업일이 예상됩니다. 자료와 착수금이 모두 접수된 이후부터 계산합니다.'],['검색 상위 노출을 보장하나요?','아니요. 제목·설명·공유 이미지 같은 검색 기본 설정과 등록 지원은 제공하지만, 검색 결과의 상위 노출 순위는 보장하지 않습니다.'],['결제·예약·회원가입 기능도 가능한가요?','가능 여부와 비용은 기능 범위를 확인한 뒤 별도 상담으로 안내합니다. 회원가입, 결제, 자체 예약 시스템, 관리자 페이지, 데이터베이스 구축은 고정 가격 항목이 아닙니다.']];
+const faqList=document.getElementById('faqList');faqList.innerHTML=FAQ.map(x=>`<div class="faq-item"><button class="faq-q" type="button"><span>${x[0]}</span><span>+</span></button><div class="faq-a"><div>${x[1]}</div></div></div>`).join('');document.querySelectorAll('.faq-q').forEach(q=>q.onclick=()=>q.parentElement.classList.toggle('open'));
+const modal=document.getElementById('previewModal'),previewImage=document.getElementById('previewImage'),previewTitle=document.getElementById('previewTitle');document.querySelectorAll('.preview-btn').forEach(b=>b.onclick=()=>{previewImage.src=b.dataset.image;previewImage.alt=b.dataset.title+' 확대 이미지';previewTitle.textContent=b.dataset.title+' 미리보기';modal.classList.add('open');document.body.style.overflow='hidden'});function closePreview(){modal.classList.remove('open');document.body.style.overflow=''}document.getElementById('previewClose').onclick=closePreview;modal.onclick=e=>{if(e.target===modal)closePreview()};document.addEventListener('keydown',e=>{if(e.key==='Escape'){closePreview();closeMenu()}});
+
+/* ===== 헤더 / 모바일 메뉴 ===== */
+const header=document.getElementById('header'),menuBtn=document.getElementById('menuBtn'),mobileMenu=document.getElementById('mobileMenu');
+function closeMenu(){mobileMenu.classList.remove('open');menuBtn.textContent='☰';document.body.style.overflow=''}
+menuBtn.onclick=()=>{const open=!mobileMenu.classList.contains('open');mobileMenu.classList.toggle('open',open);menuBtn.textContent=open?'×':'☰';document.body.style.overflow=open?'hidden':''};
+mobileMenu.querySelectorAll('a').forEach(a=>a.onclick=closeMenu);
+let lastY=0;
+const sectionIds=['portfolio','pricing','estimate','process','faq','contact'];
+const navA=[...document.querySelectorAll('#navLinks a')],dots=[...document.querySelectorAll('#dots i')];
+const themed=[...document.querySelectorAll('[data-theme]')].filter(el=>el.tagName==='SECTION');
+
+/* ===== 스크롤: 미터, 헤더 숨김, 테마 전환, 활성 섹션 ===== */
+const tick=document.getElementById('tick'),pct=document.getElementById('scrollPct');
+function onScroll(){
+  const y=scrollY,max=document.documentElement.scrollHeight-innerHeight,p=max>0?y/max:0;
+  tick.style.top=(p*58)+'px';pct.textContent=String(Math.round(p*100)).padStart(3,'0')+'%';
+  header.classList.toggle('hide',y>lastY&&y>300&&!mobileMenu.classList.contains('open'));lastY=y;
+  const probe=y+innerHeight*.45;let theme='dark';
+  for(const s of themed){if(s.offsetTop<=probe)theme=s.dataset.theme}
+  if(document.body.dataset.theme!==theme)document.body.dataset.theme=theme;
+  let active=-1;sectionIds.forEach((id,i)=>{const el=document.getElementById(id);if(el&&el.offsetTop-200<=y)active=i});
+  navA.forEach((a,i)=>a.classList.toggle('active',i===active));dots.forEach((d,i)=>d.classList.toggle('on',i===active));
+  /* 프로세스 진행선 */
+  const rail=document.getElementById('processRail');if(rail){const r=rail.getBoundingClientRect();const prog=Math.min(1,Math.max(0,(innerHeight*.8-r.top)/(r.height+innerHeight*.3)));document.getElementById('processFill').style.width=(prog*100)+'%';const steps=rail.querySelectorAll('.step');steps.forEach((s,i)=>s.classList.toggle('done',(i+1)/steps.length<=prog+.02))}
+  /* 마퀴 스크롤 연동 */
+  const track=document.getElementById('marqueeTrack');if(track){track.style.transform=`translateX(${-(y*.35)%(track.scrollWidth/2||1)}px)`}
+}
+addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);
+
+/* ===== 마퀴 ===== */
+(function(){const t=document.getElementById('marqueeTrack');const words=['홍스랩','HONGS LAB','소상공인 홈페이지 제작','159,000원부터','WEBSITE STUDIO','제작 사례','간단 견적','카카오톡 상담'];let html='';for(let r=0;r<4;r++)words.forEach(w=>html+=`<span>${w}</span>`);t.innerHTML=html})();
+
+/* ===== 리빌 / 스크램블 ===== */
+const GLYPHS='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>/\\|[]{}#%&*+=~가나다라마바사아자차카타파하ㄱㄴㄷㄹㅁㅂㅅㅇㅈㅊㅋㅌㅍㅎ';
+function scramble(el){if(el.dataset.done)return;el.dataset.done=1;const final=el.textContent;const len=final.length;const start=performance.now(),dur=900+len*25;el.style.minWidth=el.offsetWidth+'px';(function frame(now){const t=Math.min(1,(now-start)/dur);let out='';for(let i=0;i<len;i++){const c=final[i];if(c===' '||c==='·'){out+=c;continue}out+=(i/len<t)?c:GLYPHS[Math.floor(Math.random()*GLYPHS.length)]}el.textContent=out;if(t<1)requestAnimationFrame(frame);else{el.textContent=final;el.style.minWidth=''}})(start)}
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');e.target.querySelectorAll('.scramble').forEach(scramble);if(e.target.classList.contains('scramble'))scramble(e.target);io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal,.stagger,.hero .scramble').forEach(el=>io.observe(el));
+
+/* ===== 히어로 단어 등장 ===== */
+(function(){const h=document.getElementById('heroTitle');const parts=h.innerHTML.split('<br>');let i=0;h.innerHTML=parts.map(line=>line.trim().split(' ').map(w=>`<span class="word" style="animation-delay:${.15+i++*.09}s">${w}</span>`).join(' ')).join('<br>')})();
+
+/* ===== 카드 스포트라이트 & 커서 글로우 ===== */
+document.addEventListener('pointermove',e=>{const c=document.getElementById('cursor');c.style.transform=`translate(${e.clientX-180}px,${e.clientY-180}px)`;const el=e.target.closest('.card');if(el){const r=el.getBoundingClientRect();el.style.setProperty('--mx',(e.clientX-r.left)+'px');el.style.setProperty('--my',(e.clientY-r.top)+'px')}},{passive:true});
+document.addEventListener('pointerleave',()=>document.getElementById('cursor').style.opacity=0);document.addEventListener('pointerenter',()=>document.getElementById('cursor').style.opacity=1);
+if(matchMedia('(hover:none)').matches)document.getElementById('cursor').style.display='none';
+
+/* ===== 지구본 ===== */
+(function(){
+  const LAND_B64='AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADf//8AAf///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB////D//////n/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/gf/x////////wAAAAAbgAAB4AAAAAAPwAAAAAAAAAAAAAAAAAAAAAAAAAAAf//8A///////+AAAAB/ngAAAAAAAAAAH8AAAAAAAAAAAAAAAAAAAAAAAAcH3Hv/5////////8AAAAA/gAAAAAAAAAAAAD4AAAAAAAAAAAAAAAAAAAAAAcIAAQP/AH///////+AAAAAPCAAAAAAAAAAAAAYAAAAAAAAAAAAAAAAAAAAADwDAc+f+AP///////4AAAAAAAAAAAAAB4AAAAB/8AAAAAAAAAAAAAAAAAAAAAH9wc374AAAf/////8AAAAAAAAAAAAH4AAAA////AAAB/gAAAAAAAAAAAAAAAAwAAA/QAAAH/////8AAAAAAAAAAAAOAAAAP///wAAAAAAAAAAAAAAAAAAAAP8AYe+c3AAAD/////4AAAAAAAAAAAA4AAAH////++HgAOAAAAAAAAAAAAAAAfv+4+w/4gAAB/////wAAAAAAAAAAADwAHgH///////4AfgAAAAAgAAAAAAAAPf/4O4//9AAB/////wAAAAAAAAAAADwAPb////////4m//gAAAAAAAf+AAAAAA/+A8f//4AB////8gAAAAAAA/gAAAAAfv/////////////8AAAAAB///+H//H/+PeDwf+AA3////AAAAAAA//4AAAA8fv///////////////P8gAf////////A4CPz4H8AAP///wAAAAAAD///wADH/n3/////////////////8AD////////////34Z/wA///4AAAAAAAP///+M////n/////////////////+4E/////////////gD/8Af//gAAAAAAAf//5+P////f/////////////////fw/////////////6AD8YAf/wAAf8AAAA/8f+D///////////////////////AgEf///////////zw7/AAP/gAAP4AAAB/4/+f//////////////////////8AMAf//////////+DIA/gAH/gAAAAAAAH/z/////////////////////////+AAH///////////8AwgOAAD+AAAAAAAA//H/////////////////////////6AAP///////////wAA/AAAB+AAAAAAAB/+H//////////////////////nP+AAAH//z////////wAA/wAAAOAAAAAAAB//D/////////////////////+A/4AAAA/zAD///////gAA/4wAAAAAAAAAAB//Ab///////////////////+eDgAAAAABwAA///////4AA/94AAAAAAAAAYA5+A///////////////////4AAHAAAAAADcAAD//////4AAf/8AAAAAAAAA8AC+C///////////////////wAAfgAAAAAMAAAA///////wAf/8AAAAAAAAA4AO8H///////////////////AAA/gAAAABgAAAA///////8A///AAAAAAAAA8ANwH//////////////////8AAB/AAAAAEAAAAAf///////z///4AAAAAAAHOAEDv//////////////////+AAA+AAAAAAAAAABH///////x///8AAAAAAAHHAf/////////////////////6AA8AAAAAAAAAAAD///////x///8AAAAAAAGPz//////////////////////6AAwAAAAAAAAAAAD///////9///6AAAAAAAAPj//////////////////////6AAQAAAAAAAAAAAC///////////MAAAAAAAAYf//////////////////////7AAAAAAAAAAAAAABv////////+MNAAAAAAAAD///////////////////////zAAAAAAAAAAAAAAAH////////7gfgAAAAAAAf///////////////////////yAAAAAAAAAAAAAAAL/////////gCgAAAAAAAH///////////////////////iAAAAAAAAAAAAAAAP/////////pAAAAAAAAAD/////uP/x//////////////DAAAAAAAAAAAAAAAP/////////+AAAAAAAAAB//v//Gf/B/////////////+AAAAAAAAAAAAAAAAP////////8wAAAAAAAAAB//H/+AP+P/////////////8CAAAAAAAAAAAAAAAP////////wAAAAAAAAADj/jz/8AD/H/////////////4HgAAAAAAAAAAAAAAP////////gAAAAAAAAAH/4Bw/8AA/B////////////+APAAAAAAAAAAAAAAAP////////gAAAAAAAAAH/wA8f8Ph/g////////////8AAAAAAAAAAAAAAAAAP///////8AAAAAAAAAAH/gMHfJ///x///////////v4AMAAAAAAAAAAAAAAAP///////8AAAAAAAAAAH/AMCOP///h//////////+JwAMAAAAAAAAAAAAAAAH///////4AAAAAAAAAAH/AAAHH///g//////////8BwAIAAAAAAAAAAAAAAAH///////wAAAAAAAAAAH+AAYGH///w//////////+w4A4AAAAAAAAAAAAAAAD///////wAAAAAAAAAAAgf+ACBs//////////////g4D4AAAAAAAAAAAAAAAB///////wAAAAAAAAAAAj/+AAAA//////////////AYf4AAAAAAAAAAAAAAAA///////gAAAAAAAAAAB//8AAAA//////////////Ah2AAAAAAAAAAAAAAAAAP/////+AAAAAAAAAAAD//+AAAB//////////////gDwAAAAAAAAAAAAAAAAAH/////8AAAAAAAAAAAH///4GAB//////////////gDAAAAAAAAAAAAAAAAAAG/////4AAAAAAAAAAAP///8P4h//////////////wCAAAAAAAAAAAAAAAAAACf////4AAAAAAAAAAAP////v////////////////gAAAAAAAAAAAAAAAAAAABP//hgYAAAAAAAAAAAP//////3//P///////////wAAAAAAAAAAAAAAAAAAAAv//AAYAAAAAAAAAAAf//////9//H///////////wAAAAAAAAAAAAAAAAAAAB3/+AAcAAAAAAAAAAB///////4//h///////////gAAAAAAAAAAAAAAAAAAAAR/+AANAAAAAAAAAAD///////8//wH//////////AAAAAAAAAAAAAAAAAAAAAJ/+AAEAAAAAAAAAAH///////+f/0B/////////+AAAAAAAAAAAAAAAAAAAAAI/8AAAAAAAAAAAAAH///////+f/44Af///////+QAAAAAAAAAAAAAAAAAAAAAf8AAAAAAAAAAAAAP////////H//+AP///////4gAAAAAAAAAAAAAAAAAAAAAP8AAuAAAAAAAAAAP////////H///AD///v///ggAAAAAAAAAAAAAAAAAAAAAH+AABgAAAAAAAAAf////////n//+AD//4P//YAAAAAAAAAAAAAAAAAAAAAAAP+A4AYAAAAAAAAAP////////j//+AAf/4H/+AAAAAAAAAAAAAAAAgAAAAAAAH/B4ABwAAAAAAAAP////////h//8AAf/gD/8YAAAAAAAAAAAAAAAAAAAAAAAD/nwAD9AAAAAAAAP////////x//4AAf/AD/8QAAAAAAAAAAAAAAAAAAAAAAAAf/wAAAAAAAAAAAP////////4//gAAf+AD/+AAwAAAAAAAAAAAAAAAAAAAAAAH/wAAAAAAAAAAAf////////4f+AAAf8AD//AAwAAAAAAAAAAAAAAAAAAAAAAAH/AAAAAAAAAAAf////////8f8AAAPwAAP/gAwAAAAAAAAAAAAAAAAAAAAAAAD/gAAAAAAAAAAf////////+fgAAAPwAAP/gAwAAAAAAAAAAAAAAAAAAAAAAAA/AAAAAAAAAAAf/////////eAAAAHwAAP/gAMAAAAAAAAAAAAAAAAAAAAAAAAHgAAAAAAAAAAf/////////gAAAAHwAAM/gACAAAAAAAAAAAAAAAAAAAAAAAADABAAAAAAAAAP/////////gYAAADwAAEfgAJAAAAAAAAAAAAAAAAAAAAAAAADgPfKAAAAAAAH/////////34AAADwAAIOABAAAAAAAAAAAAAAAAAAAAAAAAAAyPf+AAAAAAAD//////////4AAADoAAIEACBAAAAAAAAAAAAAAAAAAAAAAAAA8///AAAAAAAB//////////wAAABIAAMAAAFAAAAAAAAAAAAAAAAAAAAAAAAAE///gAAAAAAB//////////wAAAAMAAEAAALgAAAAAAAAAAAAAAAAAAAAAAAAAf//wAAAAAAAf/////////gAAAAMAADAAMCAAAAAAAAAAAAAAAAAAAAAAAAAA////gAAAAAAP/B///////gAAAAAAADgAOAAAAAAAAAAAAAAAAAAAAAAAAAAAf///wAAAAAACAA///////AAAAAAAAxgA+AAAAAAAAAAAAAAAAAAAAAAAAAAAf///4AAAAAAAAAD/////+AAAAAAAAZgB4AAAAAAAAAAAAAAAAAAAAAAAAAAB////4AAAAAAAAAD/////8AAAAAAAAMwH8AAAAAAAAAAAAAAAAAAAAAAAAAAB////8AAAAAAAAAH/////4AAAAAAAAHQf8AIAAAAAAAAAAAAAAAAAAAAAAAAD////8AAAAAAAAAH/////gAAAAAAAAHgf88IAAAAAAAAAAAAAAAAAAAAAAAAD////+AAAAAAAAAH/////AAAAAAAAADwf8AAgAAAAAAAAAAAAAAAAAAAAAAAH/////4AAAAAAAAH/////AAAAAAAAABwP5wBwAAAAAAAAAAAAAAAAAAAAAAAH/////6AAAAAAAAD////+AAAAAAAAAB8P5wATwAAAAAAAAAAAAAAAAAAAAAAD//////4AAAAAAAB////8AAAAAAAAAA8AxQif+AAAAAAAAAAAAAAAAAAAAAAH//////8AAAAAAAB////4AAAAAAAAAAcAAIAD/gAAAAAAAAAAAAAAAAAAAAAH///////gAAAAAAA////4AAAAAAAAAAMAAIAI/ywAAAAAAAAAAAAAAAAAAAAH///////gAAAAAAA////4AAAAAAAAAADgAAAI/8BAAAAAAAAAAAAAAAAAAAAD///////gAAAAAAAf///4AAAAAAAAAAB+AAAA/4AIAAAAAAAAAAAAAAAAAAAB///////gAAAAAAAf///4AAAAAAAAAAAAmogAOMAAAAAAAAAAAAAAAAAAAAAB///////AAAAAAAAf///8AAAAAAAAAAAABCAAAGADAAAAAAAAAAAAAAAAAAAA///////AAAAAAAAf///8AAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAf/////+AAAAAAAAP///8AAAAAAAAAAAAAAAgCAAAAAAAAAAAAAAAAAAAAAAAf/////8AAAAAAAAf///+AQAAAAAAAAAAAAB+CAAAAAAAAAAAAAAAAAAAAAAAP/////4AAAAAAAAf///+AQAAAAAAAAAAAAD8DAAAAAAAAAAAAAAAAAAAAAAAP/////4AAAAAAAA////+AwAAAAAAAAAAAA38DgAAAAAAAAAAAAAAAAAAAAAAH/////4AAAAAAAA////8BwAAAAAAAAAAAD/8DgAAAAAAAAAAAAAAAAAAAAAAB/////4AAAAAAAA////8PwAAAAAAAAAAAD//HwAABABAAAAAAAAAAAAAAAAAAf////4AAAAAAAA////wPgAAAAAAAAAAAP//3wAAAACAAAAAAAAAAAAAAAAAAP////wAAAAAAAA////APgAAAAAAAAAAAP///wAAAAAAAAAAAAAAAAAAAAAAAP////wAAAAAAAAf//+APgAAAAAAAAAAAf///4AAAAAAAAAAAAAAAAAAAAAAAP////wAAAAAAAAf//+APgAAAAAAAAAAD////+AAIAAAAAAAAAAAAAAAAAAAAP////gAAAAAAAAP//+AfAAAAAAAAAAAf////+AAEAAAAAAAAAAAAAAAAAAAAP////AAAAAAAAAP///AfAAAAAAAAAAA//////AAAAAAAAAAAAAAAAAAAAAAAP///4AAAAAAAAAP//+APAAAAAAAAAAA//////gAAAAAAAAAAAAAAAAAAAAAAf///gAAAAAAAAAH//+AOAAAAAAAAAAB//////wAAAAAAAAAAAAAAAAAAAAAAf///AAAAAAAAAAH//4AEAAAAAAAAAAA//////4AAAAAAAAAAAAAAAAAAAAAAf//+AAAAAAAAAAH//4AAAAAAAAAAAAB//////4AAAAAAAAAAAAAAAAAAAAAAf//+AAAAAAAAAAH//4AAAAAAAAAAAAA//////4AAAAAAAAAAAAAAAAAAAAAAf//+AAAAAAAAAAD//wAAAAAAAAAAAAAf/////8AAAAAAAAAAAAAAAAAAAAAAf//8AAAAAAAAAAB//gAAAAAAAAAAAAAf/////4AAAAAAAAAAAAAAAAAAAAAA///8AAAAAAAAAAB//gAAAAAAAAAAAAAf/////4AAAAAAAAAAAAAAAAAAAAAA///4AAAAAAAAAAA//AAAAAAAAAAAAAAP/////4AAAAAAAAAAAAAAAAAAAAAAf//wAAAAAAAAAAA/+AAAAAAAAAAAAAAP/AP//wAAAAAAAAAAAAAAAAAAAAAA///gAAAAAAAAAAA/4AAAAAAAAAAAAAAf8AG//gAAAAAAAAAAAAAAAAAAAAAA//3AAAAAAAAAAAAYAAAAAAAAAAAAAAAOAAF//gAAAAAAAAAAAAAAAAAAAAAB//4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//AAABAAAAAAAAAAAAAAAAAAB//4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/AAAAgAAAAAAAAAAAAAAAAAD//4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/AAAAQAAAAAAAAAAAAAAAAAB//gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABYAAAAcAAAAAAAAAAAAAAAAAB/8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAD/8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAAAD/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAADQAAAAAAAAAAAAAAAAAD/4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcAAAHAAAAAAAAAAAAAAAAAAB/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAOAAAAAAAAAAAAAAAAAAD/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAAAAAH+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAAAAAH+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAH/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP8AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH4BwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAAAAAH4AAAAAAB4HgAD8AAAAAAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAAAAA//AAAD//////////wAAAAAAAAAAAAAAAAAAAAAAADgAAAAAAAAAAAAAAAAAf///4Af///////////AAAAAAAAAAAAAAAAAAAAAAAz4AAAAAAAAAAAAAAAPz////8B/////////////wAAAAAAAAAAAAAAAAAAAAA78AAAAAAAAAAA8/8///////wf/////////////+AAAAAAAAAAAAAAAAAAAAH9+AAAAAAAAZ////////////w////////////////4AAAAAAAAAAAAAAAAAAAB+AAAAAAAB//////////////////////////////4AAAAAAAAABmAAB8f+HB/+AAAAAAAP//////////////////////////////gAAAAAAAAP/c/oAf/////4AAAAAAAP/////////////////////////////8AAAAAAAD/////////////gAAAAAAB//////////////////////////////wAAAAAAAD////////////wAAAAAAP///////////////////////////////wAAAAAD/////////////4AAAAAAD////////////////////////////////wAAAADh/////////////AAAAB8A/////////////////////////////////+AAAAA4Af///////////gAAAH+AA///////////////////////////////+AAAAAAAAH///////////+A/A/wAA///////////////////////////////8AAAAAAAf//////////////gAAAf////////////////////////////////+AAAAAAAH///////////////h////////////////////////////////////wAAAAAAP/////////////////////////////////////////////////////gA+/gAAH/////////////////////////////////////////////////////8/////v//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////';
+  const W=360,H=180;const raw=atob(LAND_B64);const land=new Uint8Array(W*H);for(let i=0;i<raw.length;i++){const b=raw.charCodeAt(i);for(let k=0;k<8;k++)land[i*8+k]=(b>>(7-k))&1}
+  const isLand=(lat,lon)=>{const px=Math.floor((lon+180)/360*W)%W,py=Math.min(H-1,Math.floor((90-lat)/180*H));return land[py*W+px]};
+  const pts=[];const STEP=2.4;
+  for(let lat=-88;lat<=88;lat+=STEP){const cos=Math.cos(lat*Math.PI/180);const n=Math.max(1,Math.round(360/STEP*cos));for(let i=0;i<n;i++){const lon=-180+i*360/n+(lat/STEP%2?180/n:0);if(isLand(lat,lon)){const la=lat*Math.PI/180,lo=lon*Math.PI/180;pts.push([Math.cos(la)*Math.cos(lo),Math.sin(la),Math.cos(la)*Math.sin(lo)])}}}
+  const toV=(lat,lon)=>{const la=lat*Math.PI/180,lo=lon*Math.PI/180;return [Math.cos(la)*Math.cos(lo),Math.sin(la),Math.cos(la)*Math.sin(lo)]};
+  const HOME=[36.48,127.29];const CITIES=[[35.68,139.69],[1.35,103.82],[-33.87,151.21],[25.2,55.27],[51.5,-.12],[40.71,-74.0],[34.05,-118.24],[-23.55,-46.63],[19.43,-99.13],[55.75,37.62]];
+  const arcs=CITIES.map((c,i)=>({a:toV(HOME[0],HOME[1]),b:toV(c[0],c[1]),phase:i*.37}));
+  const cv=document.getElementById('globe'),wrap=document.getElementById('globeWrap'),online=document.getElementById('online');const ctx=cv.getContext('2d');
+  let size=0,dpr=1;function resize(){const r=wrap.getBoundingClientRect();size=r.width;dpr=Math.min(2,devicePixelRatio||1);cv.width=size*dpr;cv.height=size*dpr}resize();addEventListener('resize',resize);
+  let rot=-2.2,vel=.0022,tilt=.32,drag=null,hover=false;
+  wrap.addEventListener('pointerdown',e=>{drag={x:e.clientX,r:rot};wrap.setPointerCapture(e.pointerId)});
+  wrap.addEventListener('pointermove',e=>{if(drag){const d=(e.clientX-drag.x)/size*3;rot=drag.r+d;vel=0}});
+  wrap.addEventListener('pointerup',()=>{drag=null;vel=.0022});wrap.addEventListener('pointercancel',()=>{drag=null;vel=.0022});
+  wrap.addEventListener('pointerenter',()=>hover=true);wrap.addEventListener('pointerleave',()=>hover=false);
+  const light=()=>document.body.dataset.theme==='light';
+  function project(v){const [x,y,z]=v;const cr=Math.cos(rot),sr=Math.sin(rot);let x1=x*cr-z*sr,z1=x*sr+z*cr;const ct=Math.cos(tilt),st=Math.sin(tilt);let y2=y*ct-z1*st,z2=y*st+z1*ct;return [x1,y2,z2]}
+  function slerp(a,b,t){let d=a[0]*b[0]+a[1]*b[1]+a[2]*b[2];d=Math.max(-1,Math.min(1,d));const o=Math.acos(d),so=Math.sin(o)||1e-6;const k1=Math.sin((1-t)*o)/so,k2=Math.sin(t*o)/so;return [a[0]*k1+b[0]*k2,a[1]*k1+b[1]*k2,a[2]*k1+b[2]*k2]}
+  let last=performance.now();
+  function frame(now){const dt=now-last;last=now;if(!drag)rot+=vel*(hover?.35:1)*dt/16;
+    const R=size*.42,cx=size/2,cy=size/2;ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,size,size);
+    const fg=light()?'23,23,23':'240,240,248';
+    /* 뒷면 점 */
+    ctx.fillStyle=`rgba(${fg},.07)`;for(const p of pts){const [x,y,z]=project(p);if(z<0)ctx.fillRect(cx+x*R-.6,cy-y*R-.6,1.2,1.2)}
+    /* 테두리 */
+    ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.strokeStyle=`rgba(${fg},.12)`;ctx.lineWidth=1;ctx.stroke();
+    const g=ctx.createRadialGradient(cx-R*.3,cy-R*.3,R*.2,cx,cy,R);g.addColorStop(0,'rgba(168,20,90,.04)');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fill();
+    /* 앞면 점 */
+    for(const p of pts){const [x,y,z]=project(p);if(z>=0){const a=.18+.82*z;ctx.fillStyle=`rgba(${fg},${a})`;const s=1.3+z*1.2;ctx.fillRect(cx+x*R-s/2,cy-y*R-s/2,s,s)}}
+    /* 아크 */
+    const t0=now/1000;
+    for(const arc of arcs){const prog=((t0*.18+arc.phase)%1);const head=prog*1.35;const N=48;ctx.beginPath();let started=false;
+      for(let i=0;i<=N;i++){const t=i/N;if(t>head)break;const v=slerp(arc.a,arc.b,t);const lift=1+Math.sin(t*Math.PI)*.28;const [x,y,z]=project([v[0]*lift,v[1]*lift,v[2]*lift]);if(z<-.15){started=false;continue}const px=cx+x*R,py=cy-y*R;if(!started){ctx.moveTo(px,py);started=true}else ctx.lineTo(px,py)}
+      const fade=head>1?Math.max(0,1-(head-1)/.35):1;ctx.strokeStyle=`rgba(168,20,90,${.55*fade})`;ctx.lineWidth=1;ctx.stroke();
+      if(head<1){const v=slerp(arc.a,arc.b,head);const lift=1+Math.sin(head*Math.PI)*.28;const [x,y,z]=project([v[0]*lift,v[1]*lift,v[2]*lift]);if(z>-.15){ctx.beginPath();ctx.arc(cx+x*R,cy-y*R,2,0,Math.PI*2);ctx.fillStyle='#c0246f';ctx.fill()}}}
+    /* 홈 포인트 & 라벨 */
+    const [hx,hy,hz]=project(arcs[0].a);const px=cx+hx*R,py=cy-hy*R;
+    if(hz>0){ctx.beginPath();ctx.arc(px,py,3.5,0,Math.PI*2);ctx.fillStyle='#a8145a';ctx.fill();ctx.beginPath();ctx.arc(px,py,9+Math.sin(t0*3)*3,0,Math.PI*2);ctx.strokeStyle='rgba(168,20,90,.45)';ctx.stroke()}
+    online.style.opacity=hz>.15?1:0;online.style.left=px+'px';online.style.top=py+'px';
+    requestAnimationFrame(frame)}
+  requestAnimationFrame(frame);
+})();
+onScroll();
+</script>
+</body>
+</html>
