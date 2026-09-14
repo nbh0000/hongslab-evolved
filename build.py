@@ -126,7 +126,7 @@ NET_HTML = """<section class="section net" id="network" data-ghost="NETWORK">
       <div class="reveal"><div class="eyebrow scramble">NETWORK · SEJONG TO WORLD</div><h2 class="title">어디서 열어도<br>같은 경험<em>.</em></h2></div>
       <div class="net-tags reveal"><span>WEB APP</span><span>LANDING</span><span>ADMIN</span><span>BOOKING</span><span>PAYMENT</span><span>AUTH</span></div>
     </div>
-    <div class="globe-wrap" id="globeWrap"><canvas id="globe"></canvas><div class="online" id="online"><b></b>ONLINE · SEJONG</div></div>
+    <div class="globe-wrap" id="globeWrap"><canvas id="globe"></canvas><div class="online" id="online"><b></b>ONLINE · KOREA</div></div>
   </div>
 </section>"""
 
