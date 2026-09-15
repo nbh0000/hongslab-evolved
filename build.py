@@ -90,7 +90,7 @@ INDEX_HERO = """<section class="hero hero-x" id="hero">
       <div class="eyebrow scramble">AI STUDIO GENILO · WEB APP STUDIO</div>
       <h1 id="heroTitle">웹 · 앱 제작<br>Studio Genilo</h1>
       <div class="hero-tagline">TRANSFORMING <em>IDEAS</em> INTO <em>WORKING PRODUCTS</em></div>
-      <div class="hero-actions"><a class="btn primary" href="portfolio.html">제작 사례 보기</a><a class="btn outline" href="http://pf.kakao.com/_KxojrX" target="_blank" rel="noopener noreferrer">카카오톡 무료 상담</a></div>
+      <div class="hero-actions"><a class="btn primary" href="portfolio.html">제작 사례 보기</a><a class="btn outline" href="https://open.kakao.com/o/sACnsFNi" target="_blank" rel="noopener noreferrer">카카오톡 무료 상담</a></div>
     </div>
   </div>
   <div class="hero-tags"><span>AI ASSISTED BUILD</span><span>PLAN · DESIGN · DEPLOY</span><span>SEOUL · KOREA</span></div>
