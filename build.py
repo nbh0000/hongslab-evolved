@@ -54,10 +54,11 @@ STUDIO_CSS = """
 .hero:after{content:"";position:absolute;inset:0;z-index:0;background:radial-gradient(70% 60% at 50% 45%,rgba(23,23,23,.25),rgba(23,23,23,.9) 80%),linear-gradient(180deg,rgba(23,23,23,.65),transparent 28%,transparent 62%,#171717)}
 .hero .wrap,.hero .hero-scroll{position:relative;z-index:1}
 /* ===== 포트폴리오 라벨 강조 ===== */
-#portfolio .eyebrow{font-size:1.05rem;letter-spacing:.42em;font-weight:700;color:#fff;padding:12px 22px 12px 26px;border:1px solid rgba(165,49,219,.55);border-radius:999px;background:linear-gradient(90deg,rgba(138,31,194,.32),rgba(138,31,194,.12));box-shadow:0 0 0 4px rgba(138,31,194,.10),0 12px 40px rgba(138,31,194,.35);animation:portfolioGlow 2.6s ease-in-out infinite}
+#portfolio .eyebrow{font-size:1.05rem;letter-spacing:.42em;font-weight:700;color:#fff;padding:12px 22px 12px 26px;border:1px solid rgba(165,49,219,.55);border-radius:999px;background:linear-gradient(90deg,rgba(138,31,194,.32),rgba(138,31,194,.12));position:relative;isolation:isolate}
+#portfolio .eyebrow:before{content:"";position:absolute;inset:-4px;border-radius:999px;box-shadow:0 0 0 4px rgba(138,31,194,.10),0 12px 40px rgba(138,31,194,.45);z-index:-1;animation:portfolioGlow 2.6s ease-in-out infinite;will-change:opacity}
 #portfolio .eyebrow:before,#portfolio .eyebrow:after{color:var(--accent-2)}
 #portfolio .title{margin-top:26px;font-size:clamp(2rem,4vw,3.4rem)}
-@keyframes portfolioGlow{0%,100%{box-shadow:0 0 0 4px rgba(138,31,194,.10),0 12px 40px rgba(138,31,194,.35)}50%{box-shadow:0 0 0 8px rgba(138,31,194,.06),0 16px 56px rgba(138,31,194,.55)}}
+@keyframes portfolioGlow{0%,100%{opacity:.6}50%{opacity:1}}
 @media(max-width:720px){#portfolio .eyebrow{font-size:.82rem;letter-spacing:.32em;padding:10px 16px 10px 20px}}
 /* ===== 스튜디오 비주얼 (index) ===== */
 .studio{padding-top:0}

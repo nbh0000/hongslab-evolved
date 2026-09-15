@@ -6,9 +6,9 @@ body[data-theme="dark"]{--bg:#06060a;--pill:rgba(8,8,12,.8);--card:rgba(255,255,
 .grid-bg:after{background:radial-gradient(60% 50% at 50% 0%,rgba(210,76,255,.07),transparent 70%)}
 
 /* 스캔라인 + 스윕 */
-.scan{position:fixed;inset:0;z-index:3;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 1px,transparent 1px 3px);opacity:.55}
-.scan:after{content:"";position:absolute;left:0;right:0;height:160px;top:-180px;background:linear-gradient(180deg,transparent,rgba(210,76,255,.06),transparent);animation:sweep 9s linear infinite}
-@keyframes sweep{to{top:110%}}
+.scan{position:fixed;inset:0;z-index:3;pointer-events:none;contain:strict;background:repeating-linear-gradient(0deg,rgba(255,255,255,.028) 0 1px,transparent 1px 3px);opacity:.55}
+.scan:after{content:"";position:absolute;left:0;right:0;height:160px;top:-180px;will-change:transform;background:linear-gradient(180deg,transparent,rgba(210,76,255,.06),transparent);animation:sweep 9s linear infinite}
+@keyframes sweep{to{transform:translateY(calc(100vh + 200px))}}
 body[data-theme="light"] .scan{opacity:.15}
 
 /* 화면 모서리 HUD */
