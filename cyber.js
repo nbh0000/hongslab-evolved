@@ -41,13 +41,13 @@ window.SG_READY=new Promise(resolve=>{
   (function loop(){h.style.transform='translate('+x+'px,'+y+'px)';tx+=(x-tx)*.14;ty+=(y-ty)*.14;tail.style.transform='translate('+tx+'px,'+ty+'px)';requestAnimationFrame(loop)})();
 })();
 
-/* ===== 스킬 맵 · 글리치 ===== */
+/* ===== 스킬 맵 · 홀로그램 ===== */
 (function init(){
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);return}
   const stage=document.querySelector('.sk-stage');if(!stage)return;
   if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
   const items=[...stage.querySelectorAll('.sk-node,.sk-link,.sk-card')];
-  items.forEach(el=>el.addEventListener('animationend',e=>{if(e.target===el&&e.animationName==='skGlitch'){el.classList.add('done');el.classList.remove('glitch')}}));
+  items.forEach(el=>el.addEventListener('animationend',e=>{if(e.target===el&&(e.animationName==='skHolo'||e.animationName==='skShimmer')){el.classList.add('done');el.classList.remove('glitch')}}));
   const cards=[...stage.querySelectorAll('.sk-card')];
   function tick(){
     const r=stage.getBoundingClientRect();
@@ -55,7 +55,7 @@ window.SG_READY=new Promise(resolve=>{
       const done=cards.filter(c=>c.classList.contains('done'));
       if(done.length){const c=done[Math.random()*done.length|0];c.classList.remove('glitch');void c.offsetWidth;c.classList.add('glitch')}
     }
-    setTimeout(tick,2600+Math.random()*3400);
+    setTimeout(tick,4500+Math.random()*4500);
   }
   setTimeout(tick,4000);
 })();
