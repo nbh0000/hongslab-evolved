@@ -38,6 +38,9 @@ hero, header, footer, mbar = links(hero), links(header), links(footer), links(mb
 hero = hero.replace('<div class="hero-scroll">SCROLL</div>', '<div class="hero-tags"><span>AI ASSISTED BUILD</span><span>PLAN · DESIGN · DEPLOY</span><span>SEOUL · KOREA</span></div><div class="hud-stats"><span><b>AI</b>CORE</span><span><b>WEB</b>APP</span><span><b>24</b>ONLINE</span></div><div class="hero-scroll">SCROLL DOWN</div>')
 for key, label, fn in PAGES[1:]:
     header = header.replace(f'<a href="{fn}">{label}</a>', f'<a href="{fn}" data-page="{key}">{label}</a>')
+header = header.replace('<a href="contact.html" data-page="contact">상담하기</a>', '<a href="contact.html" data-page="contact">상담하기</a><a href="workspace.html" data-page="workspace">AI 작업실</a>')
+header = header.replace('<a href="contact.html"><span>04</span>상담하기</a>', '<a href="contact.html"><span>04</span>상담하기</a><a href="workspace.html"><span>05</span>AI 작업실</a>')
+footer = footer.replace('<a href="contact.html">상담하기</a></nav>', '<a href="contact.html">상담하기</a><a href="workspace.html">AI 작업실</a></nav>')
 
 css = css.replace('.section+.section{padding-top:40px}',
                   '.section+.section{padding-top:40px}\nmain>.section:first-child{padding-top:170px}')
