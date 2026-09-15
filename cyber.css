@@ -71,8 +71,10 @@ body[data-theme="light"] .section[data-ghost]:before{-webkit-text-stroke-color:r
 
 /* 버튼 */
 .btn{border-radius:6px;clip-path:polygon(9px 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%,0 9px)}
-.btn.primary{background:linear-gradient(90deg,#b8175f,#e0287f);box-shadow:0 0 24px rgba(210,76,255,.25)}
-.btn.primary:hover{background:linear-gradient(90deg,#9a2bd0,#d24cff);box-shadow:0 0 40px rgba(210,76,255,.45)}
+.btn.primary{color:#fff;border:1px solid rgba(255,255,255,.28);background:linear-gradient(115deg,#4f3df2 0%,#8a2be2 32%,#d24cff 58%,#7c5cff 82%,#36cfff 100%);background-size:260% 100%;background-position:0% 50%;box-shadow:0 0 0 1px rgba(210,76,255,.25),0 0 24px rgba(210,76,255,.3),inset 0 0 18px rgba(255,255,255,.12);text-shadow:0 0 10px rgba(255,255,255,.45);animation:btnFlow 7s ease-in-out infinite alternate;transition:transform .35s var(--ease-out),box-shadow .35s,filter .35s}
+.btn.primary:before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(255,255,255,.07) 0 1px,transparent 1px 3px),radial-gradient(120% 90% at 50% -20%,rgba(255,255,255,.35),transparent 55%);pointer-events:none}
+.btn.primary:hover{background-position:100% 50%;filter:brightness(1.12) saturate(1.1);box-shadow:0 0 0 1px rgba(210,76,255,.5),0 0 44px rgba(210,76,255,.55),0 0 80px rgba(124,92,255,.3),inset 0 0 22px rgba(255,255,255,.18);animation-duration:2.5s}
+@keyframes btnFlow{from{background-position:0% 50%}to{background-position:100% 50%}}
 .btn.outline{border-color:rgba(210,76,255,.45)}
 .preview-btn,.visit-btn,.choice-row label{border-radius:6px}
 .visit-btn{box-shadow:0 0 18px rgba(210,76,255,.25)}
