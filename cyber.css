@@ -297,4 +297,18 @@ body.booting .hero h1 .word{animation-play-state:paused}
   55%{opacity:1;scale:1.01;filter:saturate(.7) brightness(1.3) blur(1px) hue-rotate(22deg)}
   100%{opacity:1;scale:1;filter:saturate(.7) brightness(.85) blur(0) hue-rotate(22deg)}
 }
-@media(prefers-reduced-motion:reduce){.sk-figure img,.sk-node,.sk-link,.sk-card{opacity:1;animation:none!important}.sk-stage.in:after,.sk-card:after{display:none}}
+/* circuit traces */
+.sk-circuit{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;overflow:visible}
+.sk-circuit path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.sk-circuit .trace path{stroke:rgba(210,76,255,.28);stroke-width:1.2;stroke-dasharray:1;stroke-dashoffset:1}
+.sk-circuit .pulse path{stroke:#e9a8ff;stroke-width:2.6;stroke-dasharray:.14 1;stroke-dashoffset:1.14;opacity:0;filter:drop-shadow(0 0 4px var(--neon)) drop-shadow(0 0 10px var(--glow))}
+.sk-circuit .pad circle{fill:#06060a;stroke:rgba(210,76,255,.6);stroke-width:1.2;opacity:0}
+.sk-stage.in .trace path{animation:traceDraw 1.4s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(.2s + var(--t) * .12s)}
+.sk-stage.in .pad circle{animation:padIn .6s ease-out forwards;animation-delay:1.2s}
+.sk-stage.in .pulse path{animation:pulseRun 3.2s linear infinite;animation-delay:calc(1.4s + var(--t) * .55s)}
+.sk-circuit path:nth-child(1){--t:0}.sk-circuit path:nth-child(2){--t:1}.sk-circuit path:nth-child(3){--t:2}.sk-circuit path:nth-child(4){--t:3}.sk-circuit path:nth-child(5){--t:4}.sk-circuit path:nth-child(6){--t:5}.sk-circuit path:nth-child(7){--t:6}.sk-circuit path:nth-child(8){--t:7}.sk-circuit path:nth-child(9){--t:8}
+@keyframes traceDraw{to{stroke-dashoffset:0}}
+@keyframes padIn{to{opacity:1}}
+@keyframes pulseRun{0%{stroke-dashoffset:1.14;opacity:0}6%{opacity:1}60%{stroke-dashoffset:0;opacity:1}68%,100%{stroke-dashoffset:0;opacity:0}}
+@media(max-width:900px){.sk-circuit{display:none}}
+@media(prefers-reduced-motion:reduce){.sk-figure img,.sk-node,.sk-link,.sk-card{opacity:1;animation:none!important}.sk-stage.in:after,.sk-card:after,.sk-circuit{display:none}}

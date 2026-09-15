@@ -49,6 +49,10 @@ window.SG_READY=new Promise(resolve=>{
   const items=[...stage.querySelectorAll('.sk-node,.sk-link,.sk-card')];
   items.forEach(el=>el.addEventListener('animationend',e=>{if(e.target===el&&(e.animationName==='skHolo'||e.animationName==='skShimmer')){el.classList.add('done');el.classList.remove('glitch')}}));
   const cards=[...stage.querySelectorAll('.sk-card')];
+  new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting&&e.intersectionRatio>=.15){stage.classList.add('in')}
+    else if(!e.isIntersecting){stage.classList.remove('in');items.forEach(el=>el.classList.remove('done','glitch'))}
+  }),{threshold:[0,.15]}).observe(stage);
   function tick(){
     const r=stage.getBoundingClientRect();
     if(document.visibilityState==='visible'&&r.bottom>0&&r.top<innerHeight){
