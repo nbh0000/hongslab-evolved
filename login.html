@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <link rel="preconnect" href="https://api.genilo.kr">
+  <meta name="color-scheme" content="dark">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>로그인 | Genilo</title>
+  <meta name="theme-color" content="#06060a">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="icon" href="/favicon.svg">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <script>
+    // The auth modal opens only when ?auth= is present. Direct visits get the login flow.
+    (function(){var p=new URLSearchParams(location.search);if(!p.get("auth")){p.set("auth","login");history.replaceState(null,"",location.pathname+"?"+p.toString())}})();
+  </script>
+  <link rel="stylesheet" href="/site-quality.css">
+  <link rel="stylesheet" href="/commercial-shell.css">
+  <script type="module" crossorigin src="/assets/main-DBMNyx41.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/growth-runtime-BsKwnrXR.js">
+  <link rel="modulepreload" crossorigin href="/assets/preload-helper-BXl3LOEh.js">
+  <link rel="modulepreload" crossorigin href="/assets/supabase-client-D8zR8z4z.js">
+  <link rel="modulepreload" crossorigin href="/assets/ranking-strengths-DyvT0tad.js">
+  <link rel="stylesheet" crossorigin href="/assets/main-BdO1nhyz.css">
+  <link rel="stylesheet" crossorigin href="/assets/interactions-CuxYAi4e.css">
+  <link rel="stylesheet" href="/fonts.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/workspace-theme.css">
+  <style>
+    .login-stubs{display:none!important}
+    body{min-height:100vh;margin:0;overflow:auto}
+    .login-bar{position:fixed;top:0;left:0;right:0;z-index:5;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 22px;border-bottom:1px solid rgba(210,76,255,.22);background:rgba(6,6,10,.82);backdrop-filter:blur(14px)}
+    .login-bar .brand{font-family:var(--font-hud);font-weight:700;letter-spacing:.04em;font-size:1.15rem;text-decoration:none;background:linear-gradient(90deg,#fff,#e6bfff 50%,#d24cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .login-bar .back{font-family:var(--font-hud);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(240,240,248,.65);text-decoration:none;border:1px solid rgba(210,76,255,.4);padding:10px 14px;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+    .login-bar .back:hover{color:#fff;background:rgba(210,76,255,.14)}
+    .login-hint{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:5;font-family:var(--font-hud);font-size:.55rem;letter-spacing:.3em;color:rgba(210,76,255,.7);text-align:center}
+    .login-hint a{color:#fff;text-decoration:none;border-bottom:1px solid rgba(210,76,255,.5)}
+    #authModal{border:1px solid rgba(210,76,255,.35);border-radius:8px;background:rgba(8,8,12,.97);color:#fff;box-shadow:0 0 0 1px rgba(210,76,255,.08),0 30px 90px rgba(0,0,0,.75),0 0 60px rgba(210,76,255,.14)}
+    #authModal::backdrop{background:rgba(6,6,10,.7);backdrop-filter:blur(8px)}
+    #authModal .auth-heading h2{color:#fff}
+    #authModal input{background:#08080d;border:1px solid rgba(210,76,255,.25);color:#fff}
+    #authModal input:focus{outline:none;border-color:#d24cff;box-shadow:inset 0 0 0 1px rgba(210,76,255,.35)}
+    #authModal .email-login{border:1px solid rgba(255,255,255,.28);border-radius:0;clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);color:#fff;background:linear-gradient(115deg,#4f3df2 0%,#8a2be2 32%,#d24cff 58%,#7c5cff 82%,#36cfff 100%);background-size:260% 100%;text-shadow:0 0 10px rgba(255,255,255,.45)}
+    #authModal .email-login:hover{background-position:100% 50%}
+    #authModal .social{border:1px solid rgba(210,76,255,.25);border-radius:0;clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px)}
+    #authModal .social.google{background:#fff;color:#111}
+    #authModal .social.kakao{background:#fee500;color:#191600}
+    #authModal .auth-mode-switch,#authModal .forgot-password,#authModal .resend-confirmation{color:#e6bfff}
+    #authModal .auth-legal a,#authModal .signup-consent a{color:#d24cff}
+  </style>
+</head>
+<body data-page="login">
+  <div class="login-bar"><a class="brand" href="/">Studio Genilo</a><a class="back" href="/workspace.html?panel=chat">작업실로 돌아가기</a></div>
+  <p class="login-hint">GENILO ACCOUNT · <a href="/login.html?auth=login">로그인</a> · <a href="/login.html?auth=signup">회원가입</a></p>
+
+  <!-- Elements the landing bundle looks up at startup. Kept hidden so it initializes without errors. -->
+  <div class="login-stubs" aria-hidden="true">
+    <script type="application/ld+json" id="geniloWebsiteSchema">{}</script>
+    <div id="guestActions"></div><div id="userActions" hidden></div>
+    <div id="homeAccountMenu" hidden></div><button type="button" id="homeAccountButton"></button>
+    <span id="homeAccountEmail"></span><span id="homeAccountInitial"></span><button type="button" id="homeLogout"></button>
+    <a id="heroUserCta" href="/workspace.html"></a>
+    <div id="homeRankingRows"></div><div id="homeRankingExplanation"></div><div id="homeRankingSource"></div><div id="homeRankingUpdated"></div><div id="homeRankingStatus"></div><div id="homePerformanceSourceTab"></div>
+    <div id="homeOutcomePricing"></div><div id="homeOutcomeNote"></div>
+  </div>
+
+  <dialog id="authModal" aria-labelledby="authTitle">
+    <button type="button" class="modal-close" aria-label="닫기">×</button>
+    <form class="auth" id="authForm" novalidate><img class="auth-logo" src="genilo-logo.svg" alt="Genilo" width="292" height="64" loading="lazy" decoding="async">
+      <div class="auth-heading"><h2 id="authTitle">로그인</h2><p><span id="authPrompt">가입한 계정이 없나요?</span> <button type="button" class="auth-mode-switch">가입하기</button></p></div>
+      <p class="auth-credit" id="authCredit" hidden><strong>800</strong><span>이메일 인증 완료 후 무료 크레딧</span></p>
+      <button type="button" class="social google" data-provider="google">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path fill="#4285f4" d="M21.6 12.2c0-.7-.1-1.4-.2-2H12v3.9h5.4a4.6 4.6 0 0 1-2 3v2.6h3.2c1.9-1.8 3-4.4 3-7.5Z"/><path fill="#34a853" d="M12 22c2.7 0 5-.9 6.6-2.3l-3.2-2.6c-.9.6-2 1-3.4 1a5.8 5.8 0 0 1-5.5-4H3.2v2.6A10 10 0 0 0 12 22Z"/><path fill="#fbbc05" d="M6.5 14.1a6 6 0 0 1 0-3.9V7.6H3.2a10 10 0 0 0 0 9.1l3.3-2.6Z"/><path fill="#ea4335" d="M12 6.1c1.5 0 2.8.5 3.8 1.5l2.9-2.8A9.7 9.7 0 0 0 3.2 7.6l3.3 2.6A5.8 5.8 0 0 1 12 6.1Z"/></svg>
+        <span>Google으로 가입하기</span>
+      </button>
+      <button type="button" class="social kakao" data-provider="kakao">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3C6.5 3 2 6.5 2 10.8c0 2.8 1.9 5.2 4.7 6.6l-1.2 4.1c-.1.4.3.7.7.5l4.8-3.3h1c5.5 0 10-3.5 10-7.9S17.5 3 12 3Z"/></svg>
+        <span>카카오톡으로 가입하기</span>
+      </button>
+      <p class="provider-note" id="providerNote" hidden></p>
+      <div class="or" id="authDivider"><span>또는</span></div>
+      <p class="signup-email-notice" id="signupEmailNotice" hidden>입력한 이메일로 보낸 인증 링크를 눌러야 가입이 완료됩니다. 이미 가입된 Google·카카오 계정은 같은 버튼을 누르면 로그인됩니다.</p>
+      <p class="signup-email-notice" id="recoveryEmailNotice" hidden>가입한 이메일을 입력하면 본인 확인용 재설정 링크를 보내드립니다. 링크에서 새 비밀번호를 설정할 수 있습니다.</p>
+      <div class="auth-field"><label for="email" id="emailLabel">이메일</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="254" placeholder="이메일 주소 입력" required></div>
+      <div class="auth-field" id="passwordField"><label for="password">비밀번호</label><span class="password-input"><input id="password" name="password" type="password" autocomplete="current-password" minlength="8" maxlength="72" placeholder="8자 이상 입력" required><button type="button" class="password-toggle" data-password-target="password" aria-label="비밀번호 표시">보기</button></span></div>
+      <div class="auth-field confirm-password-field" id="confirmPasswordField" hidden><label for="confirmPassword">비밀번호 확인</label><span class="password-input"><input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" minlength="8" maxlength="72" placeholder="비밀번호 다시 입력"><button type="button" class="password-toggle" data-password-target="confirmPassword" aria-label="비밀번호 확인 표시">보기</button></span></div>
+      <p class="password-help" id="passwordHelp" hidden>영문과 숫자를 포함해 8자 이상 입력하세요.</p>
+      <label class="signup-consent" id="signupConsentRow" hidden><input id="signupConsent" type="checkbox"> <span><a href="terms.html" target="_blank" rel="noopener">이용약관</a> 및 <a href="privacy.html" target="_blank" rel="noopener">개인정보처리방침</a>에 동의합니다.</span></label>
+      <label class="remember-login" id="rememberLoginRow"><input id="rememberLogin" type="checkbox" checked> <span>로그인 유지</span></label>
+      <button type="submit" class="email-login">이메일로 로그인</button>
+      <button type="button" class="forgot-password">비밀번호를 잊으셨나요?</button>
+      <button type="button" class="resend-confirmation" hidden>인증 이메일 다시 보내기</button>
+      <p class="auth-status" id="authStatus" role="status" aria-live="polite"></p>
+      <small class="auth-legal" id="authLegal">소셜 로그인을 계속하면 <a href="terms.html">이용약관</a> 및 <a href="privacy.html">개인정보처리방침</a>에 동의하게 됩니다.</small>
+    </form>
+  </dialog>
+  <script src="/consent-manager.js" defer></script>
+  <script src="/journey-runtime.js" type="module"></script>
+</body>
+</html>
