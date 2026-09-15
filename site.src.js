@@ -114,46 +114,46 @@ if(matchMedia('(hover:none)').matches)cursor.style.display='none';
     const fg=light()?'23,23,23':'240,240,248';const t0=now/1000;
     /* HUD 다이얼 */
     ctx.save();ctx.translate(cx,cy);ctx.rotate(t0*.05);
-    ctx.beginPath();ctx.arc(0,0,R*1.08,0,Math.PI*2);ctx.setLineDash([2,9]);ctx.strokeStyle='rgba(255,45,138,.3)';ctx.lineWidth=1;ctx.stroke();ctx.setLineDash([]);
-    for(let i=0;i<72;i++){const a=i/72*Math.PI*2,l=i%6===0?9:4,r0=R*1.115;ctx.beginPath();ctx.moveTo(Math.cos(a)*r0,Math.sin(a)*r0);ctx.lineTo(Math.cos(a)*(r0+l),Math.sin(a)*(r0+l));ctx.strokeStyle=i%6===0?'rgba(255,45,138,.55)':`rgba(${fg},.2)`;ctx.stroke()}
+    ctx.beginPath();ctx.arc(0,0,R*1.08,0,Math.PI*2);ctx.setLineDash([2,9]);ctx.strokeStyle='rgba(210,76,255,.3)';ctx.lineWidth=1;ctx.stroke();ctx.setLineDash([]);
+    for(let i=0;i<72;i++){const a=i/72*Math.PI*2,l=i%6===0?9:4,r0=R*1.115;ctx.beginPath();ctx.moveTo(Math.cos(a)*r0,Math.sin(a)*r0);ctx.lineTo(Math.cos(a)*(r0+l),Math.sin(a)*(r0+l));ctx.strokeStyle=i%6===0?'rgba(210,76,255,.55)':`rgba(${fg},.2)`;ctx.stroke()}
     ctx.restore();
-    ctx.save();ctx.translate(cx,cy);ctx.rotate(-t0*.12);ctx.strokeStyle='rgba(255,45,138,.6)';ctx.lineWidth=2;
+    ctx.save();ctx.translate(cx,cy);ctx.rotate(-t0*.12);ctx.strokeStyle='rgba(210,76,255,.6)';ctx.lineWidth=2;
     ctx.beginPath();ctx.arc(0,0,R*1.2,0,Math.PI*.32);ctx.stroke();ctx.beginPath();ctx.arc(0,0,R*1.2,Math.PI,Math.PI*1.32);ctx.stroke();ctx.restore();
     /* 뒷면 점 */
     ctx.fillStyle=`rgba(${fg},.06)`;for(const p of pts){const [x,y,z]=project(p);if(z<0)ctx.fillRect(cx+x*R-.6,cy-y*R-.6,1.2,1.2)}
     /* 구 외곽선 + 홀로그램 글로우 */
-    ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.strokeStyle='rgba(255,45,138,.28)';ctx.lineWidth=1;ctx.stroke();
-    const g=ctx.createRadialGradient(cx,cy,R*.55,cx,cy,R);g.addColorStop(0,'rgba(255,45,138,0)');g.addColorStop(1,'rgba(255,45,138,.13)');ctx.fillStyle=g;ctx.fill();
+    ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.strokeStyle='rgba(210,76,255,.28)';ctx.lineWidth=1;ctx.stroke();
+    const g=ctx.createRadialGradient(cx,cy,R*.55,cx,cy,R);g.addColorStop(0,'rgba(210,76,255,0)');g.addColorStop(1,'rgba(210,76,255,.13)');ctx.fillStyle=g;ctx.fill();
     /* 경위선 와이어프레임 (앞면만) */
-    ctx.lineWidth=1;ctx.strokeStyle='rgba(255,45,138,.11)';
+    ctx.lineWidth=1;ctx.strokeStyle='rgba(210,76,255,.11)';
     for(let lat=-60;lat<=60;lat+=30){ctx.beginPath();let st=false;for(let i=0;i<=90;i++){const [x,y,z]=project(toV(lat,-180+i*4));if(z<0){st=false;continue}const px=cx+x*R,py=cy-y*R;if(!st){ctx.moveTo(px,py);st=true}else ctx.lineTo(px,py)}ctx.stroke()}
     for(let lon=0;lon<360;lon+=30){ctx.beginPath();let st=false;for(let i=0;i<=45;i++){const [x,y,z]=project(toV(-90+i*4,lon));if(z<0){st=false;continue}const px=cx+x*R,py=cy-y*R;if(!st){ctx.moveTo(px,py);st=true}else ctx.lineTo(px,py)}ctx.stroke()}
     /* 앞면 점 */
     for(const p of pts){const [x,y,z]=project(p);if(z>=0){const a=.16+.8*z;ctx.fillStyle=`rgba(${fg},${a})`;const s=1.2+z*1.2;ctx.fillRect(cx+x*R-s/2,cy-y*R-s/2,s,s)}}
     /* 뉴럴 링크 + 패킷 */
     for(const [i,j,ph] of links){const A=project(nodes[i]),B=project(nodes[j]);if(A[2]<.05||B[2]<.05)continue;const vis=Math.min(A[2],B[2]);const pulse=.5+.5*Math.sin(t0*1.6+ph);
-      ctx.beginPath();ctx.moveTo(cx+A[0]*R,cy-A[1]*R);ctx.lineTo(cx+B[0]*R,cy-B[1]*R);ctx.strokeStyle=`rgba(255,45,138,${(.08+.3*pulse)*vis})`;ctx.lineWidth=1;ctx.stroke();
-      const k=(t0*.22+ph/6.283)%1;const px=cx+(A[0]+(B[0]-A[0])*k)*R,py=cy-(A[1]+(B[1]-A[1])*k)*R;ctx.beginPath();ctx.arc(px,py,1.3,0,Math.PI*2);ctx.fillStyle=`rgba(255,140,200,${.9*vis})`;ctx.fill()}
+      ctx.beginPath();ctx.moveTo(cx+A[0]*R,cy-A[1]*R);ctx.lineTo(cx+B[0]*R,cy-B[1]*R);ctx.strokeStyle=`rgba(210,76,255,${(.08+.3*pulse)*vis})`;ctx.lineWidth=1;ctx.stroke();
+      const k=(t0*.22+ph/6.283)%1;const px=cx+(A[0]+(B[0]-A[0])*k)*R,py=cy-(A[1]+(B[1]-A[1])*k)*R;ctx.beginPath();ctx.arc(px,py,1.3,0,Math.PI*2);ctx.fillStyle=`rgba(220,140,255,${.9*vis})`;ctx.fill()}
     for(let i=0;i<nodes.length;i++){const [x,y,z]=project(nodes[i]);if(z<.05)continue;const px=cx+x*R,py=cy-y*R;const pulse=.5+.5*Math.sin(t0*2+i);
-      ctx.beginPath();ctx.arc(px,py,1.6+pulse*1.2,0,Math.PI*2);ctx.fillStyle=`rgba(255,45,138,${(.45+.55*pulse)*z})`;ctx.fill();
-      if(i%9===0){ctx.beginPath();ctx.arc(px,py,5+pulse*4,0,Math.PI*2);ctx.strokeStyle=`rgba(255,45,138,${.25*z})`;ctx.lineWidth=1;ctx.stroke()}}
+      ctx.beginPath();ctx.arc(px,py,1.6+pulse*1.2,0,Math.PI*2);ctx.fillStyle=`rgba(210,76,255,${(.45+.55*pulse)*z})`;ctx.fill();
+      if(i%9===0){ctx.beginPath();ctx.arc(px,py,5+pulse*4,0,Math.PI*2);ctx.strokeStyle=`rgba(210,76,255,${.25*z})`;ctx.lineWidth=1;ctx.stroke()}}
     /* 스캔 스윕 */
-    ctx.save();ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.clip();const sy=cy-R+((t0*.2)%1)*R*2;const sg=ctx.createLinearGradient(0,sy-44,0,sy+4);sg.addColorStop(0,'rgba(255,45,138,0)');sg.addColorStop(1,'rgba(255,45,138,.2)');ctx.fillStyle=sg;ctx.fillRect(cx-R,sy-44,R*2,48);ctx.fillStyle='rgba(255,150,205,.55)';ctx.fillRect(cx-R,sy,R*2,1);ctx.restore();
+    ctx.save();ctx.beginPath();ctx.arc(cx,cy,R,0,Math.PI*2);ctx.clip();const sy=cy-R+((t0*.2)%1)*R*2;const sg=ctx.createLinearGradient(0,sy-44,0,sy+4);sg.addColorStop(0,'rgba(210,76,255,0)');sg.addColorStop(1,'rgba(210,76,255,.2)');ctx.fillStyle=sg;ctx.fillRect(cx-R,sy-44,R*2,48);ctx.fillStyle='rgba(224,150,255,.55)';ctx.fillRect(cx-R,sy,R*2,1);ctx.restore();
     /* 궤도 링 + 위성 */
     for(const ring of RINGS){const ang=t0*ring.spin;const N=120;ctx.beginPath();let st=false;
       for(let i=0;i<=N;i++){const [x,y,z]=ringPoint(ring,i/N*Math.PI*2,ang);const px=cx+x*R,py=cy-y*R;if(z<0&&Math.hypot(px-cx,py-cy)<R){st=false;continue}if(!st){ctx.moveTo(px,py);st=true}else ctx.lineTo(px,py)}
-      ctx.strokeStyle='rgba(255,45,138,.32)';ctx.lineWidth=1;ctx.stroke();
+      ctx.strokeStyle='rgba(210,76,255,.32)';ctx.lineWidth=1;ctx.stroke();
       const [sx,syy,sz]=ringPoint(ring,t0*.55+ring.phase,ang);const px=cx+sx*R,py=cy-syy*R;
-      if(!(sz<0&&Math.hypot(px-cx,py-cy)<R)){ctx.beginPath();ctx.arc(px,py,2.4,0,Math.PI*2);ctx.fillStyle='#ff7ab8';ctx.fill();ctx.beginPath();ctx.arc(px,py,7,0,Math.PI*2);ctx.strokeStyle='rgba(255,45,138,.45)';ctx.stroke()}}
+      if(!(sz<0&&Math.hypot(px-cx,py-cy)<R)){ctx.beginPath();ctx.arc(px,py,2.4,0,Math.PI*2);ctx.fillStyle='#e08cff';ctx.fill();ctx.beginPath();ctx.arc(px,py,7,0,Math.PI*2);ctx.strokeStyle='rgba(210,76,255,.45)';ctx.stroke()}}
     /* 연결 아크 */
     for(const arc of arcs){const prog=((t0*.18+arc.phase)%1);const head=prog*1.35;const N=48;ctx.beginPath();let started=false;
       for(let i=0;i<=N;i++){const t=i/N;if(t>head)break;const v=slerp(arc.a,arc.b,t);const lift=1+Math.sin(t*Math.PI)*.28;const [x,y,z]=project([v[0]*lift,v[1]*lift,v[2]*lift]);if(z<-.15){started=false;continue}const px=cx+x*R,py=cy-y*R;if(!started){ctx.moveTo(px,py);started=true}else ctx.lineTo(px,py)}
-      const fade=head>1?Math.max(0,1-(head-1)/.35):1;ctx.strokeStyle=`rgba(255,45,138,${.6*fade})`;ctx.lineWidth=1;ctx.stroke();
-      if(head<1){const v=slerp(arc.a,arc.b,head);const lift=1+Math.sin(head*Math.PI)*.28;const [x,y,z]=project([v[0]*lift,v[1]*lift,v[2]*lift]);if(z>-.15){ctx.beginPath();ctx.arc(cx+x*R,cy-y*R,2,0,Math.PI*2);ctx.fillStyle='#ff7ab8';ctx.fill()}}}
+      const fade=head>1?Math.max(0,1-(head-1)/.35):1;ctx.strokeStyle=`rgba(210,76,255,${.6*fade})`;ctx.lineWidth=1;ctx.stroke();
+      if(head<1){const v=slerp(arc.a,arc.b,head);const lift=1+Math.sin(head*Math.PI)*.28;const [x,y,z]=project([v[0]*lift,v[1]*lift,v[2]*lift]);if(z>-.15){ctx.beginPath();ctx.arc(cx+x*R,cy-y*R,2,0,Math.PI*2);ctx.fillStyle='#e08cff';ctx.fill()}}}
     /* 홈 마커 */
     const [hx,hy,hz]=project(arcs[0].a);const px=cx+hx*R,py=cy-hy*R;
-    if(hz>0){ctx.beginPath();ctx.arc(px,py,3.5,0,Math.PI*2);ctx.fillStyle='#ff2d8a';ctx.fill();ctx.beginPath();ctx.arc(px,py,9+Math.sin(t0*3)*3,0,Math.PI*2);ctx.strokeStyle='rgba(255,45,138,.5)';ctx.stroke();
-      ctx.beginPath();ctx.moveTo(px-14,py);ctx.lineTo(px-6,py);ctx.moveTo(px+6,py);ctx.lineTo(px+14,py);ctx.moveTo(px,py-14);ctx.lineTo(px,py-6);ctx.moveTo(px,py+6);ctx.lineTo(px,py+14);ctx.strokeStyle='rgba(255,45,138,.7)';ctx.stroke()}
+    if(hz>0){ctx.beginPath();ctx.arc(px,py,3.5,0,Math.PI*2);ctx.fillStyle='#d24cff';ctx.fill();ctx.beginPath();ctx.arc(px,py,9+Math.sin(t0*3)*3,0,Math.PI*2);ctx.strokeStyle='rgba(210,76,255,.5)';ctx.stroke();
+      ctx.beginPath();ctx.moveTo(px-14,py);ctx.lineTo(px-6,py);ctx.moveTo(px+6,py);ctx.lineTo(px+14,py);ctx.moveTo(px,py-14);ctx.lineTo(px,py-6);ctx.moveTo(px,py+6);ctx.lineTo(px,py+14);ctx.strokeStyle='rgba(210,76,255,.7)';ctx.stroke()}
     online.style.opacity=hz>.15?1:0;online.style.left=px+'px';online.style.top=py+'px';
     requestAnimationFrame(frame)}
   requestAnimationFrame(frame);

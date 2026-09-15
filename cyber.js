@@ -40,3 +40,22 @@ window.SG_READY=new Promise(resolve=>{
   document.addEventListener('mouseenter',()=>{if(shown){h.classList.add('on');tail.classList.add('on')}});
   (function loop(){h.style.transform='translate('+x+'px,'+y+'px)';tx+=(x-tx)*.14;ty+=(y-ty)*.14;tail.style.transform='translate('+tx+'px,'+ty+'px)';requestAnimationFrame(loop)})();
 })();
+
+/* ===== 스킬 맵 · 글리치 ===== */
+(function init(){
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);return}
+  const stage=document.querySelector('.sk-stage');if(!stage)return;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+  const items=[...stage.querySelectorAll('.sk-node,.sk-link,.sk-card')];
+  items.forEach(el=>el.addEventListener('animationend',e=>{if(e.target===el&&e.animationName==='skGlitch'){el.classList.add('done');el.classList.remove('glitch')}}));
+  const cards=[...stage.querySelectorAll('.sk-card')];
+  function tick(){
+    const r=stage.getBoundingClientRect();
+    if(document.visibilityState==='visible'&&r.bottom>0&&r.top<innerHeight){
+      const done=cards.filter(c=>c.classList.contains('done'));
+      if(done.length){const c=done[Math.random()*done.length|0];c.classList.remove('glitch');void c.offsetWidth;c.classList.add('glitch')}
+    }
+    setTimeout(tick,2600+Math.random()*3400);
+  }
+  setTimeout(tick,4000);
+})();
