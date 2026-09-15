@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <link rel="preconnect" href="https://api.genilo.kr">
+  <meta name="color-scheme" content="dark">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Genilo 작업실 | 목적부터 고르고 결과를 이어 만들기</title>
+  <meta name="theme-color" content="#09090c">
+  <link rel="icon" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/favicon.svg">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="application-name" content="Genilo">
+  <meta name="apple-mobile-web-app-title" content="Genilo">
+  <meta name="format-detection" content="telephone=no,email=no,address=no">
+  <meta name="msapplication-TileColor" content="#09090c">
+  <meta name="description" content="목적에 맞는 AI 모델을 선택하고 이미지 결과를 영상 제작으로 이어가는 Genilo 작업실입니다.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://genilo.kr/workspace.html">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="Genilo">
+  <meta property="og:title" content="Genilo 작업실 | 목적부터 고르고 결과를 이어 만들기">
+  <meta property="og:description" content="목적에 맞는 AI 모델을 선택하고 이미지 결과를 영상 제작으로 이어가는 Genilo 작업실입니다.">
+  <meta property="og:url" content="https://genilo.kr/workspace.html">
+  <meta property="og:image" content="https://genilo.kr/assets/creative-collage.webp">
+  <meta property="og:image:alt" content="Genilo에서 제작할 수 있는 이미지·영상 결과 예시">
+  <meta property="og:image:type" content="image/webp">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Genilo 작업실 | 목적부터 고르고 결과를 이어 만들기">
+  <meta name="twitter:description" content="목적에 맞는 AI 모델을 선택하고 이미지 결과를 영상 제작으로 이어가는 Genilo 작업실입니다.">
+  <meta name="twitter:image" content="https://genilo.kr/assets/creative-collage.webp">
+  <meta name="twitter:image:alt" content="Genilo에서 제작할 수 있는 이미지·영상 결과 예시">
+  <link rel="stylesheet" href="/site-quality.css">
+  <link rel="stylesheet" href="/commercial-shell.css">
+  <script type="module" crossorigin src="/assets/workspace-Ber3K24J.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/growth-runtime-BsKwnrXR.js">
+  <link rel="modulepreload" crossorigin href="/assets/supabase-client-D8zR8z4z.js">
+  <link rel="modulepreload" crossorigin href="/assets/api-62hNMqHP.js">
+  <link rel="modulepreload" crossorigin href="/assets/model-catalog-DanI5Re7.js">
+  <link rel="stylesheet" crossorigin href="/assets/workspace-BriOPaWH.css">
+  <link rel="stylesheet" crossorigin href="/assets/interactions-CuxYAi4e.css">
+  <style id="chat-only">[data-panel]:not([data-panel="chat"]),[data-filter]:not([data-filter="chat"]){display:none!important}</style>
+</head>
+<body data-page="workspace" data-workspace-ready="false" aria-busy="true">
+  <noscript class="javascript-required">일부 로그인·제작·결제 기능에는 JavaScript가 필요합니다. 정적 안내와 도움말은 계속 확인할 수 있습니다.</noscript>
+
+<a class="skip-link" href="#workspaceMain">본문 바로가기</a>
+<header>
+  <a class="logo" href="index.html" aria-label="Genilo 홈"><span class="brand-mark" aria-hidden="true"></span><span class="brand-word">Genilo</span></a>
+  <nav aria-label="스튜디오 작업 유형"><button type="button" data-panel="chat" aria-pressed="true">챗봇</button><button type="button" data-panel="image" aria-pressed="false">이미지</button><button type="button" data-panel="video" aria-pressed="false">영상</button><button type="button" data-panel="audio" aria-pressed="false">오디오</button><button type="button" data-panel="music" aria-pressed="false">음악</button></nav>
+  <div class="credits" id="creditChip" hidden><span>크레딧</span><b id="creditBalance">0</b></div>
+  <button type="button" class="header-login" id="headerLogin" hidden>로그인</button>
+  <button class="history-open" id="historyOpen" type="button" aria-haspopup="dialog">작업 기록</button>
+  <div class="workspace-account">
+    <button type="button" class="profile" id="profileButton" aria-label="내 계정 메뉴" aria-haspopup="menu" aria-expanded="false">U</button>
+    <div class="workspace-account-menu" id="workspaceAccountMenu" role="menu" hidden>
+      <strong id="workspaceAccountEmail">로그인이 필요합니다</strong>
+      <span><b id="workspaceAccountCredits">로그인 후 확인</b> 크레딧</span>
+      <a href="index.html" role="menuitem">홈으로</a>
+      <button type="button" id="workspaceLogin" role="menuitem">로그인 / 회원가입</button>
+      <button type="button" id="workspaceLogout" role="menuitem" hidden>로그아웃</button>
+    </div>
+  </div>
+</header>
+<main id="workspaceMain" tabindex="-1">
+<aside>
+  <button type="button" class="new-board" id="newBoard">새 작업</button>
+  <div class="history-title conversation-section-title">대화</div>
+  <div id="conversationList" class="conversation-list" aria-live="polite"><p>대화를 불러오고 있습니다.</p></div>
+  <div class="history-title">작업 기록</div>
+  <div id="history" aria-live="polite"><p>작업 기록을 불러오고 있습니다.</p></div>
+  <div class="aside-foot"><a href="index.html">홈</a><a href="terms.html">이용약관</a><a href="privacy.html">개인정보처리방침</a><a href="contact.html">문의</a></div>
+</aside>
+<section class="studio">
+  <div class="settings">
+    <div class="settings-content" id="settingsScroll">
+    <div class="panel-switch">
+      <button type="button" data-panel="chat" aria-pressed="true"><img src="/assets/mode-chat-v4-6K77FiZq.webp" alt="" width="1024" height="1024" decoding="async">챗봇</button>
+      <button type="button" data-panel="image" aria-pressed="false"><img src="/assets/mode-image-v4-CxJyUv1R.webp" alt="" width="1024" height="1024" decoding="async">이미지</button>
+      <button type="button" data-panel="video" aria-pressed="false"><img src="/assets/mode-video-v4-Bn3BotNQ.webp" alt="" width="1024" height="1024" decoding="async">영상</button>
+      <button type="button" data-panel="audio" aria-pressed="false"><img src="/assets/mode-music-v1-Dd-yHjvY.webp" alt="" width="1024" height="1024" decoding="async">오디오</button>
+      <button type="button" data-panel="music" aria-pressed="false"><img src="/assets/mode-music-v1-Dd-yHjvY.webp" alt="" width="1024" height="1024" decoding="async">음악</button>
+    </div>
+    <article class="mode-card">
+      <img id="modeArtwork" src="/assets/mode-chat-v4-6K77FiZq.webp" alt="" width="1024" height="1024" decoding="async">
+      <div><span id="modeEyebrow">AI CHAT</span><h1 id="modeTitle">아이디어를 대화로 완성하세요</h1><p id="modeDescription">원하는 모델과 대화하고 결과를 구체화할 수 있습니다.</p></div>
+    </article>
+    <section class="priority-section" aria-labelledby="priorityTitle">
+      <div class="workspace-step compact"><span>1</span><div><b id="priorityTitle">어떤 기준으로 모델을 고를까요?</b><small id="priorityReason">품질·속도·크레딧 중 중요한 기준을 선택하면 알맞은 모델을 추천해 드립니다.</small></div></div>
+      <div class="priority-options" role="group" aria-label="모델 추천 기준">
+        <button type="button" class="active" data-priority="recommended" aria-pressed="true">Genilo 추천</button>
+        <button type="button" data-priority="quality" aria-pressed="false">최고 품질</button>
+        <button type="button" data-priority="speed" aria-pressed="false">빠른 생성</button>
+        <button type="button" data-priority="cost" aria-pressed="false">합리적인 비용</button>
+      </div>
+    </section>
+    <button type="button" class="model-select" id="modelOpen" aria-haspopup="dialog">
+      <img id="modelThumb" src="/assets/mode-chat-v4-6K77FiZq.webp" alt="" width="1024" height="1024" decoding="async"><span><small id="modelRecommendationLabel">Genilo 추천 모델</small><b id="selectedModel">Gemini 3.5 Flash</b><i id="selectedModelMeta">현재 사용 가능 · 37크레딧</i></span><em>직접 선택</em>
+    </button>
+    <section class="reference-section" id="referenceSection">
+      <div class="field-head"><div><b id="referenceTitle">레퍼런스 이미지</b><p id="referenceHelp">스타일과 구도를 참고할 이미지를 추가하세요.</p></div><small id="uploadCount">0 / 10</small></div>
+      <div class="upload-grid" id="uploadGrid">
+        <label class="upload"><input type="file" id="file" accept="image/png,image/jpeg,image/webp" multiple><span>파일 선택</span><small>PNG, JPG, WEBP · 각 10MB 이하</small></label>
+        <div class="reference-previews" id="referencePreviews"></div>
+      </div>
+    </section>
+    <label class="field prompt">
+      <span class="field-head"><b id="promptTitle">메시지</b><small id="charCount">0 / 4,000</small></span>
+      <textarea id="prompt" maxlength="4000" autocomplete="off" enterkeyhint="send" spellcheck="true" aria-describedby="charCount" placeholder="Genilo에게 메시지를 보내세요."></textarea>
+      <div class="prompt-tools">
+        <button type="button" id="enhance" aria-haspopup="dialog">프롬프트 개선</button>
+        <button type="button" id="examplePrompt" aria-haspopup="dialog">예시 불러오기</button>
+        <button type="button" id="undoPrompt" hidden>되돌리기</button>
+      </div>
+    </label>
+    <details class="advanced-settings" id="advancedSettings">
+      <summary><span><b>고급 설정</b><small>비율·화질·길이와 세부 옵션</small></span><em aria-hidden="true">＋</em></summary>
+      <div class="advanced-body">
+        <div class="options" id="options">
+          <label id="ratioField">화면 비율<select id="ratio"><option value="auto">자동</option><option value="1:1">1:1</option><option value="16:9">16:9</option><option value="9:16">9:16</option><option value="4:3">4:3</option><option value="3:4">3:4</option><option value="4:5">4:5</option><option value="5:4">5:4</option><option value="3:2">3:2</option><option value="2:3">2:3</option><option value="2:1">2:1</option><option value="1:2">1:2</option><option value="21:9">21:9</option><option value="9:21">9:21</option><option value="custom">사용자 설정</option></select></label>
+          <label id="qualityField">화질<select id="quality"><option value="1K">1K</option><option value="2K" selected>2K</option><option value="4K">4K</option></select></label>
+          <label id="durationField">영상 길이 <small id="durationValue">8초</small><select id="duration"><option value="4">4초</option><option value="6">6초</option><option value="8" selected>8초</option></select></label>
+          <label id="musicDurationField">음악 길이<select id="musicDuration"><option value="30">30초</option><option value="60">1분</option><option value="180">3분</option></select></label>
+          <label id="toneField">응답 방식<select id="tone"><option value="balanced">균형 있게</option><option value="concise">간결하게</option><option value="creative">창의적으로</option></select></label>
+        </div>
+        <div class="custom-ratio" id="customRatio" hidden><label>가로<input id="customWidth" type="number" min="256" max="4096" step="1" value="1920" inputmode="numeric"></label><span aria-hidden="true">×</span><label>세로<input id="customHeight" type="number" min="256" max="4096" step="1" value="1080" inputmode="numeric"></label></div>
+        <label class="toggle-row" id="audioField">결과에서 오디오 유지 <small>생성 비용 동일</small><input type="checkbox" id="includeAudio" checked><i></i></label>
+        <label class="toggle-row" id="instrumentalField">보컬 없이 연주곡으로 생성<input type="checkbox" id="instrumental" checked><i></i></label>
+      </div>
+    </details>
+      <div class="generation-summary" id="generationSummary">
+        <div><span>사용 크레딧</span><b><em id="summaryCost">1</em>크레딧</b></div>
+        <div><span>선택 모델</span><b id="summarySelectedModel">모델 선택 중</b></div>
+        <div><span>현재 잔액</span><b id="summaryBalance">로그인 후 확인</b></div>
+        <div><span>생성 후 예상 잔액</span><b id="summaryAfter">로그인 후 확인</b></div>
+        <div><span>주요 옵션</span><b id="summaryOptions">기본 설정</b></div>
+      <small>공급자 생성 실패 시 차감 크레딧은 자동 환불됩니다.</small>
+    </div>
+    </div>
+    <div class="generation-action">
+      <button type="button" class="create" id="createBtn" disabled><span id="createText">메시지 보내기</span><small><em id="cost">1</em>크레딧</small></button>
+      <p class="form-error" id="formError" role="alert" aria-live="assertive"></p>
+    </div>
+  </div>
+  <div class="board">
+    <section class="empty" id="empty"><img id="emptyArtwork" src="/assets/mode-chat-v4-6K77FiZq.webp" alt="" width="1024" height="1024" decoding="async"><span id="emptyLabel">GENILO CHAT</span><h2 id="emptyTitle">무엇이든 물어보세요</h2><p id="emptyDescription">작업 유형과 모델을 고른 뒤 원하는 내용을 입력해 주세요.</p></section>
+    <section class="chat-board" id="chatBoard"><div id="chatMessages"></div></section>
+    <section class="progress-card" id="progressCard" role="status" aria-live="polite"><i role="progressbar" aria-label="생성 진행률" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progressBar"></span></i><b id="progressTitle">생성 준비 중</b><p id="progressText">요청을 안전하게 처리하고 있습니다.</p><small>예상 시간은 공급자 상태에 따라 달라지며, 시작된 작업은 현재 취소할 수 없습니다. 완료 후 작업 기록에서 다시 확인할 수 있습니다.</small></section>
+    <section class="result" id="result" aria-labelledby="resultTitle"><img id="outputImage" alt="AI가 생성한 결과 이미지" decoding="async" hidden><video id="outputVideo" controls loop muted playsinline preload="metadata"></video><audio id="outputAudio" controls preload="metadata"></audio><div class="result-summary"><span>생성 완료</span><h2 id="resultTitle" tabindex="-1">결과가 준비되었습니다</h2><p id="resultMeta">모델과 실제 사용 크레딧을 확인하세요.</p></div><div class="result-actions"><button type="button" class="continue-primary" id="continueVideo" hidden>이 이미지에서 8초 영상 만들기 <small>이미지·비율 자동 전달</small></button><button type="button" id="newVariation">같은 설정으로 변형</button><button type="button" id="shareResult">공유 링크 만들기</button><a id="downloadResult" download="genilo-result" aria-disabled="true">원본 다운로드</a></div><p class="share-status" id="shareStatus" role="status" aria-live="polite" hidden></p></section>
+  </div>
+</section>
+</main>
+<dialog id="historyDialog" aria-labelledby="historyDialogTitle">
+  <div class="history-dialog-shell">
+    <header>
+      <div><span>MY CREATIONS</span><h2 id="historyDialogTitle">대화와 작업 기록</h2><p>저장된 대화를 이어가거나 결과를 다시 열 수 있습니다.</p></div>
+      <button type="button" id="historyClose" aria-label="작업 기록 닫기">×</button>
+    </header>
+    <div class="history-dialog-section">
+      <h3>대화</h3>
+      <div id="conversationListMobile" class="conversation-list" aria-live="polite"><p>대화를 불러오고 있습니다.</p></div>
+    </div>
+    <div class="history-dialog-section">
+      <h3>작업 기록</h3>
+      <div id="historyMobile" aria-live="polite"><p>작업 기록을 불러오고 있습니다.</p></div>
+    </div>
+  </div>
+</dialog>
+<dialog id="promptAssistant" aria-labelledby="promptAssistantTitle" aria-describedby="promptAssistantDescription">
+  <div class="prompt-assistant-shell">
+    <header>
+      <div><span id="promptAssistantEyebrow">PROMPT ASSISTANT</span><h2 id="promptAssistantTitle">프롬프트 개선안</h2><p id="promptAssistantDescription">원문을 유지한 채 개선안을 먼저 확인할 수 있습니다.</p></div>
+      <button type="button" id="promptAssistantClose" aria-label="프롬프트 도우미 닫기">×</button>
+    </header>
+    <section id="promptEnhanceView">
+      <div class="prompt-detail-options" role="group" aria-label="프롬프트 개선 강도">
+        <button type="button" data-prompt-detail="concise" aria-pressed="false">간단히</button>
+        <button type="button" class="active" data-prompt-detail="balanced" aria-pressed="true">균형 있게</button>
+        <button type="button" data-prompt-detail="detailed" aria-pressed="false">상세하게</button>
+      </div>
+      <div class="prompt-compare">
+        <div class="prompt-original"><span>현재 프롬프트</span><p id="promptOriginalPreview"></p></div>
+        <label class="prompt-improved"><span>개선안 · 직접 수정 가능</span><textarea id="improvedPrompt" maxlength="4000" autocomplete="off" spellcheck="true" aria-describedby="improvedPromptCount"></textarea><small id="improvedPromptCount">0 / 4,000</small></label>
+      </div>
+      <p class="prompt-assistant-note">브라우저에서 구조만 정리하므로 크레딧은 차감되지 않습니다.</p>
+      <div class="prompt-assistant-actions"><button type="button" id="promptEnhanceCancel">취소</button><button type="button" class="primary" id="applyImprovedPrompt">개선안 적용</button></div>
+    </section>
+    <section id="promptExamplesView" hidden>
+      <div class="prompt-example-grid" id="promptExampleGrid"></div>
+    </section>
+  </div>
+</dialog>
+<dialog id="models" aria-labelledby="modelDialogTitle"><div class="model-modal"><header><div><h2 id="modelDialogTitle">AI 모델 선택</h2><p>현재 작업에 맞는 모델을 선택하세요.</p></div><button type="button" id="modelClose" aria-label="모델 선택 닫기">×</button></header><label class="model-search"><span>모델 검색</span><input id="modelSearch" type="search" placeholder="모델 또는 제공사 검색" autocomplete="off" enterkeyhint="search"></label><div class="model-tabs" role="group" aria-label="모델 유형 필터"><button type="button" data-filter="chat" aria-pressed="true">챗봇</button><button type="button" data-filter="image" aria-pressed="false">이미지</button><button type="button" data-filter="video" aria-pressed="false">영상</button><button type="button" data-filter="audio" aria-pressed="false">오디오</button><button type="button" data-filter="music" aria-pressed="false">음악</button><button type="button" data-filter="all" aria-pressed="false">전체</button></div><div class="model-list" id="modelList"></div></div></dialog>
+  <script src="/consent-manager.js" defer></script>
+  <script src="/journey-runtime.js" type="module"></script>
+</body>
+</html>

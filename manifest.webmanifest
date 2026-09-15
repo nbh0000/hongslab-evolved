@@ -1,0 +1,28 @@
+{
+  "name": "Genilo AI 스튜디오",
+  "short_name": "Genilo",
+  "description": "챗봇, 이미지, 영상, 오디오와 음악을 한곳에서 만드는 한국어 AI 스튜디오",
+  "lang": "ko-KR",
+  "dir": "ltr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#09090c",
+  "theme_color": "#09090c",
+  "categories": ["productivity", "design", "business"],
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
