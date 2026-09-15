@@ -38,9 +38,9 @@ hero, header, footer, mbar = links(hero), links(header), links(footer), links(mb
 hero = hero.replace('<div class="hero-scroll">SCROLL</div>', '<div class="hero-tags"><span>AI ASSISTED BUILD</span><span>PLAN · DESIGN · DEPLOY</span><span>SEOUL · KOREA</span></div><div class="hud-stats"><span><b>AI</b>CORE</span><span><b>WEB</b>APP</span><span><b>24</b>ONLINE</span></div><div class="hero-scroll">SCROLL DOWN</div>')
 for key, label, fn in PAGES[1:]:
     header = header.replace(f'<a href="{fn}">{label}</a>', f'<a href="{fn}" data-page="{key}">{label}</a>')
-header = header.replace('<a href="contact.html" data-page="contact">상담하기</a>', '<a href="contact.html" data-page="contact">상담하기</a><a href="workspace.html" data-page="workspace">AI 작업실</a>')
-header = header.replace('<a href="contact.html"><span>04</span>상담하기</a>', '<a href="contact.html"><span>04</span>상담하기</a><a href="workspace.html"><span>05</span>AI 작업실</a>')
-footer = footer.replace('<a href="contact.html">상담하기</a></nav>', '<a href="contact.html">상담하기</a><a href="workspace.html">AI 작업실</a></nav>')
+header = header.replace('<a href="contact.html" data-page="contact">상담하기</a>', '<a href="contact.html" data-page="contact">상담하기</a><a href="workspace.html" data-page="workspace">AI 작업실</a><a href="experts.html" data-page="experts">AI 전문가 지원</a>')
+header = header.replace('<a href="contact.html"><span>04</span>상담하기</a>', '<a href="contact.html"><span>04</span>상담하기</a><a href="workspace.html"><span>05</span>AI 작업실</a><a href="experts.html"><span>06</span>AI 전문가 지원</a>')
+footer = footer.replace('<a href="contact.html">상담하기</a></nav>', '<a href="contact.html">상담하기</a><a href="workspace.html">AI 작업실</a><a href="experts.html">AI 전문가 지원</a></nav>')
 
 css = css.replace('.section+.section{padding-top:40px}',
                   '.section+.section{padding-top:40px}\nmain>.section:first-child{padding-top:170px}')
@@ -189,6 +189,62 @@ HEAD = '''<!doctype html>
 <script src="cyber.js"></script>
 '''
 
+EXPERTS_HTML = """<section class="section" id="experts" data-theme="dark" data-ghost="APPLY">
+  <div class="wrap">
+    <div class="reveal"><div class="eyebrow scramble">APPLY · AI EXPERT</div><h2 class="title">AI 전문가 지원<em>.</em></h2><p class="lead">Studio Genilo 프로젝트에 함께할 AI 전문가를 찾습니다. 지원서는 검토 후 이메일 또는 카카오톡으로 연락드립니다.</p></div>
+    <div class="contact-grid">
+      <aside class="contact-side card reveal">
+        <h3>모집 분야</h3>
+        <div class="info"><ul><li>프롬프트 엔지니어링 · 에이전트 워크플로</li><li>LLM 앱 개발 (RAG · 챗봇 · API 연동)</li><li>이미지 · 영상 · 음악 생성</li><li>데이터 · 자동화 · MCP 도구</li><li>UI 디자인 · 프런트엔드</li></ul></div>
+        <h3 style="margin-top:22px">협업 형태</h3>
+        <p>프로젝트 단위 프리랜서, 파트타임, 상시 협업 모두 가능합니다. 원격 기본, 필요 시 서울 마포 오프라인 미팅.</p>
+        <h3 style="margin-top:22px">진행</h3>
+        <div class="info"><ul><li>지원서 접수</li><li>포트폴리오 검토 (영업일 3일 이내)</li><li>화상 또는 카카오톡 인터뷰</li><li>시범 과제 후 협업 시작</li></ul></div>
+      </aside>
+      <form class="form card reveal" id="expertForm" novalidate>
+        <h3 style="margin-top:0">지원서</h3>
+        <p class="notice">* 표시는 필수입니다. 접수된 내용은 채용 검토 목적으로만 사용합니다.</p>
+        <div class="form-grid">
+          <div class="field"><label for="exName">이름 <span style="color:var(--red)">*</span></label><input id="exName" type="text" autocomplete="name" maxlength="80" placeholder="홍길동"></div>
+          <div class="field"><label for="exEmail">이메일 <span style="color:var(--red)">*</span></label><input id="exEmail" type="text" inputmode="email" autocomplete="email" maxlength="254" placeholder="you@example.com"></div>
+          <div class="field"><label for="exPhone">연락처</label><input id="exPhone" type="text" inputmode="tel" autocomplete="tel" maxlength="40" placeholder="010-0000-0000"></div>
+          <div class="field"><label for="exYears">경력</label><select id="exYears"><option>1년 미만</option><option>1~3년</option><option>3~5년</option><option>5~10년</option><option>10년 이상</option></select></div>
+          <div class="field full"><label>전문 분야 <span class="notice">(복수 선택)</span></label><div class="choice-row" id="exFields"><label><input class="exField" type="checkbox" value="프롬프트 엔지니어링"> 프롬프트 엔지니어링</label><label><input class="exField" type="checkbox" value="에이전트 워크플로"> 에이전트 워크플로</label><label><input class="exField" type="checkbox" value="LLM 앱 개발"> LLM 앱 개발</label><label><input class="exField" type="checkbox" value="이미지 생성"> 이미지 생성</label><label><input class="exField" type="checkbox" value="영상 생성"> 영상 생성</label><label><input class="exField" type="checkbox" value="음악 생성"> 음악 생성</label><label><input class="exField" type="checkbox" value="데이터 · 자동화"> 데이터 · 자동화</label><label><input class="exField" type="checkbox" value="UI 디자인"> UI 디자인</label><label><input class="exField" type="checkbox" value="프런트엔드"> 프런트엔드</label><label><input class="exField" type="checkbox" value="기타"> 기타</label></div></div>
+          <div class="field full"><label>협업 형태</label><div class="choice-row"><label><input name="exType" type="radio" value="프리랜서 (프로젝트 단위)" checked> 프리랜서 (프로젝트 단위)</label><label><input name="exType" type="radio" value="파트타임"> 파트타임</label><label><input name="exType" type="radio" value="상시 협업"> 상시 협업</label></div></div>
+          <div class="field full"><label for="exLinks">포트폴리오 · GitHub 링크</label><input id="exLinks" type="text" inputmode="url" maxlength="500" placeholder="https://github.com/… , https://…"></div>
+          <div class="field full"><label for="exIntro">소개 <span style="color:var(--red)">*</span></label><textarea id="exIntro" rows="6" maxlength="4000" placeholder="주로 다뤄 온 모델과 도구, 대표 작업, 가능한 시간대를 적어 주세요."></textarea></div>
+          <div class="field full"><label class="privacy"><input type="checkbox" id="exPrivacy"> 지원서 검토를 위한 개인정보 수집 및 이용에 동의합니다. <span style="color:var(--red)">*</span></label></div>
+          <input type="text" id="exWebsite" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+        </div>
+        <div class="form-actions"><button class="btn primary" type="submit" id="exSubmit">지원서 보내기</button><button class="btn kakao-btn" type="button" id="exKakao">카카오톡으로 보내기</button></div>
+        <div class="result" id="exResult" aria-live="polite"></div>
+        <div class="form-success" id="exSuccess">지원서가 접수되었습니다. 검토 후 이메일로 연락드리겠습니다.</div>
+      </form>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);const form=$('expertForm');if(!form)return;
+  const startedAt=Date.now();const KAKAO='https://open.kakao.com/o/sACnsFNi';
+  function fields(){return [...document.querySelectorAll('.exField:checked')].map(i=>i.value)}
+  function type(){const r=document.querySelector('input[name=exType]:checked');return r?r.value:''}
+  function compose(){return ['[AI 전문가 지원]','이름: '+$('exName').value.trim(),'이메일: '+$('exEmail').value.trim(),'연락처: '+($('exPhone').value.trim()||'-'),'경력: '+$('exYears').value,'전문 분야: '+(fields().join(', ')||'-'),'협업 형태: '+type(),'링크: '+($('exLinks').value.trim()||'-'),'','소개:',$('exIntro').value.trim()].join('\\n')}
+  function validate(){const name=$('exName').value.trim(),email=$('exEmail').value.trim(),intro=$('exIntro').value.trim();
+    if(name.length<2)return '이름을 입력해 주세요.';if(!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email))return '이메일 주소를 확인해 주세요.';
+    if(intro.length<10)return '소개를 10자 이상 적어 주세요.';if(!$('exPrivacy').checked)return '개인정보 수집·이용에 동의해 주세요.';return ''}
+  function show(msg,ok){const r=$('exResult');r.textContent=msg;r.style.color=ok?'':'var(--red)'}
+  form.addEventListener('submit',async e=>{e.preventDefault();const err=validate();if(err){show(err,false);return}
+    const btn=$('exSubmit');btn.disabled=true;btn.textContent='보내는 중…';show('',true);
+    try{const res=await fetch('https://api.genilo.kr/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({category:'partnership',name:$('exName').value.trim(),email:$('exEmail').value.trim(),subject:'AI 전문가 지원 · '+$('exName').value.trim()+' · '+(fields().slice(0,2).join(', ')||'분야 미선택'),message:compose(),privacy:true,startedAt,website:$('exWebsite').value})});
+      const data=await res.json().catch(()=>({}));if(!res.ok)throw new Error(data.message||'접수에 실패했습니다.');
+      $('exSuccess').classList.add('show');form.querySelectorAll('input,textarea,select,button').forEach(el=>{if(el.id!=='exKakao')el.disabled=true});btn.textContent='접수 완료'}
+    catch(err){show((err.message||'접수에 실패했습니다.')+' 카카오톡으로 보내기를 이용해 주세요.',false);btn.disabled=false;btn.textContent='지원서 보내기'}});
+  $('exKakao').addEventListener('click',async()=>{const err=validate();if(err){show(err,false);return}
+    try{await navigator.clipboard.writeText(compose())}catch{}window.open(KAKAO,'_blank','noopener');show('지원 내용이 복사되었습니다. 열린 채팅창에 붙여 넣어 보내 주세요.',true)});
+})();
+</script>"""
+
 def page(key, title, theme, content):
     return (HEAD.format(title=title, theme=theme, key=key) + header + '\n\n<main id="top">\n' + content +
             '\n</main>\n\n' + footer + '\n\n' + mbar + '\n' + modal + '\n<script src="site.js"></script>\n</body>\n</html>\n')
@@ -200,6 +256,7 @@ out = {
     'pricing.html': page('pricing', '제작 요금 | Studio Genilo', 'light', secs['pricing'] + '\n\n' + secs['maintenance']),
     'process.html': page('process', '제작 과정 | Studio Genilo', 'dark', secs['process']),
     'contact.html': page('contact', '상담하기 | Studio Genilo', 'dark', secs['contact']),
+    'experts.html': page('experts', 'AI 전문가 지원 | Studio Genilo', 'dark', EXPERTS_HTML),
 }
 for fn, html in out.items():
     open(fn, "w", encoding="utf-8", newline="\n").write(html)
